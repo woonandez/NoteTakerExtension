@@ -14,6 +14,10 @@ app.get('/', function(req, res) {
 
 });
 
+app.get('/users', function(req, res) {
+  res.send('Hi!');
+});
+
 var port = 3003;
 
 app.listen(port, () => {
