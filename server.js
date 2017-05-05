@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var db = require('./database/db.js');
 
-var Users = require('./database/models/users.js');
+var Users = require('./database/models/user.js');
 
 var app = express();
 
