@@ -18,7 +18,7 @@ app.get('/users', function(req, res) {
   res.send('Hi!');
 });
 
-var port = 3003;
+var port = process.env.PORT || 3003;
 
 app.listen(port, () => {
   console.log(`server listening at ${port}`)
