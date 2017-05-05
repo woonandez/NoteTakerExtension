@@ -1,14 +1,13 @@
 var path = require('path');
 var express = require('express');
+var db = require('./database/db.js');
 
-
+var Users = require('./database/models/users.js');
 
 var app = express();
 
-
-
 // set path for static files
-app.use(express.static(path.join(__dirname, '/www')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', function(req, res) {
   res.send('Hello, humans!');
