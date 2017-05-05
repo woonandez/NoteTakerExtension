@@ -7,6 +7,7 @@ var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 
 
 var MONGODB_URI = 'mongodb://127.0.0.1:27017/NoteExtension';
 mongoose.connect(MONGODB_URI, options);
+
 mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;
