@@ -1,11 +1,12 @@
 var path = require('path');
 var express = require('express');
 var db = require('./database/db.js');
-
-var Users = require('./database/models/user.js');
+var bodyParser = require('body-parser');
+var User = require('./database/models/user.js');
 
 var app = express();
 
+app.use(bodyParser.json());
 // set path for static files
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -16,6 +17,12 @@ app.get('/', function(req, res) {
 
 app.get('/users', function(req, res) {
   res.send('Hi!');
+});
+
+app.post('/api/users', (req, res) => {
+  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
+
+  res.send(201, 'Post Success');
 });
 
 var port = process.env.PORT || 3003;
