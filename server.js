@@ -28,13 +28,7 @@ app.get('/api/users', function(req, res) {
 app.post('/api/users', (req, res) => {
   User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
 
-  res.send(201, 'Post Success');
-});
-
-app.post('/api/users', (req, res) => {
-  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
-
-  res.send(201, 'Post Success');
+  res.send(201).send('Post Success');
 });
 
 var port = process.env.PORT || 3003;

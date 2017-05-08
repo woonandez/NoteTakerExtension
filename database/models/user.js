@@ -30,9 +30,7 @@ var addUser = function(name, password, uri, notes) {
   });
 };
 
-
-
-var result = addUser('Kevin', 'Ng', 'www.yahoo.com', "Kevin is awesome");
+// var result = addUser('Kevin', 'Ng', 'www.yahoo.com', "Kevin is awesome");
 
 // You can use this to create a fake user to initialize the database
 // var kevin = new User({name: 'Kevin', password: 'Kevin'});
