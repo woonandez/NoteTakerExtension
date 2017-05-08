@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var db = require('./database/db.js');
 var bodyParser = require('body-parser');
-var User = require('./database/models/user.js');
+var handle = require('./server/requestHandler.js')
 
 var app = express();
 
@@ -18,24 +18,11 @@ app.use(function(req, res, next) {
 
 app.get('/', function(req, res) {
   res.send('Hello, humans!');
-
 });
 
-app.get('/api/users', function(req, res) {
-  User.user.find((err, users) => {
-    if(err) {
-      console.error(err);
-    } else {
-      res.send(users);
-    }
-  });
-});
+app.get('/api/users', handle.usersGet);
 
-app.post('/api/users', (req, res) => {
-  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
-
-  res.status(201).send('Post Success');
-});
+app.post('/api/users', handle.userPost);
 
 var port = process.env.PORT || 3003;
 
