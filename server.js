@@ -15,8 +15,20 @@ app.get('/', function(req, res) {
 
 });
 
-app.get('/users', function(req, res) {
-  res.send('Hi!');
+app.get('/api/users', function(req, res) {
+  User.user.find((err, users) => {
+    if(err) {
+      console.error(err);
+    } else {
+      res.send(users);
+    }
+  });
+});
+
+app.post('/api/users', (req, res) => {
+  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
+
+  res.send(201, 'Post Success');
 });
 
 app.post('/api/users', (req, res) => {
