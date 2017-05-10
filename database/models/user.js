@@ -1,13 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose 
+mongoose
 mongoose.Promise = global.Promise;
 
 // GRADY WORK HERE
 var userSchema = mongoose.Schema({
   name: String,
   password: String,
-  url: []
+  urls: [{
+    name: String,
+    pins: [String]
+  }]
 });
 
 var User = mongoose.model('User', userSchema);
@@ -16,7 +19,7 @@ var User = mongoose.model('User', userSchema);
 var addUser = function(name, password) {
   var account = new User({
     name: name,
-    password: password,
+    password: password
   });
 
   account.save((err, account) => {
