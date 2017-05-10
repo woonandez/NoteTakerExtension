@@ -15,3 +15,29 @@ exports.usersGet = (req, res) => {
   })
 };
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+exports.userSignup = (req, res) => {
+  User.user.find({name: req.body.name})
+    .then(user => {
+console.log(user);
+      if(user.length !== 0) {
+        res.status(200).send('User already exists!');
+      } else {
+        User.addUser(req.body.name, req.body.password);
+        res.status(201).send('Successfully created user!');
+      }
+    })
+    .catch(err => {
+      console.log(`Error: ${err}.`);
+    });
+}
+
+
+
+
+

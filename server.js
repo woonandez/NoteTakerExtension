@@ -24,6 +24,8 @@ app.get('/api/users', handle.usersGet);
 
 app.post('/api/users', handle.userPost);
 
+app.post('/signup', handle.userSignup);
+
 var port = process.env.PORT || 3003;
 
 app.listen(port, () => {
