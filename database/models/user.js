@@ -16,7 +16,7 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 //Add User to database GRADY WORK HERE
-var addUser = function(name, password) {
+var addUser = (name, password) => {
   var account = new User({
     name: name,
     password: password
@@ -30,16 +30,23 @@ var addUser = function(name, password) {
 };
 
 //Add Note to database GRADY WORK HERE
-var addNotes =  function(username, uri, note) {
-  User.findOne({name: username}, function(err, user){
-    console.log(user, uri);
-    if(user.url[uri]) {
-      user.url[uri].push(note);
+var addNotes = (username, uri, note) => {
+  User.findOne({name: username}, (err, user) => {
+    var pages = user.urls.map(site => site.name);
+
+console.log(pages);
+console.log(pages.includes(uri));
+
+    if(pages.includes(uri)) {
+      user.urls[pages.indexOf(uri)].pins.push(note);
     } else {
       //create a new array to store notes
-      user.url[uri] = [note];
+      user.urls.push({
+        name: uri,
+        pins: [note]
+      });
     }
-    user.markModified('url');
+    user.markModified('urls');
     user.save();
   })
 };

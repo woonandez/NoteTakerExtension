@@ -27,7 +27,7 @@ app.post('/signup', handle.userSignup);
 
 //David will fill in the blanks with Auth0
 app.post('/login', handle.userLogin);
-app.post('/notes', handle.userAddNotes);
+app.post('/api/user/notes', handle.userAddNotes);
 
 var port = process.env.PORT || 3003;
 
