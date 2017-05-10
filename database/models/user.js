@@ -1,27 +1,23 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+mongoose 
+mongoose.Promise = global.Promise;
 
+// GRADY WORK HERE
 var userSchema = mongoose.Schema({
   name: String,
   password: String,
-  bookmarks: [{
-    url: String,
-    notes: [String]
-  }]
+  url: []
 });
 
 var User = mongoose.model('User', userSchema);
 
-var addUser = function(name, password, uri, notes) {
-  console.log(name, password, uri, notes);
+//Add User to database GRADY WORK HERE
+var addUser = function(name, password) {
   var account = new User({
-      name: name,
-      password: password,
-      bookmarks: [{
-        url: uri,
-        notes: notes
-      }]
-    });
+    name: name,
+    password: password,
+  });
 
   account.save((err, account) => {
     if(err) {
@@ -30,17 +26,23 @@ var addUser = function(name, password, uri, notes) {
   });
 };
 
-// var result = addUser('Kevin', 'Ng', 'www.yahoo.com', "Kevin is awesome");
-
-// You can use this to create a fake user to initialize the database
-// var kevin = new User({name: 'Kevin', password: 'Kevin'});
-// kevin.save(function(err) {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
+//Add Note to database GRADY WORK HERE
+var addNotes =  function(username, uri, note) {
+  User.findOne({name: username}, function(err, user){
+    console.log(user, uri);
+    if(user.url[uri]) {
+      user.url[uri].push(note);
+    } else {
+      //create a new array to store notes
+      user.url[uri] = [note];
+    }
+    user.markModified('url');
+    user.save();
+  })
+};
 
 module.exports = {
   user: User,
-  addUser: addUser
+  addUser: addUser,
+  addNotes: addNotes
 };

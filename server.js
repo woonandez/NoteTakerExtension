@@ -21,10 +21,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/users', handle.usersGet);
-
 app.post('/api/users', handle.userPost);
 
 app.post('/signup', handle.userSignup);
+
+//David will fill in the blanks with Auth0
+app.post('/login', handle.userLogin);
+app.post('/notes', handle.userAddNotes);
 
 var port = process.env.PORT || 3003;
 
