@@ -3,11 +3,10 @@ var express = require('express');
 var db = require('./database/db.js');
 var bodyParser = require('body-parser');
 var handle = require('./server/requestHandler.js')
-
 var app = express();
 
 app.use(bodyParser.json());
-// set path for static files
+
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,6 +15,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+//WEB APP ENDPOINTS//
 app.get('/', function(req, res) {
   res.send('Hello, humans!');
 });
@@ -23,11 +23,22 @@ app.get('/', function(req, res) {
 app.get('/api/users', handle.usersGet);
 app.post('/api/users', handle.userPost);
 
+app.delete('/api/users/url', handle.urlRemove);
+
+app.delete('/api/users/notes', handle.noteRemove);
+
 app.post('/signup', handle.userSignup);
+//David will fill in the blanks with Auth0
+app.post('/login', handle.userLogin);
+
+
+//CHROME EXTENSION ENDPOINTS//
+//EX.axios => /api/users/notes/5913c8501b7eaa3f1403fc4c 
+app.post('/api/users/notes/', handle.userAddNotes);
 
 //David will fill in the blanks with Auth0
 app.post('/login', handle.userLogin);
-app.post('/api/user/notes', handle.userAddNotes);
+app.post('/notes', handle.userAddNotes);
 
 var port = process.env.PORT || 3003;
 

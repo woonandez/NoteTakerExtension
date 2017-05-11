@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose
+
 mongoose.Promise = global.Promise;
 
 // GRADY WORK HERE
@@ -15,7 +15,7 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-//Add User to database GRADY WORK HERE
+//Add User to database
 var addUser = (name, password) => {
   var account = new User({
     name: name,
@@ -29,18 +29,14 @@ var addUser = (name, password) => {
   });
 };
 
-//Add Note to database GRADY WORK HERE
+//Add Note to database
 var addNotes = (username, uri, note) => {
   User.findOne({name: username}, (err, user) => {
     var pages = user.urls.map(site => site.name);
 
-console.log(pages);
-console.log(pages.includes(uri));
-
     if(pages.includes(uri)) {
       user.urls[pages.indexOf(uri)].pins.push(note);
     } else {
-      //create a new array to store notes
       user.urls.push({
         name: uri,
         pins: [note]
@@ -48,11 +44,46 @@ console.log(pages.includes(uri));
     }
     user.markModified('urls');
     user.save();
-  })
+  });
 };
+
+//Remove Sites from database
+var removeUrl = (username, uri) => {
+  User.findOne({name: username}, (err, user) => {
+    var pages = user.urls.map(site => site.name);
+    var index = pages.indexOf(uri);
+
+    if(index !== -1) {
+     user.urls.splice(index, 1);
+    }
+
+    user.markModified('urls');
+    user.save();
+  });
+}
+
+//Remove Notes from database
+var removeNote = (username, uri, note) => {
+  User.findOne({name: username}, (err, user) => {
+    var pages = user.urls.map(site => site.name);
+    var index = pages.indexOf(uri);
+
+    if(index !== -1) {
+      var noteIndex = user.urls[index].pins.indexOf(note);
+      if(noteIndex !== -1) {
+        user.urls[index].pins.splice(noteIndex, 1);
+      }
+    }
+    user.markModified('urls');
+    user.save();
+  });
+}
+
 
 module.exports = {
   user: User,
   addUser: addUser,
-  addNotes: addNotes
+  addNotes: addNotes,
+  removeUrl: removeUrl,
+  removeNote: removeNote
 };

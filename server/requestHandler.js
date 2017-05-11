@@ -1,5 +1,6 @@
 var User = require('../database/models/user.js');
 
+//WEB APP ENDPOINTS//
 //Handle User Get Request
 exports.usersGet = (req, res) => {
   User.user.find((err, users) => {
@@ -13,15 +14,21 @@ exports.usersGet = (req, res) => {
 
 //Handle User Post Request
 exports.userPost = (req, res) => {
-  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.notes);
+  User.addUser(req.body.name, req.body.password, req.body.uri, req.body.note);
   res.status(201).send('Post Success');
 };
 
-//Add note to database for existing Users GRADY WORK HERE
-exports.userAddNotes = (req, res) => {
-  User.addNotes(req.body.name, req.body.uri, req.body.note);
-  res.status(201).send('Post Success');
-};
+//Handle Remove Url
+exports.urlRemove = (req, res) => {
+  User.removeUrl(req.body.name, req.body.uri);
+  res.status(201).send('Url Removed');
+}
+
+//Handle Remove Note
+exports.noteRemove = (req, res) => {
+  User.removeNote(req.body.name, req.body.uri, req.body.note);
+  res.status(201).send('Note Removed');
+}
 
 //Handle User Signup
 exports.userSignup = (req, res) => {
@@ -63,6 +70,14 @@ exports.userLogin = (req, res) => {
   });
 }
 
-
-
+//CHROME EXTENSION ENDPOINTS//
+//Handle Add note to database for existing Users
+exports.userAddNotes = (req, res) => {
+  if(req.body.note === null || req.body.note === "") {
+    res.status(404).send('please hightlight something');
+  } else {
+    User.addNotes(req.body.name, req.body.uri, req.body.note);
+    res.status(201).send('Post Success');
+  }
+};
 

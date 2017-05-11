@@ -9,16 +9,11 @@ class Pin extends React.Component {
   render() {
     return (
       <div className="pin">
-
         <div className="note-container">
           <span>PIN: {this.props.pin}</span>
-
         </div>
-
         <p className="pin-url"></p>
-
       </div>
-
     )
   }
 }

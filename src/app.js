@@ -20,7 +20,7 @@ class App extends React.Component {
 
           {
             name: "www.craiglist.com/job",
-            pins: ["Great Job", "Greater Job"]
+            pins: ["Great KEVIN", "Greater Job"]
           }
         ]
       }
@@ -56,20 +56,12 @@ class App extends React.Component {
 
   render() {
     return (
-
-
       <div className="container">
         <p>Happy Birthday, David!</p>
-
         <Nav />
-
         {this.state.fakeData.urls.map((list, index) => (<List data = {list} key={index}/>) )}
-
-
-
       </div>
     );
-
   }
 }
 
