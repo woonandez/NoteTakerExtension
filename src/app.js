@@ -38,7 +38,7 @@ class App extends React.Component {
 
   fetch() {
     axios
-      .get("/users")
+      .get("/api/users")
       .then(res => {
         this.setState({ data: res.data[0] });
 
