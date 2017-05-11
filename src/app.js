@@ -33,7 +33,7 @@ class App extends React.Component {
       }
     };
 
-    this.getData = this.getData.bind(this);
+    this.fetch = this.fetch.bind(this);
   }
 
   fetch() {
@@ -50,6 +50,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.fetch();
     // getPins(query) {
     // }
     // onPinClick(pin) {
