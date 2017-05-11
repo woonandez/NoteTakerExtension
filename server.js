@@ -26,6 +26,7 @@ app.post('/api/users', handle.userPost);
 app.delete('/api/users/urls', handle.urlRemove);
 app.delete('/api/users/notes', handle.noteRemove);
 
+
 //CHROME EXTENSION ENDPOINTS//
 //EX.axios => /api/users/notes/5913c8501b7eaa3f1403fc4c 
 app.post('/api/users/notes/', handle.userAddNotes);
@@ -33,6 +34,7 @@ app.post('/api/users/notes/', handle.userAddNotes);
 //DAVID will fill in the blanks with Auth0//
 app.post('/login', handle.userLogin);
 app.post('/signup', handle.userSignup);
+
 
 var port = process.env.PORT || 3003;
 
