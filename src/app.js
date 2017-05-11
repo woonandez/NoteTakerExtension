@@ -9,28 +9,42 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
+      data: {urls: []},
+
       fakeData: {
         name: "Kevin",
         password: "qwerty",
         urls: [
           {
-            name: "www.craiglist.com/deal",
-            pins: ["Great Deal", "Greater Deal"]
+
+            url: "www.craiglist.com/deal",
+            notes: ["Great Deal", "Greater Deal"]
           },
 
           {
-            name: "www.craiglist.com/job",
-            pins: ["Great KEVIN", "Greater Job"]
+            url: "www.craiglist.com/job",
+            notes: ["Great KEVIN", "Greater Job"]
+
           }
         ]
       }
     };
+
+
+    this.getData = this.getData.bind(this);
   }
 
-  fetch() {
-    axios.get('/users')
+
+
+  getData() {
+    axios.get('/api/users')
       .then(res => {
-        console.log(res);
+        this.setState({ data: res.data[0] });
+
+        console.log('DATA: ',this.state.data);
+
+
       })
       .catch(error => {
         console.error(error);
@@ -38,16 +52,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //this.fetch();
+
+
+    this.getData();
+
   }
-
-
 
   // getPins(query) {
 
-
   // }
-
 
 
   // onPinClick(pin) {
@@ -55,13 +68,24 @@ class App extends React.Component {
   // }
 
   render() {
+
+    console.log('Rendering...................');
+
     return (
-      <div className="container">
-        <p>Happy Birthday, David!</p>
+      <div>
         <Nav />
-        {this.state.fakeData.urls.map((list, index) => (<List data = {list} key={index}/>) )}
+
+        <div className="container">
+
+
+          {this.state.data.urls.map((list, index) => (<List data = {list} key={index}/>) )}
+
+        </div>
+
       </div>
+
     );
+
   }
 }
 

@@ -8,6 +8,7 @@ class Nav extends React.Component {
 
   render() {
     return (
+
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -17,13 +18,13 @@ class Nav extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">Brand</a>
+            <a className="navbar-brand" href="#">Yummy Penguin</a>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
+              <li className="active"><a href="#">Home <span className="sr-only">(current)</span></a></li>
+              <li><a href="#">Profile</a></li>
 
             </ul>
             <form className="navbar-form navbar-left" role="search">
@@ -33,12 +34,13 @@ class Nav extends React.Component {
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
+              <li><a href="#">Log In</a></li>
             </ul>
           </div>
         </div>
       </nav>
     )
+
   }
 
 

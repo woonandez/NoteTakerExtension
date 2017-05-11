@@ -1,3 +1,7 @@
 /node_modules
+<<<<<<< HEAD
 mongod.exe
 /public/bundle.js
+=======
+mongod.exe
+>>>>>>> 2e35c3a6bd235b65e1eef2b6e5aae5d9873a378d
