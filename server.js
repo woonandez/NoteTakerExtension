@@ -23,22 +23,16 @@ app.get('/', function(req, res) {
 app.get('/api/users', handle.usersGet);
 app.post('/api/users', handle.userPost);
 
-app.delete('/api/users/url', handle.urlRemove);
-
+app.delete('/api/users/urls', handle.urlRemove);
 app.delete('/api/users/notes', handle.noteRemove);
-
-app.post('/signup', handle.userSignup);
-//David will fill in the blanks with Auth0
-app.post('/login', handle.userLogin);
-
 
 //CHROME EXTENSION ENDPOINTS//
 //EX.axios => /api/users/notes/5913c8501b7eaa3f1403fc4c 
 app.post('/api/users/notes/', handle.userAddNotes);
 
-//David will fill in the blanks with Auth0
+//DAVID will fill in the blanks with Auth0//
 app.post('/login', handle.userLogin);
-app.post('/notes', handle.userAddNotes);
+app.post('/signup', handle.userSignup);
 
 var port = process.env.PORT || 3003;
 

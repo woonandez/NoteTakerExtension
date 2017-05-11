@@ -20,6 +20,7 @@ exports.userPost = (req, res) => {
 
 //Handle Remove Url
 exports.urlRemove = (req, res) => {
+  console.log(req.body.name, req.body.uri)
   User.removeUrl(req.body.name, req.body.uri);
   res.status(201).send('Url Removed');
 }
