@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import List from "./List";
 import AuthService from "./utils/AuthService";
 
+
 const auth = new AuthService(
   "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
   "dhsiao89.auth0.com"
@@ -15,30 +16,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       data: { urls: [] }
-
-      // fakeData: {
-      //   name: "Kevin",
-      //   password: "qwerty",
-      //   urls: [
-      //     {
-      //       url: "www.craiglist.com/deal",
-      //       notes: ["Great Deal", "Greater Deal"]
-      //     },
-
-      //     {
-      //       url: "www.craiglist.com/job",
-      //       notes: ["Great KEVIN", "Greater Job"]
-      //     }
-      //   ]
-      // }
     };
 
     this.fetch = this.fetch.bind(this);
   }
 
   fetch() {
+    var token = localStorage.id_token;
+    
     axios
-      .get("/api/users")
+      .get("/api/users/" + token)
       .then(res => {
         this.setState({ data: res.data[0] });
 
@@ -47,10 +34,6 @@ class App extends React.Component {
       .catch(error => {
         console.error(error);
       });
-  }
-
-  handleClick() {
-
   }
 
   deleteNote(name, uri, note) {
@@ -75,13 +58,8 @@ class App extends React.Component {
       });
   }
 
-
-
-
-
   componentDidMount() {
     this.fetch();
-
   }
 
   render() {
