@@ -18,7 +18,11 @@ export default class AuthService {
 
   _doAuthentication(authResult) {
     // Saves the user token
-    console.log("WH");
+    this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+      console.log("client info", profile);
+      console.log("name", profile.name);
+      console.log("user_id", profile["user_id"]);
+    });
     console.log("authResult", authResult);
     this.setToken(authResult.idToken);
     // navigate to the home route

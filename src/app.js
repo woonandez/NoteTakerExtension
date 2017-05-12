@@ -14,23 +14,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: { urls: [] },
+      data: { urls: [] }
 
-      fakeData: {
-        name: "Kevin",
-        password: "qwerty",
-        urls: [
-          {
-            url: "www.craiglist.com/deal",
-            notes: ["Great Deal", "Greater Deal"]
-          },
+      // fakeData: {
+      //   name: "Kevin",
+      //   password: "qwerty",
+      //   urls: [
+      //     {
+      //       url: "www.craiglist.com/deal",
+      //       notes: ["Great Deal", "Greater Deal"]
+      //     },
 
-          {
-            url: "www.craiglist.com/job",
-            notes: ["Great KEVIN", "Greater Job"]
-          }
-        ]
-      }
+      //     {
+      //       url: "www.craiglist.com/job",
+      //       notes: ["Great KEVIN", "Greater Job"]
+      //     }
+      //   ]
+      // }
     };
 
     this.fetch = this.fetch.bind(this);
