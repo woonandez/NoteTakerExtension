@@ -1,5 +1,6 @@
 import Auth0Lock from "auth0-lock";
 import { browserHistory } from "react-router";
+import axios from "axios";
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -14,19 +15,33 @@ export default class AuthService {
     this.lock.on("authenticated", this._doAuthentication.bind(this));
     // binds login functions to keep this context
     this.login = this.login.bind(this);
+    this.createNewUser = this.createNewUser.bind(this);
   }
 
   _doAuthentication(authResult) {
+    var account = {};
+    account.password = authResult.idToken;
     // Saves the user token
     this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-      console.log("client info", profile);
-      console.log("name", profile.name);
-      console.log("user_id", profile["user_id"]);
+      //console.log("client info", profile);
+      account.name = profile.email;
+      console.log("hello account", account);
+      this.createNewUser(account);
     });
-    console.log("authResult", authResult);
     this.setToken(authResult.idToken);
     // navigate to the home route
     browserHistory.replace("/");
+  }
+
+  createNewUser(account) {
+    axios
+      .post("/api/users", account)
+      .then(res => {
+        console.log("Auth0 save user success!");
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   login() {
