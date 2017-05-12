@@ -1,0 +1,23 @@
+.panel-title {
+  font-weight: bold;
+  color: white;
+
+}
+
+.panel-heading {
+
+}
+
+.panel-body {
+  padding: 0px;
+}
+
+.list-group {
+  margin-bottom: 0px;
+}
+
+.list-group-item {
+
+  font-size: 1.5em;
+}
+

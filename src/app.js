@@ -49,15 +49,44 @@ class App extends React.Component {
       });
   }
 
+  handleClick() {
+
+  }
+
+  deleteNote(name, uri, note) {
+    axios({ method: 'delete', url: '/api/users/notes', data: { name: name, uri: uri, note: note } })
+      .then(res => {
+        this.fetch();
+        console.log("NOTE DELETED!");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  deleteList(name, uri) {
+    axios({ method: 'delete', url: '/api/users/urls', data: { name: name, uri: uri } })
+      .then(res => {
+        this.fetch();
+        console.log("LIST DELETED!");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+
+
+
+
   componentDidMount() {
     this.fetch();
-    // getPins(query) {
-    // }
-    // onPinClick(pin) {
+
   }
 
   render() {
     console.log("Rendering...................");
+    console.log("Name: ", this.state.data.name);
 
     return (
       <div>
@@ -66,7 +95,7 @@ class App extends React.Component {
         <div className="container">
 
           {this.state.data.urls.map((list, index) => (
-            <List data={list} key={index} />
+            <List name={this.state.data.name} data={list} key={index} deleteList = {this.deleteList.bind(this)} deleteNote = {this.deleteNote.bind(this)}/>
           ))}
 
         </div>
