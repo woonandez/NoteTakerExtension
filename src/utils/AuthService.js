@@ -20,7 +20,7 @@ export default class AuthService {
 
   _doAuthentication(authResult) {
     var account = {};
-    account.password = authResult.idToken;
+    account.token_id = authResult.idToken;
     // Saves the user token
     this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
       //console.log("client info", profile);
@@ -30,12 +30,12 @@ export default class AuthService {
     });
     this.setToken(authResult.idToken);
     // navigate to the home route
-    browserHistory.replace("/");
+    //browserHistory.replace("/");
   }
 
   createNewUser(account) {
     axios
-      .post("/api/users", account)
+      .post("/api/users/", account)
       .then(res => {
         console.log("Auth0 save user success!");
       })
