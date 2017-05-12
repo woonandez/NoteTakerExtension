@@ -32,7 +32,6 @@ export default class AuthService {
       this.createNewUser(account);
     });
     this.setToken(authResult.idToken);
-    // navigate to the home route
     //browserHistory.replace("/");
   }
 
