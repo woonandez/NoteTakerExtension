@@ -16,19 +16,31 @@ exports.usersGet = (req, res) => {
 //Handle User Post Request
 exports.userPost = (req, res) => {
   console.log(req.body.name, req.body.user_id);
-  var account = new User({
-    name: req.body.name,
-    user_id: req.body.user_id
-  });
 
-  account.save((err, account) => {
-    if(err) {
-      console.log(err);
-      res.status(404).send("Could not create user");
+  User.find({user_id: req.body.user_id}, (err, user) => {
+    if (err) {
+      console.error(err);
     } else {
-      res.status(201).send("New User Created")
+      if (user.length === 0) {
+        var account = new User({
+          name: req.body.name,
+          user_id: req.body.user_id
+        });
+
+        account.save((err, account) => {
+          if(err) {
+            console.log(err);
+            res.status(404).send("Could not create user");
+          } else {
+            res.status(201).send("New User Created")
+          }
+        });
+      } else {
+        res.status(201).send('user already exists. fuck youuuuuuuuuu');
+      }
     }
-  });
+  })
+
 };
 
 //Handle Remove Url
@@ -101,7 +113,7 @@ exports.noteRemove = (req, res) => {
 //CHROME EXTENSION ENDPOINTS//
 //Handle Add note to database for existing Users
 exports.userAddNotes = (req, res) => {
-  //send username/url/note in body
+  //send username/uri/note in body
   if(req.body.note === null || req.body.note === "") {
     res.status(404).send('please hightlight something');
   } else {

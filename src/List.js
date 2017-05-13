@@ -36,4 +36,3 @@ class List extends React.Component {
 
 export default List;
 
-          // <a href="#" className="btn btn-warning pull-right" onClick={() => this.props.deleteList('Anton', this.props.data.name)} ><span className="glyphicon glyphicon-trash"></span></a>

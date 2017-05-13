@@ -24,15 +24,16 @@ class App extends React.Component {
   }
 
   fetch() {
-
+    console.log('ACCOUNT: ', account.user_id);
     axios
-      .get("/api/users/" + token)
+      .get("/api/users/" + account.user_id)
       .then(res => {
-        this.setState({ data: res.data[0] });
+        console.log("DATA1: ", res.data[0]);
 
+        if (res.data.length > 0) {
+          this.setState({ data: res.data[0] });
+        }
 
-
-        console.log("DATA: ", this.state.data);
       })
       .catch(error => {
         console.error(error);
@@ -62,12 +63,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetch();
+    setTimeout(() => this.fetch(), 2000);
+
+
   }
 
   render() {
-    console.log('Account: ', account);
-
+    console.log("DATA3: ", this.state.data);
     return (
       <div>
         <Nav auth={auth} />
