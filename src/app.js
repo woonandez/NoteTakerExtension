@@ -5,12 +5,12 @@ import Nav from "./Nav";
 import List from "./List";
 import AuthService from "./utils/AuthService";
 
-
-
+var option = { autoclose: true };
 
 const auth = new AuthService(
   "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
-  "dhsiao89.auth0.com"
+  "dhsiao89.auth0.com",
+  option
 );
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   fetch() {
-    console.log('ACCOUNT: ', account.user_id);
+    // console.log("ACCOUNT: ", account.user_id);
     axios
       .get("/api/users/" + account.user_id)
       .then(res => {
@@ -33,7 +33,6 @@ class App extends React.Component {
         if (res.data.length > 0) {
           this.setState({ data: res.data[0] });
         }
-
       })
       .catch(error => {
         console.error(error);
@@ -41,7 +40,11 @@ class App extends React.Component {
   }
 
   deleteNote(name, uri, note) {
-    axios({ method: 'delete', url: '/api/users/notes', data: { name: name, uri: uri, note: note } })
+    axios({
+      method: "delete",
+      url: "/api/users/notes",
+      data: { name: name, uri: uri, note: note }
+    })
       .then(res => {
         this.fetch();
         console.log("NOTE DELETED!");
@@ -52,7 +55,11 @@ class App extends React.Component {
   }
 
   deleteList(name, uri) {
-    axios({ method: 'delete', url: '/api/users/urls', data: { name: name, uri: uri } })
+    axios({
+      method: "delete",
+      url: "/api/users/urls",
+      data: { name: name, uri: uri }
+    })
       .then(res => {
         this.fetch();
         console.log("LIST DELETED!");
@@ -64,8 +71,6 @@ class App extends React.Component {
 
   componentDidMount() {
     setTimeout(() => this.fetch(), 2000);
-
-
   }
 
   render() {
@@ -77,7 +82,13 @@ class App extends React.Component {
         <div className="container">
 
           {this.state.data.urls.map((list, index) => (
-            <List name={this.state.data.name} data={list} key={index} deleteList = {this.deleteList.bind(this)} deleteNote = {this.deleteNote.bind(this)}/>
+            <List
+              name={this.state.data.name}
+              data={list}
+              key={index}
+              deleteList={this.deleteList.bind(this)}
+              deleteNote={this.deleteNote.bind(this)}
+            />
           ))}
 
         </div>
