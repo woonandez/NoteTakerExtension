@@ -6,6 +6,8 @@ import List from "./List";
 import AuthService from "./utils/AuthService";
 
 
+
+
 const auth = new AuthService(
   "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
   "dhsiao89.auth0.com"
@@ -22,12 +24,13 @@ class App extends React.Component {
   }
 
   fetch() {
-    var token = localStorage.id_token;
-    
+
     axios
       .get("/api/users/" + token)
       .then(res => {
         this.setState({ data: res.data[0] });
+
+
 
         console.log("DATA: ", this.state.data);
       })
@@ -63,8 +66,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("Rendering...................");
-    console.log("Name: ", this.state.data.name);
+    console.log('Account: ', account);
 
     return (
       <div>

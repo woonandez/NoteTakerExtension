@@ -23,7 +23,7 @@ class List extends React.Component {
 
         <div className="panel-body">
           <ul className="list-group">
-            {this.props.data.pins.map((pin, index) => (<Pin pin={pin} key={index} deleteNote = {this.props.deleteNote} />) )}
+            {this.props.data.pins.map((pin, index) => (<Pin pin={pin} key={index} username={this.props.name} listname={this.props.data.name} deleteNote = {this.props.deleteNote} />) )}
           </ul>
         </div>
       </div>

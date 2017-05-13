@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 // GRADY WORK HERE
 var userSchema = mongoose.Schema({
   name: String,
-  token_id: String,
+  user_id: String,
   urls: [{
     name: String,
     pins: [String]

@@ -4,7 +4,7 @@ var User = require('../database/models/user.js');
 //Handle User Get Request
 exports.usersGet = (req, res) => {
   console.log(req.params.id);
-  User.find({token_id: req.params.id}, (err, user) => {
+  User.find({user_id: req.params.id}, (err, user) => {
     if(err) {
       console.error(err);
     } else {
@@ -15,10 +15,10 @@ exports.usersGet = (req, res) => {
 
 //Handle User Post Request
 exports.userPost = (req, res) => {
-  console.log(req.body.name, req.body.token_id);
+  console.log(req.body.name, req.body.user_id);
   var account = new User({
     name: req.body.name,
-    token_id: req.body.token_id
+    user_id: req.body.user_id
   });
 
   account.save((err, account) => {
@@ -93,7 +93,7 @@ exports.noteRemove = (req, res) => {
 //       }
 //   })
 //   .catch(err => {
-//       console.log(`Error: ${err}.`);  
+//       console.log(`Error: ${err}.`);
 //       res.status(404).send(err);
 //   });
 // }
@@ -112,7 +112,7 @@ exports.userAddNotes = (req, res) => {
       var pages = user.urls.map(site => site.name);
 
       if(pages.includes(req.body.uri)) {
-        user.urls[pages.indexOf(req.body.uri)].pins.push(note);
+        user.urls[pages.indexOf(req.body.uri)].pins.push(req.body.note);
       } else {
         user.urls.push({
           name: req.body.uri,

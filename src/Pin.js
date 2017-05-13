@@ -16,7 +16,7 @@ class Pin extends React.Component {
 
           {this.props.pin}
 
-          <a href="#" className="btn btn-danger pull-right" onClick={() => this.props.deleteNote('Anton', 'google.com', this.props.pin)} ><span className="glyphicon glyphicon-trash"></span></a>
+          <a href="#" className="btn btn-danger pull-right" onClick={() => this.props.deleteNote(this.props.username, this.props.listname, this.props.pin)} ><span className="glyphicon glyphicon-trash"></span></a>
 
 
 

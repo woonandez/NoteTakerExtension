@@ -2,6 +2,8 @@ import Auth0Lock from "auth0-lock";
 import { browserHistory } from "react-router";
 import axios from "axios";
 
+var account = {};
+
 export default class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
@@ -19,12 +21,13 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult) {
-    var account = {};
-    account.token_id = authResult.idToken;
+    //var account = {};
+
     // Saves the user token
     this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
       //console.log("client info", profile);
       account.name = profile.email;
+      account.user_id = profile.user_id;
       console.log("hello account", account);
       this.createNewUser(account);
     });
@@ -71,3 +74,6 @@ export default class AuthService {
     localStorage.removeItem("id_token");
   }
 }
+
+
+window.account = account;
