@@ -74,5 +74,4 @@ export default class AuthService {
   }
 }
 
-
 window.account = account;
