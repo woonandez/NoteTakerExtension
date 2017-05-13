@@ -18,7 +18,6 @@ class List extends React.Component {
             href={this.props.data.name}
             target="_blank"
             className="panel-title"
-            class="nohover"
           >
             {this.props.data.name}
           </a>

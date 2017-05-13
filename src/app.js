@@ -5,12 +5,9 @@ import Nav from "./Nav";
 import List from "./List";
 import AuthService from "./utils/AuthService";
 
-var option = { autoclose: true };
-
 const auth = new AuthService(
   "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
-  "dhsiao89.auth0.com",
-  option
+  "dhsiao89.auth0.com"
 );
 
 class App extends React.Component {
