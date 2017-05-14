@@ -21,7 +21,38 @@
   font-size: 1.5em;
 }
 
-a:hover{
+a:visited {
   color: white;
 }
 
+a:hover {
+  color: #ffd164;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-heading .panel-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 33px;
+  line-height: 33px;
+  min-width: 0;
+  margin-right: 10px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-group-item .pin {
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 10px;
+  text-overflow: ellipsis;
+  width: 100%;
+}
