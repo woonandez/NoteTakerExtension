@@ -8,8 +8,6 @@ class List extends React.Component {
   }
 
   render() {
-    console.log("List.js props: ", this.props);
-
     return (
       <div className="panel panel-primary">
 

@@ -2,11 +2,10 @@ import Auth0Lock from "auth0-lock";
 import { browserHistory } from "react-router";
 import axios from "axios";
 
-var account = {};
-
 export default class AuthService {
-  constructor(clientId, domain) {
+  constructor(clientId, domain, authenticateCallback) {
     // Configure Auth0
+    this.authenticateCallback = authenticateCallback;
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
         redirectUrl: "http://localhost:3003/",
@@ -21,25 +20,23 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult) {
-    //var account = {};
+    var account = {};
 
     // Saves the user token
     this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-      //console.log("client info", profile);
       account.name = profile.email;
       account.user_id = profile.user_id;
-      console.log("hello account", account);
+      this.setAccount(account);
       this.createNewUser(account);
     });
     this.setToken(authResult.idToken);
-    //browserHistory.replace("/");
   }
 
   createNewUser(account) {
     axios
       .post("/api/users/", account)
       .then(res => {
-        console.log("Auth0 save user success!");
+        this.authenticateCallback();
       })
       .catch(error => {
         console.error(error);
@@ -53,25 +50,26 @@ export default class AuthService {
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid
-    return !!this.getToken();
+    var token = localStorage.getItem("id_token");
+    return !!token;
+  }
+
+  getAccount() {
+    return JSON.parse(localStorage.getItem('account'));
+  }
+
+  setAccount(account) {
+    localStorage.setItem('account', JSON.stringify(account));
   }
 
   setToken(idToken) {
-    console.log("****");
-    console.log(idToken);
     // Saves user token to local storage
     localStorage.setItem("id_token", idToken);
-  }
-
-  getToken() {
-    // Retrieves the user token from local storage
-    return localStorage.getItem("id_token");
   }
 
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem("id_token");
+    localStorage.removeItem('account');
   }
 }
-
-window.account = account;
