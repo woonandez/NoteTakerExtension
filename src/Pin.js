@@ -7,7 +7,6 @@ class Pin extends React.Component {
   }
 
   render() {
-    console.log('Pin.js props: ', this.props);
     return (
         <li className="list-group-item">
           <div className="pin">
