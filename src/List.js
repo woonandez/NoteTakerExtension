@@ -21,16 +21,15 @@ class List extends React.Component {
           >
             {this.props.data.name}
           </a>
-          <div className="pull-right action-buttons">
-            <div className="btn-group pull-right">
-              <a
-                href="#"
-                className="btn btn-warning pull-right"
+          <div className="action-buttons">
+            <div className="btn-group">
+              <button
+                className="btn btn-danger"
                 onClick={() =>
                   this.props.deleteList(this.props.name, this.props.data.name)}
               >
                 <span className="glyphicon glyphicon-trash" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

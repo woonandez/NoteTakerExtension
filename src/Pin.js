@@ -9,20 +9,14 @@ class Pin extends React.Component {
   render() {
     console.log('Pin.js props: ', this.props);
     return (
-
-
-
         <li className="list-group-item">
-
-          {this.props.pin}
-
-          <a href="#" className="btn btn-danger pull-right" onClick={() => this.props.deleteNote(this.props.username, this.props.listname, this.props.pin)} ><span className="glyphicon glyphicon-trash"></span></a>
-
-
-
-
+          <div className="pin">
+            {this.props.pin}
+          </div>
+          <button className="btn btn-warning " onClick={() => this.props.deleteNote(this.props.username, this.props.listname, this.props.pin)} >
+            <span className="glyphicon glyphicon-trash"></span>
+          </button>
         <p className="pin-url"></p>
-
       </li>
     )
   }
