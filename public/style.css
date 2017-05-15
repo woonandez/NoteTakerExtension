@@ -56,3 +56,9 @@ a:hover {
   text-overflow: ellipsis;
   width: 100%;
 }
+
+.penguin{
+  height: 30px;
+  margin-bottom: 10px;
+  line-height: 33px;
+}
