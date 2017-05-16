@@ -35,10 +35,10 @@ export default class AuthService {
   createNewUser(account) {
     axios
       .post("/api/users/", account)
-      .then(res => {
+      .then((res) => {
         this.authenticateCallback();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }

@@ -3,7 +3,7 @@ var User = require('../database/models/user.js');
 //WEB APP ENDPOINTS//
 //Handle User Get Request
 exports.usersGet = (req, res) => {
-  console.log(req.params.id);
+  //send user_id in body
   User.find({user_id: req.params.id}, (err, user) => {
     if(err) {
       console.error(err);
@@ -15,8 +15,7 @@ exports.usersGet = (req, res) => {
 
 //Handle User Post Request
 exports.userPost = (req, res) => {
-  console.log(req.body.name, req.body.user_id);
-
+  //send name/user_id in body
   User.find({user_id: req.body.user_id}, (err, user) => {
     if (err) {
       console.error(err);
@@ -30,29 +29,27 @@ exports.userPost = (req, res) => {
         account.save((err, account) => {
           if(err) {
             console.log(err);
-            res.status(404).send("Could not create user");
+            res.status(404).send("Could not create user.");
           } else {
-            res.status(201).send("New User Created")
+            res.status(201).send("New User Created.");
           }
         });
       } else {
-        res.status(201).send('user already exists. fuck youuuuuuuuuu');
+        res.status(201).send('User Already Exists.');
       }
     }
   })
-
 };
 
 //Handle Remove Url
 exports.urlRemove = (req, res) => {
-  //send username/url in body
-  // console.log(req.body.name, req.body.uri);
+  //send name/uri/note in body
   User.findOne({name: req.body.name}, (err, user) => {
     if(err) {
       console.log(err);
-      res.status(404).send("Did not find User");
+      res.status(404).send("Did not find User.");
     }
-    var pages = user.urls.map(site => site.name);
+    var pages = user.urls.map((site) => site.name);
     var index = pages.indexOf(req.body.uri);
 
     if(index !== -1) {
@@ -66,13 +63,13 @@ exports.urlRemove = (req, res) => {
 
 //Handle Remove Note
 exports.noteRemove = (req, res) => {
-  //send username/url/note in body
+  //send name/url/note in body
   User.findOne({name: req.body.name}, (err, user) => {
     if(err) {
       console.log(err);
-      res.status(404).send('Coud not remove note');
+      res.status(404).send('Coud not remove note.');
     } else {
-      var pages = user.urls.map(site => site.name);
+      var pages = user.urls.map((site) => site.name);
       var index = pages.indexOf(req.body.uri);
 
       if(index !== -1) {
@@ -83,43 +80,21 @@ exports.noteRemove = (req, res) => {
       }
       user.markModified('urls');
       user.save();
-      res.status(201).send('Note Removed');
+      res.status(201).send('Note Removed.');
     }
   });
 }
 
-
-//Handle User Login
-// exports.userLogin = (req, res) => {
-//   User.find({name: req.body.name})
-//     .then((user) => {
-//       console.log(user);
-//       if(user.length !== 0) {
-//         if(req.body.password === user[0].password) {
-//           res.status(201).send('Login Success');
-//         } else {
-//           res.status(401).send('Password Incorrect');
-//         }
-//       } else {
-//         res.status(404).send('Username Not Found');
-//       }
-//   })
-//   .catch(err => {
-//       console.log(`Error: ${err}.`);
-//       res.status(404).send(err);
-//   });
-// }
-
 //CHROME EXTENSION ENDPOINTS//
 //Handle Add note to database for existing Users
 exports.userAddNotes = (req, res) => {
-  //send username/uri/note in body
+  //send name/uri/note in body
   if(req.body.note === null || req.body.note === "") {
-    res.status(404).send('please hightlight something');
+    res.status(404).send('Please hightlight something.');
   } else {
     User.findOne({name: req.body.name}, (err, user) => {
       if(err) {
-        res.status(404).send('Could not find user');
+        res.status(404).send('Could not find user.');
       }
       var pages = user.urls.map(site => site.name);
 
@@ -137,4 +112,3 @@ exports.userAddNotes = (req, res) => {
     });
   }
 };
-

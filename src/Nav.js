@@ -20,6 +20,8 @@ class Nav extends React.Component {
   render() {
     var loggedIn = this.props.auth.loggedIn();
     var authButton;
+    
+  //Conditional to render correct button if logged in or not
     if (!loggedIn) {
       authButton = <a onClick={this.handleLogin}>Login</a>;
     } else {
@@ -27,7 +29,6 @@ class Nav extends React.Component {
     }
 
     return (
-
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -47,7 +48,6 @@ class Nav extends React.Component {
             </button>
             <a className="navbar-brand" href="#">Noted</a>
           </div>
-
           <div
             className="collapse navbar-collapse"
             id="bs-example-navbar-collapse-1"
@@ -58,10 +58,7 @@ class Nav extends React.Component {
           </div>
         </div>
       </nav>
-
-
     );
-
   }
 }
 

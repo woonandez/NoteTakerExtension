@@ -10,7 +10,6 @@ class List extends React.Component {
   render() {
     return (
       <div className="panel panel-primary">
-
         <div className="panel-heading">
           <a
             href={this.props.data.name}
@@ -31,7 +30,6 @@ class List extends React.Component {
             </div>
           </div>
         </div>
-
         <div className="panel-body">
           <ul className="list-group">
             {this.props.data.pins.map((pin, index) => (
