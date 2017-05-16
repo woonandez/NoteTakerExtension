@@ -1,11 +1,6 @@
 .panel-title {
   font-weight: bold;
   color: white;
-
-}
-
-.panel-heading {
-
 }
 
 .panel-body {
@@ -17,7 +12,6 @@
 }
 
 .list-group-item {
-
   font-size: 1.5em;
 }
 
@@ -56,3 +50,8 @@ a:hover {
   text-overflow: ellipsis;
   width: 100%;
 }
+
+.penguin{
+  height: 30px;
+  margin-bottom: 10px;
+  line-height: 33px;

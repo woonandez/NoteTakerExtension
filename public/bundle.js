@@ -22340,23 +22340,26 @@ var Pin = function (_React$Component) {
   }
 
   _createClass(Pin, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log('Pin.js props: ', this.props);
       return _react2.default.createElement(
-        'li',
-        { className: 'list-group-item' },
-        this.props.pin,
+        "li",
+        { className: "list-group-item" },
         _react2.default.createElement(
-          'a',
-          { href: '#', className: 'btn btn-danger pull-right', onClick: function onClick() {
-              return _this2.props.deleteNote('Anton', 'google.com', _this2.props.pin);
-            } },
-          _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
+          "div",
+          { className: "pin" },
+          this.props.pin
         ),
-        _react2.default.createElement('p', { className: 'pin-url' })
+        _react2.default.createElement(
+          "button",
+          { className: "btn btn-warning ", onClick: function onClick() {
+              return _this2.props.deleteNote(_this2.props.username, _this2.props.listname, _this2.props.pin);
+            } },
+          _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
+        ),
+        _react2.default.createElement("p", { className: "pin-url" })
       );
     }
   }]);
@@ -28808,8 +28811,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var auth = new _AuthService2.default("7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T", "dhsiao89.auth0.com");
-
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -28818,25 +28819,34 @@ var App = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = {
-      data: { urls: [] }
-    };
-
+    _this.handleAuthenticate = _this.handleAuthenticate.bind(_this);
     _this.fetch = _this.fetch.bind(_this);
+    _this.handleSignout = _this.handleSignout.bind(_this);
+
+    _this.auth = new _AuthService2.default("7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T", "dhsiao89.auth0.com", _this.handleAuthenticate);
+    _this.state = {
+      data: { urls: [] },
+      loggedIn: _this.auth.loggedIn()
+    };
     return _this;
   }
 
   _createClass(App, [{
+    key: "handleAuthenticate",
+    value: function handleAuthenticate() {
+      this.setState({
+        loggedIn: this.auth.loggedIn()
+      });
+    }
+  }, {
     key: "fetch",
     value: function fetch() {
       var _this2 = this;
 
-      var token = localStorage.id_token;
-
-      _axios2.default.get("/api/users/" + token).then(function (res) {
-        _this2.setState({ data: res.data[0] });
-
-        console.log("DATA: ", _this2.state.data);
+      _axios2.default.get("/api/users/" + this.auth.getAccount().user_id).then(function (res) {
+        if (res.data.length > 0) {
+          _this2.setState({ data: res.data[0] });
+        }
       }).catch(function (error) {
         console.error(error);
       });
@@ -28846,9 +28856,12 @@ var App = function (_React$Component) {
     value: function deleteNote(name, uri, note) {
       var _this3 = this;
 
-      (0, _axios2.default)({ method: 'delete', url: '/api/users/notes', data: { name: name, uri: uri, note: note } }).then(function (res) {
+      (0, _axios2.default)({
+        method: "delete",
+        url: "/api/users/notes",
+        data: { name: name, uri: uri, note: note }
+      }).then(function (res) {
         _this3.fetch();
-        console.log("NOTE DELETED!");
       }).catch(function (error) {
         console.error(error);
       });
@@ -28858,35 +28871,58 @@ var App = function (_React$Component) {
     value: function deleteList(name, uri) {
       var _this4 = this;
 
-      (0, _axios2.default)({ method: 'delete', url: '/api/users/urls', data: { name: name, uri: uri } }).then(function (res) {
+      (0, _axios2.default)({
+        method: "delete",
+        url: "/api/users/urls",
+        data: { name: name, uri: uri }
+      }).then(function (res) {
         _this4.fetch();
-        console.log("LIST DELETED!");
       }).catch(function (error) {
         console.error(error);
       });
     }
   }, {
+    key: "handleSignout",
+    value: function handleSignout() {
+      this.setState({
+        loggedIn: false,
+        data: { urls: [] }
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetch();
+      if (this.state.loggedIn) {
+        this.fetch();
+      }
+    }
+  }, {
+    key: "componentWillUpdate",
+    value: function componentWillUpdate(nextProps, nextState) {
+      if (nextState.loggedIn && !this.state.loggedIn) {
+        this.fetch();
+      }
     }
   }, {
     key: "render",
     value: function render() {
       var _this5 = this;
 
-      console.log("Rendering...................");
-      console.log("Name: ", this.state.data.name);
-
       return _react2.default.createElement(
         "div",
         null,
-        _react2.default.createElement(_Nav2.default, { auth: auth }),
+        _react2.default.createElement(_Nav2.default, { auth: this.auth, onSignout: this.handleSignout }),
         _react2.default.createElement(
           "div",
           { className: "container" },
           this.state.data.urls.map(function (list, index) {
-            return _react2.default.createElement(_List2.default, { name: _this5.state.data.name, data: list, key: index, deleteList: _this5.deleteList.bind(_this5), deleteNote: _this5.deleteNote.bind(_this5) });
+            return _react2.default.createElement(_List2.default, {
+              name: _this5.state.data.name,
+              data: list,
+              key: index,
+              deleteList: _this5.deleteList.bind(_this5),
+              deleteNote: _this5.deleteNote.bind(_this5)
+            });
           })
         )
       );
@@ -37358,46 +37394,58 @@ var List = function (_React$Component) {
   }
 
   _createClass(List, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
-      console.log('List.js props: ', this.props);
       return _react2.default.createElement(
-        'div',
-        { className: 'panel panel-primary' },
+        "div",
+        { className: "panel panel-primary" },
         _react2.default.createElement(
-          'div',
-          { className: 'panel-heading' },
+          "div",
+          { className: "panel-heading" },
           _react2.default.createElement(
-            'a',
-            { href: 'http://www.google.com', target: '_blank', className: 'panel-title' },
+            "a",
+            {
+              href: this.props.data.name,
+              target: "_blank",
+              className: "panel-title"
+            },
             this.props.data.name
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'pull-right action-buttons' },
+            "div",
+            { className: "action-buttons" },
             _react2.default.createElement(
-              'div',
-              { className: 'btn-group pull-right' },
+              "div",
+              { className: "btn-group" },
               _react2.default.createElement(
-                'a',
-                { href: '#', className: 'btn btn-warning pull-right', onClick: function onClick() {
+                "button",
+                {
+                  className: "btn btn-danger",
+                  onClick: function onClick() {
                     return _this2.props.deleteList(_this2.props.name, _this2.props.data.name);
-                  } },
-                _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
+                  }
+                },
+                _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
               )
             )
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'panel-body' },
+          "div",
+          { className: "panel-body" },
           _react2.default.createElement(
-            'ul',
-            { className: 'list-group' },
+            "ul",
+            { className: "list-group" },
             this.props.data.pins.map(function (pin, index) {
-              return _react2.default.createElement(_Pin2.default, { pin: pin, key: index, deleteNote: _this2.props.deleteNote });
+              return _react2.default.createElement(_Pin2.default, {
+                pin: pin,
+                key: index,
+                username: _this2.props.name,
+                listname: _this2.props.data.name,
+                deleteNote: _this2.props.deleteNote
+              });
             })
           )
         )
@@ -37409,8 +37457,6 @@ var List = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = List;
-
-// <a href="#" className="btn btn-warning pull-right" onClick={() => this.props.deleteList('Anton', this.props.data.name)} ><span className="glyphicon glyphicon-trash"></span></a>
 
 /***/ }),
 /* 280 */
@@ -37443,12 +37489,43 @@ var Nav = function (_React$Component) {
   function Nav(props) {
     _classCallCheck(this, Nav);
 
-    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+
+    _this.handleLogin = _this.handleLogin.bind(_this);
+    _this.handleLogout = _this.handleLogout.bind(_this);
+    return _this;
   }
 
   _createClass(Nav, [{
+    key: "handleLogin",
+    value: function handleLogin() {
+      this.props.auth.login();
+    }
+  }, {
+    key: "handleLogout",
+    value: function handleLogout() {
+      this.props.auth.logout();
+      this.props.onSignout();
+    }
+  }, {
     key: "render",
     value: function render() {
+      var loggedIn = this.props.auth.loggedIn();
+      var authButton;
+      if (!loggedIn) {
+        authButton = _react2.default.createElement(
+          "a",
+          { onClick: this.handleLogin },
+          "Login"
+        );
+      } else {
+        authButton = _react2.default.createElement(
+          "a",
+          { onClick: this.handleLogout },
+          "Logout"
+        );
+      }
+
       return _react2.default.createElement(
         "nav",
         { className: "navbar navbar-default" },
@@ -37458,6 +37535,11 @@ var Nav = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "navbar-header" },
+            _react2.default.createElement(
+              "a",
+              { className: "navbar-brand penguin" },
+              _react2.default.createElement("img", { className: "penguin", src: "./yummypanguin.png" })
+            ),
             _react2.default.createElement(
               "button",
               {
@@ -37478,7 +37560,7 @@ var Nav = function (_React$Component) {
             _react2.default.createElement(
               "a",
               { className: "navbar-brand", href: "#" },
-              "Yummy Penguin"
+              "Noted"
             )
           ),
           _react2.default.createElement(
@@ -37489,15 +37571,11 @@ var Nav = function (_React$Component) {
             },
             _react2.default.createElement(
               "ul",
-              { className: "nav navbar-nav navbar-right" },
+              { className: "nav navbar-nav" },
               _react2.default.createElement(
                 "li",
                 null,
-                _react2.default.createElement(
-                  "a",
-                  { onClick: this.props.auth.login.bind(this) },
-                  "Login"
-                )
+                authButton
               )
             )
           )
@@ -37562,10 +37640,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AuthService = function () {
-  function AuthService(clientId, domain) {
+  function AuthService(clientId, domain, authenticateCallback) {
     _classCallCheck(this, AuthService);
 
     // Configure Auth0
+    this.authenticateCallback = authenticateCallback;
     this.lock = new _auth0Lock2.default(clientId, domain, {
       auth: {
         redirectUrl: "http://localhost:3003/",
@@ -37585,23 +37664,23 @@ var AuthService = function () {
       var _this = this;
 
       var account = {};
-      account.token_id = authResult.idToken;
+
       // Saves the user token
       this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
-        //console.log("client info", profile);
         account.name = profile.email;
-        console.log("hello account", account);
+        account.user_id = profile.user_id;
+        _this.setAccount(account);
         _this.createNewUser(account);
       });
       this.setToken(authResult.idToken);
-      // navigate to the home route
-      //browserHistory.replace("/");
     }
   }, {
     key: "createNewUser",
     value: function createNewUser(account) {
+      var _this2 = this;
+
       _axios2.default.post("/api/users/", account).then(function (res) {
-        console.log("Auth0 save user success!");
+        _this2.authenticateCallback();
       }).catch(function (error) {
         console.error(error);
       });
@@ -37616,27 +37695,31 @@ var AuthService = function () {
     key: "loggedIn",
     value: function loggedIn() {
       // Checks if there is a saved token and it's still valid
-      return !!this.getToken();
+      var token = localStorage.getItem("id_token");
+      return !!token;
+    }
+  }, {
+    key: "getAccount",
+    value: function getAccount() {
+      return JSON.parse(localStorage.getItem('account'));
+    }
+  }, {
+    key: "setAccount",
+    value: function setAccount(account) {
+      localStorage.setItem('account', JSON.stringify(account));
     }
   }, {
     key: "setToken",
     value: function setToken(idToken) {
-      console.log("****");
-      console.log(idToken);
       // Saves user token to local storage
       localStorage.setItem("id_token", idToken);
-    }
-  }, {
-    key: "getToken",
-    value: function getToken() {
-      // Retrieves the user token from local storage
-      return localStorage.getItem("id_token");
     }
   }, {
     key: "logout",
     value: function logout() {
       // Clear user token and profile data from local storage
       localStorage.removeItem("id_token");
+      localStorage.removeItem('account');
     }
   }]);
 

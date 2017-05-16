@@ -34,9 +34,6 @@ app.delete("/api/users/urls", handle.urlRemove);
 app.post("/api/users/notes/", handle.userAddNotes);
 app.delete("/api/users/notes", handle.noteRemove);
 
-//DAVID will fill in the blanks with Auth0//
-// app.post("/login", handle.userLogin);
-
 var port = process.env.PORT || 3003;
 
 app.listen(port, () => {
