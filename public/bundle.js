@@ -22565,24 +22565,24 @@ var Pin = function Pin(props) {
       { className: "buttonContainer" },
       _react2.default.createElement(
         "button",
-        { className: "btn", onClick: function onClick() {
+        { className: "lstBtn", onClick: function onClick() {
             return props.deleteNote(props.username, props.listname, props.pin);
           } },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
       ),
       _react2.default.createElement(
         "button",
-        { className: "btn", type: "button" },
+        { className: "lstBtn", type: "button" },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-text-background" })
       ),
       _react2.default.createElement(
         "button",
-        { className: "btn", type: "button" },
+        { className: "lstBtn", type: "button" },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-resize-horizontal" })
       ),
       _react2.default.createElement(
         "button",
-        { className: "btn", type: "button" },
+        { className: "lstBtn", type: "button" },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-volume-up" })
       )
     )
