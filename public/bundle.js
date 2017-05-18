@@ -29275,8 +29275,11 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'fetchConcepts',
-    value: function fetchConcepts() {
-      _axios2.default.get('/api/watson/concepts').then(function (res) {
+    value: function fetchConcepts(textBlock) {
+      (0, _axios2.default)({
+        method: 'get',
+        url: '/api/watson/concepts'
+      }).then(function (res) {
         console.log(res);
       }).catch(function (error) {
         console.error(error);

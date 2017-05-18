@@ -47,15 +47,17 @@ class App extends React.Component {
       });
   }
 
-  fetchConcepts() {
-    axios
-      .get('/api/watson/concepts')
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  fetchConcepts(textBlock) {
+    axios({
+      method: 'get',
+      url: '/api/watson/concepts'
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
 //Remove note from database
