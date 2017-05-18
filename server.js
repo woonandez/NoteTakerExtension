@@ -29,7 +29,7 @@ app.get("/", function(req, res) {
 });
 
 app.get('/watson/concepts', handle.watsonConcepts);
-app.get('/watson/read/:id', handle.watsonTextToSpeech);
+app.get('/watson/read', handle.watsonTextToSpeech);
 
 app.get("/api/users/:id", handle.usersGet);
 app.post("/api/users/", handle.userPost);

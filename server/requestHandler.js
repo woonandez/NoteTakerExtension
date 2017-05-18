@@ -169,7 +169,7 @@ exports.watsonTextToSpeech = (req, res) => {
     text: req.query.text,
     voice: 'en-US_AllisonVoice',
     accept: 'audio/wav'
-  }).pipe(fs.createWriteStream(`public/temp/${req.params.id}.wav`));
-  res.end('text');
+  }).pipe(fs.createWriteStream(`public/temp/${KSN343NDJ}.wav`));
+  res.end('KSN343NDJ');
 };
 
