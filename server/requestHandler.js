@@ -140,8 +140,8 @@ var naturalLang = new naturalLangLib({
 });
 
 var languageTranslator = new languageTranslatorLib({
-  username: process.env.TRASLATOR_USERNAME,
-  password: process.env.TRASLATOR_PASSWORD,
+  username: process.env.TRANSLATOR_USERNAME,
+  password: process.env.TRANSLATOR_PASSWORD,
   url: 'https://gateway.watsonplatform.net/language-translator/api/'
 });
 
