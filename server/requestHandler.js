@@ -1,4 +1,17 @@
 var User = require('../database/models/user.js');
+var naturalLang = require('watson-developer-cloud/natural-language-understanding/v1.js');
+
+var watson = new naturalLang({
+  username: '93ebef01-56a7-43e0-9f24-1bc243b443d3',
+  password: 'ptEOBuz565Vq',
+  version_date: naturalLang.VERSION_DATE_2017_02_27
+});
+
+
+
+
+
+
 
 //WEB APP ENDPOINTS//
 //Handle User Get Request
@@ -59,7 +72,7 @@ exports.urlRemove = (req, res) => {
     user.save();
     res.status(201).send('Url Removed');
   });
-}
+};
 
 //Handle Remove Note
 exports.noteRemove = (req, res) => {
@@ -83,7 +96,7 @@ exports.noteRemove = (req, res) => {
       res.status(201).send('Note Removed.');
     }
   });
-}
+};
 
 //CHROME EXTENSION ENDPOINTS//
 //Handle Add note to database for existing Users
@@ -112,3 +125,26 @@ exports.userAddNotes = (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+exports.watsonConcepts = (req, res) => {
+  watson.analyze({
+    html: req.query.text,
+    features: {
+      concepts: {}
+    }
+  }, function(err, response) {
+    if (err) {
+      console.log('error:', err);
+      res.end('ERROR');
+    } else {
+      console.log(response.concepts);
+      res.end( JSON.stringify(response.concepts) );
+    }
+  });
+};
+

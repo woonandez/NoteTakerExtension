@@ -26,6 +26,8 @@ app.get("/", function(req, res) {
   res.send("Hello, humans!");
 });
 
+app.get('/watson/concepts', handle.watsonConcepts);
+
 app.get("/api/users/:id", handle.usersGet);
 app.post("/api/users/", handle.userPost);
 
