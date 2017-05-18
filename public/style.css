@@ -97,3 +97,7 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+.btn-danger {
+  width: 40px;
+}
