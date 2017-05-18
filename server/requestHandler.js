@@ -1,4 +1,10 @@
 var User = require('../database/models/user.js');
+var naturalLangLib = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var textToSpeechLib = require('watson-developer-cloud/text-to-speech/v1');
+var fs = require('fs');
+require('../auth.js');
+
+
 
 //WEB APP ENDPOINTS//
 //Handle User Get Request
@@ -59,7 +65,7 @@ exports.urlRemove = (req, res) => {
     user.save();
     res.status(201).send('Url Removed');
   });
-}
+};
 
 //Handle Remove Note
 exports.noteRemove = (req, res) => {
@@ -83,7 +89,7 @@ exports.noteRemove = (req, res) => {
       res.status(201).send('Note Removed.');
     }
   });
-}
+};
 
 //CHROME EXTENSION ENDPOINTS//
 //Handle Add note to database for existing Users
@@ -112,3 +118,58 @@ exports.userAddNotes = (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+var textToSpeech = new textToSpeechLib({
+  username: process.env.TEXT_TO_SPEECH_USERNAME,
+  password: process.env.TEXT_TO_SPEECH_PASSWORD
+});
+
+var naturalLang = new naturalLangLib({
+  username: process.env.NATURAL_LANG_USERNAME,
+  password: process.env.NATURAL_LANG_PASSWORD,
+  version_date: naturalLangLib.VERSION_DATE_2017_02_27
+});
+
+
+exports.watsonConcepts = (req, res) => {
+  // query = {
+  //   text: 'In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.'
+  // }
+  naturalLang.analyze({
+    html: req.query.text,
+    features: {
+      concepts: {}
+    }
+  }, function(err, response) {
+    if (err) {
+      console.log('error:', err);
+      res.end('ERROR');
+    } else {
+      console.log(response.concepts);
+      res.end( JSON.stringify(response.concepts) );
+    }
+  });
+};
+
+
+exports.watsonTextToSpeech = (req, res) => {
+  // query = {
+  //   text: 'Hello World'
+  // }
+  console.log(typeof req.query.text);
+  textToSpeech.synthesize({
+    text: req.query.text,
+    voice: 'en-US_AllisonVoice',
+    accept: 'audio/wav'
+  }).pipe(fs.createWriteStream(`public/temp/${KSN343NDJ}.wav`));
+  res.end('KSN343NDJ');
+};
+

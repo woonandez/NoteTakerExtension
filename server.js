@@ -3,6 +3,8 @@ var express = require("express");
 var db = require("./database/db.js");
 var bodyParser = require("body-parser");
 var handle = require("./server/requestHandler.js");
+
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -25,6 +27,9 @@ app.use(function(req, res, next) {
 app.get("/", function(req, res) {
   res.send("Hello, humans!");
 });
+
+app.get('/watson/concepts', handle.watsonConcepts);
+app.get('/watson/read', handle.watsonTextToSpeech);
 
 app.get("/api/users/:id", handle.usersGet);
 app.post("/api/users/", handle.userPost);
