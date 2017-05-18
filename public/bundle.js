@@ -22549,23 +22549,46 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Pin = function Pin(props) {
   return _react2.default.createElement(
-    "li",
-    { className: "list-group-item" },
+    "div",
+    { className: "poppaDiv" },
     _react2.default.createElement(
       "div",
-      { className: "pin" },
-      props.pin
+      { className: "listContainer" },
+      _react2.default.createElement(
+        "div",
+        { className: "notesText" },
+        props.pin
+      )
     ),
     _react2.default.createElement(
-      "button",
-      { className: "btn btn-warning ", onClick: function onClick() {
-          return props.deleteNote(props.username, props.listname, props.pin);
-        } },
-      _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
-    ),
-    _react2.default.createElement("p", { className: "pin-url" })
+      "div",
+      { className: "buttonContainer" },
+      _react2.default.createElement(
+        "button",
+        { className: "btn", onClick: function onClick() {
+            return props.deleteNote(props.username, props.listname, props.pin);
+          } },
+        _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
+      ),
+      _react2.default.createElement(
+        "button",
+        { className: "btn", type: "button" },
+        _react2.default.createElement("span", { className: "glyphicon glyphicon-text-background" })
+      ),
+      _react2.default.createElement(
+        "button",
+        { className: "btn", type: "button" },
+        _react2.default.createElement("span", { className: "glyphicon glyphicon-resize-horizontal" })
+      ),
+      _react2.default.createElement(
+        "button",
+        { className: "btn", type: "button" },
+        _react2.default.createElement("span", { className: "glyphicon glyphicon-volume-up" })
+      )
+    )
   );
 };
+
 exports.default = Pin;
 
 /***/ }),

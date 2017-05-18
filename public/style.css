@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 .panel-title {
   font-weight: bold;
   color: white;
@@ -55,3 +59,41 @@ a:hover {
   height: 30px;
   margin-bottom: 10px;
   line-height: 33px;
+}
+
+.listContainer {
+  height: 150px;
+  display: flex;
+  border: 1px solid blue;
+  padding: 10px;
+  margin: 15px;
+  width: 75%;
+  overflow: scroll;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 13%;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 50px;
+}
+
+.notesText {
+  width: 100%;
+  font-size: 20px;
+}
+
+.poppaDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
