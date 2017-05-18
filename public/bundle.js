@@ -22572,7 +22572,9 @@ var Pin = function Pin(props) {
       ),
       _react2.default.createElement(
         "button",
-        { className: "lstBtn", type: "button" },
+        { className: "lstBtn", type: "button", onClick: function onClick() {
+            return props.fetchConcepts(props.pin);
+          } },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-text-background" })
       ),
       _react2.default.createElement(
@@ -29234,8 +29236,9 @@ var App = function (_React$Component) {
     _this.handleAuthenticate = _this.handleAuthenticate.bind(_this);
     _this.fetch = _this.fetch.bind(_this);
     _this.handleSignout = _this.handleSignout.bind(_this);
+    _this.fetchConcepts = _this.fetchConcepts.bind(_this);
 
-    _this.auth = new _AuthService2.default("7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T", "dhsiao89.auth0.com", _this.handleAuthenticate);
+    _this.auth = new _AuthService2.default('7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T', 'dhsiao89.auth0.com', _this.handleAuthenticate);
 
     _this.state = {
       data: { urls: [] },
@@ -29248,7 +29251,7 @@ var App = function (_React$Component) {
 
 
   _createClass(App, [{
-    key: "handleAuthenticate",
+    key: 'handleAuthenticate',
     value: function handleAuthenticate() {
       this.setState({
         loggedIn: this.auth.loggedIn()
@@ -29258,14 +29261,23 @@ var App = function (_React$Component) {
     //Get specific user
 
   }, {
-    key: "fetch",
+    key: 'fetch',
     value: function fetch() {
       var _this2 = this;
 
-      _axios2.default.get("/api/users/" + this.auth.getAccount().user_id).then(function (res) {
+      _axios2.default.get('/api/users/' + this.auth.getAccount().user_id).then(function (res) {
         if (res.data.length > 0) {
           _this2.setState({ data: res.data[0] });
         }
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: 'fetchConcepts',
+    value: function fetchConcepts() {
+      _axios2.default.get('/api/watson/concepts').then(function (res) {
+        console.log(res);
       }).catch(function (error) {
         console.error(error);
       });
@@ -29274,13 +29286,13 @@ var App = function (_React$Component) {
     //Remove note from database
 
   }, {
-    key: "deleteNote",
+    key: 'deleteNote',
     value: function deleteNote(name, uri, note) {
       var _this3 = this;
 
       (0, _axios2.default)({
-        method: "delete",
-        url: "/api/users/notes",
+        method: 'delete',
+        url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       }).then(function (res) {
         _this3.fetch();
@@ -29292,13 +29304,13 @@ var App = function (_React$Component) {
     //Remove entire url from database
 
   }, {
-    key: "deleteList",
+    key: 'deleteList',
     value: function deleteList(name, uri) {
       var _this4 = this;
 
       (0, _axios2.default)({
-        method: "delete",
-        url: "/api/users/urls",
+        method: 'delete',
+        url: '/api/users/urls',
         data: { name: name, uri: uri }
       }).then(function (res) {
         _this4.fetch();
@@ -29310,7 +29322,7 @@ var App = function (_React$Component) {
     //Set sign out state
 
   }, {
-    key: "handleSignout",
+    key: 'handleSignout',
     value: function handleSignout() {
       this.setState({
         loggedIn: false,
@@ -29318,38 +29330,39 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.state.loggedIn) {
         this.fetch();
       }
     }
   }, {
-    key: "componentWillUpdate",
+    key: 'componentWillUpdate',
     value: function componentWillUpdate(nextProps, nextState) {
       if (nextState.loggedIn && !this.state.loggedIn) {
         this.fetch();
       }
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this5 = this;
 
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(_Nav2.default, { auth: this.auth, onSignout: this.handleSignout }),
         _react2.default.createElement(
-          "div",
-          { className: "container" },
+          'div',
+          { className: 'container' },
           this.state.data.urls.map(function (list, index) {
             return _react2.default.createElement(_List2.default, {
               name: _this5.state.data.name,
               data: list,
               key: index,
               deleteList: _this5.deleteList.bind(_this5),
-              deleteNote: _this5.deleteNote.bind(_this5)
+              deleteNote: _this5.deleteNote.bind(_this5),
+              fetchConcepts: _this5.fetchConcepts.bind(_this5)
             });
           })
         )
@@ -37747,52 +37760,53 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var List = function List(props) {
   return _react2.default.createElement(
-    "div",
-    { className: "panel panel-primary" },
+    'div',
+    { className: 'panel panel-primary' },
     _react2.default.createElement(
-      "div",
-      { className: "panel-heading" },
+      'div',
+      { className: 'panel-heading' },
       _react2.default.createElement(
-        "a",
+        'a',
         {
           href: props.data.name,
-          target: "_blank",
-          className: "panel-title"
+          target: '_blank',
+          className: 'panel-title'
         },
         props.data.name
       ),
       _react2.default.createElement(
-        "div",
-        { className: "action-buttons" },
+        'div',
+        { className: 'action-buttons' },
         _react2.default.createElement(
-          "div",
-          { className: "btn-group" },
+          'div',
+          { className: 'btn-group' },
           _react2.default.createElement(
-            "button",
+            'button',
             {
-              className: "btn btn-danger",
+              className: 'btn btn-danger',
               onClick: function onClick() {
                 return props.deleteList(props.name, props.data.name);
               }
             },
-            _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
+            _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
           )
         )
       )
     ),
     _react2.default.createElement(
-      "div",
-      { className: "panel-body" },
+      'div',
+      { className: 'panel-body' },
       _react2.default.createElement(
-        "ul",
-        { className: "list-group" },
+        'ul',
+        { className: 'list-group' },
         props.data.pins.map(function (pin, index) {
           return _react2.default.createElement(_Pin2.default, {
             pin: pin,
             key: index,
             username: props.name,
             listname: props.data.name,
-            deleteNote: props.deleteNote
+            deleteNote: props.deleteNote,
+            fetchConcepts: props.fetchConcepts
           });
         })
       )

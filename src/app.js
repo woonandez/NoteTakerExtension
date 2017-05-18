@@ -1,9 +1,9 @@
-import React from "react";
-import axios from "axios";
-import Pin from "./Pin";
-import Nav from "./Nav";
-import List from "./List";
-import AuthService from "./utils/AuthService";
+import React from 'react';
+import axios from 'axios';
+import Pin from './Pin';
+import Nav from './Nav';
+import List from './List';
+import AuthService from './utils/AuthService';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +12,14 @@ class App extends React.Component {
     this.handleAuthenticate = this.handleAuthenticate.bind(this);
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
+    this.fetchConcepts = this.fetchConcepts.bind(this);
 
     this.auth = new AuthService(
-      "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
-      "dhsiao89.auth0.com",
+      '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
+      'dhsiao89.auth0.com',
       this.handleAuthenticate
     );
-    
+
     this.state = {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn()
@@ -35,7 +36,7 @@ class App extends React.Component {
 //Get specific user
   fetch() {
     axios
-      .get("/api/users/" + this.auth.getAccount().user_id)
+      .get('/api/users/' + this.auth.getAccount().user_id)
       .then((res) => {
         if (res.data.length > 0) {
           this.setState({ data: res.data[0] });
@@ -46,11 +47,22 @@ class App extends React.Component {
       });
   }
 
+  fetchConcepts() {
+    axios
+      .get('/api/watson/concepts')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
 //Remove note from database
   deleteNote(name, uri, note) {
     axios({
-        method: "delete",
-        url: "/api/users/notes",
+        method: 'delete',
+        url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       })
       .then((res) => {
@@ -64,8 +76,8 @@ class App extends React.Component {
 //Remove entire url from database
   deleteList(name, uri) {
     axios({
-        method: "delete",
-        url: "/api/users/urls",
+        method: 'delete',
+        url: '/api/users/urls',
         data: { name: name, uri: uri }
       })
       .then((res) => {
@@ -108,6 +120,7 @@ class App extends React.Component {
               key={index}
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
+              fetchConcepts={this.fetchConcepts.bind(this)}
             />
           ))}
         </div>

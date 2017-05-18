@@ -11,7 +11,7 @@ var Pin = (props) =>
         props.deleteNote(props.username, props.listname, props.pin)} >
         <span className="glyphicon glyphicon-trash"></span>
       </button>
-      <button className="lstBtn" type="button">
+      <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)}>
         <span className="glyphicon glyphicon-text-background"></span>
       </button>
       <button className="lstBtn" type="button">
