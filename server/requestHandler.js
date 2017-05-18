@@ -1,15 +1,8 @@
 var User = require('../database/models/user.js');
-var naturalLang = require('watson-developer-cloud/natural-language-understanding/v1.js');
-
-var watson = new naturalLang({
-  username: '93ebef01-56a7-43e0-9f24-1bc243b443d3',
-  password: 'ptEOBuz565Vq',
-  version_date: naturalLang.VERSION_DATE_2017_02_27
-});
-
-
-
-
+var naturalLangLib = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var textToSpeechLib = require('watson-developer-cloud/text-to-speech/v1');
+var fs = require('fs');
+require('../auth.js');
 
 
 
@@ -131,8 +124,26 @@ exports.userAddNotes = (req, res) => {
 
 
 
+
+
+
+var textToSpeech = new textToSpeechLib({
+  username: process.env.TEXT_TO_SPEECH_USERNAME,
+  password: process.env.TEXT_TO_SPEECH_PASSWORD
+});
+
+var naturalLang = new naturalLangLib({
+  username: process.env.NATURAL_LANG_USERNAME,
+  password: process.env.NATURAL_LANG_PASSWORD,
+  version_date: naturalLangLib.VERSION_DATE_2017_02_27
+});
+
+
 exports.watsonConcepts = (req, res) => {
-  watson.analyze({
+  // query = {
+  //   text: 'In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.'
+  // }
+  naturalLang.analyze({
     html: req.query.text,
     features: {
       concepts: {}
@@ -146,5 +157,19 @@ exports.watsonConcepts = (req, res) => {
       res.end( JSON.stringify(response.concepts) );
     }
   });
+};
+
+
+exports.watsonTextToSpeech = (req, res) => {
+  // query = {
+  //   text: 'Hello World'
+  // }
+  console.log(typeof req.query.text);
+  textToSpeech.synthesize({
+    text: req.query.text,
+    voice: 'en-US_AllisonVoice',
+    accept: 'audio/wav'
+  }).pipe(fs.createWriteStream(`public/temp/${req.params.id}.wav`));
+  res.end('text');
 };
 
