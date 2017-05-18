@@ -1,6 +1,7 @@
 var User = require('../database/models/user.js');
 var naturalLangLib = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var textToSpeechLib = require('watson-developer-cloud/text-to-speech/v1');
+var languageTranslatorLib = require('watson-developer-cloud/language-translator/v2');
 var fs = require('fs');
 require('../auth.js');
 
@@ -138,6 +139,12 @@ var naturalLang = new naturalLangLib({
   version_date: naturalLangLib.VERSION_DATE_2017_02_27
 });
 
+var languageTranslator = new languageTranslatorLib({
+  username: process.env.TRANSLATOR_USERNAME,
+  password: process.env.TRANSLATOR_PASSWORD,
+  url: 'https://gateway.watsonplatform.net/language-translator/api/'
+});
+
 
 exports.watsonConcepts = (req, res) => {
   // query = {
@@ -164,7 +171,6 @@ exports.watsonTextToSpeech = (req, res) => {
   // query = {
   //   text: 'Hello World'
   // }
-  console.log(typeof req.query.text);
   textToSpeech.synthesize({
     text: req.query.text,
     voice: 'en-US_AllisonVoice',
@@ -172,4 +178,25 @@ exports.watsonTextToSpeech = (req, res) => {
   }).pipe(fs.createWriteStream(`public/temp/${KSN343NDJ}.wav`));
   res.end('KSN343NDJ');
 };
+
+
+exports.watsonTranslate = (req, res) => {
+  // query = {
+  //   text: 'So we beat on, boats against the current, borne back ceaselessly into the past.',
+  //   translateTo: 'es'
+  // }
+  languageTranslator.translate({
+    text: req.query.text,
+    source: 'en',
+    target: req.query.translateTo
+  }, function (err, results) {
+    if (err) {
+      console.log('error:', err);
+    } else {
+      console.log( JSON.stringify(results.translations) );
+      res.end( JSON.stringify(results.translations[0].translation) );
+    }
+  });
+};
+
 
