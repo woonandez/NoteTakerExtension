@@ -95,6 +95,24 @@ class App extends React.Component {
     })
   }
 
+//Parul : added fetchLanguageTranslator to fetch data from api
+  fetchLanguageTranslator(text, translateTo) {
+    axios({
+      method: 'get',
+      url: '/api/watson/translate',
+      params: {
+        text: text,
+        translateTo: translateTo
+      }
+    })
+    .then((res) => {
+      console.log('******', res);
+    })
+    .catch((err) => {
+      console.error('*********', err)
+    })
+  }
+
 //Remove note from database
   deleteNote(name, uri, note) {
     axios({
@@ -158,6 +176,8 @@ class App extends React.Component {
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
+              fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
+
             />
           ))}
         </div>

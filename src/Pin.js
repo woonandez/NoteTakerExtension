@@ -5,6 +5,7 @@ var Pin = (props) =>
       <div className="notesText">
         {props.pin}
       </div>
+
     </div>
     <div className="buttonContainer">
       <button className="lstBtn" onClick={() =>
@@ -14,7 +15,7 @@ var Pin = (props) =>
       <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)}>
         <span className="glyphicon glyphicon-text-background"></span>
       </button>
-      <button className="lstBtn" type="button">
+      <button className="lstBtn" type="button" onClick={() => props.fetchLanguageTranslator(props.pin, 'Arabic')}>
         <span className="glyphicon glyphicon-resize-horizontal"></span>
       </button>
       <button className="lstBtn" type="button">
