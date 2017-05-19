@@ -120,6 +120,7 @@ a:hover {
   border-radius: 5px;
 }
 
+
 .panel {
   width: 200px;
   height: 100px;
@@ -140,3 +141,4 @@ a:hover {
   height: 0px;
   -webkit-transition: height .3s ease;
 }
+
