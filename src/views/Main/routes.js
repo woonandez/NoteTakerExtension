@@ -6,8 +6,8 @@ import Home from "./Home/Home";
 import Login from "./Login/Login";
 
 const auth = new AuthService(
-  "7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T",
-  "dhsiao89.auth0.com"
+  'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
+  'xosk.auth0.com',
 );
 
 // validate authentication for private routes
