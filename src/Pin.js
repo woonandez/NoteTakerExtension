@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 var Pin = (props) =>
   <div className="poppaDiv">
     <div className="listContainer">
