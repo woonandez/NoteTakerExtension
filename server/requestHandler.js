@@ -124,7 +124,7 @@ exports.userAddNotes = (req, res) => {
 
 
 
-
+// IBM Watson endpoints -------------------------------------------------------
 
 
 var textToSpeech = new textToSpeechLib({
@@ -202,6 +202,7 @@ exports.watsonTextToSpeech = (req, res) => {
     voice: 'en-US_AllisonVoice',
     accept: 'audio/wav'
   }).pipe(fs.createWriteStream(`public/temp/${id}.wav`));
+  setTimeout(fs.unlink, 120000, `public/temp/${id}.wav`);
   res.end(id);
 };
 
