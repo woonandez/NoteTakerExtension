@@ -39,6 +39,8 @@ var List = (props) =>
                 showDiv={props.showDiv}
                 setText={props.setText}
                 currentText={props.currentText}
+                descObj={props.descObj}
+                modifyDescObj={props.modifyDescObj}
               />
           </div>
         ))}

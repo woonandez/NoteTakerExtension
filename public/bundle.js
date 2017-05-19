@@ -22553,12 +22553,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Pin = function Pin(props) {
   var currentText = null;
+  var foundText = '';
+  var passedDownText = setCurrentText;
 
-  function setCurrentText() {
+  function setCurrentText(e) {
     console.log('ran', currentText.innerHTML);
-    //     props.fetchConcepts(props.pin);
-    // ref={(input) => { textInput = input; }}
+    console.log(e.target);
+    props.fetchConcepts(currentText.innerHTML, function (res) {
+      props.modifyDescObj();
+      var firstFound = res[0];
+      foundText = firstFound[0] + ' ' + firstFound[1];
+      console.log(foundText);
+    });
   }
+
   return _react2.default.createElement(
     'div',
     { className: 'poppaDiv' },
@@ -22599,7 +22607,12 @@ var Pin = function Pin(props) {
         { className: 'lstBtn', type: 'button' },
         _react2.default.createElement('span', { className: 'glyphicon glyphicon-volume-up' })
       )
-    )
+    ),
+    _react2.default.createElement(_info2.default, {
+      foundText: foundText,
+      currentText: props.currentText,
+      descObj: props.descObj
+    })
   );
 };
 
@@ -29257,6 +29270,7 @@ var App = function (_React$Component) {
     _this.fetchConcepts = _this.fetchConcepts.bind(_this);
     _this.showDiv = _this.showDiv.bind(_this);
     _this.setText = _this.setText.bind(_this);
+    _this.modifyDescObj = _this.modifyDescObj.bind(_this);
 
     _this.auth = new _AuthService2.default('7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T', 'dhsiao89.auth0.com', _this.handleAuthenticate);
 
@@ -29265,7 +29279,7 @@ var App = function (_React$Component) {
       loggedIn: _this.auth.loggedIn(),
       show: false,
       currentText: '',
-      descArray: []
+      descObj: {}
     };
     return _this;
   }
@@ -29298,7 +29312,7 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'fetchConcepts',
-    value: function fetchConcepts(textBlock) {
+    value: function fetchConcepts(textBlock, callback) {
       var _this3 = this;
 
       (0, _axios2.default)({
@@ -29308,8 +29322,9 @@ var App = function (_React$Component) {
           text: textBlock
         }
       }).then(function (res) {
-        console.log(res);
         _this3.setText(res.data);
+        console.log(_this3.state.currentText, 'currentText state');
+        callback(res.data);
       }).catch(function (error) {
         console.error(error);
       });
@@ -29409,6 +29424,11 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'modifyDescObj',
+    value: function modifyDescObj(originalText, foundText) {
+      var copyOfState = Object.assign(this.state.descObj);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.state.loggedIn) {
@@ -29445,7 +29465,9 @@ var App = function (_React$Component) {
               show: _this6.state.show,
               showDiv: _this6.showDiv.bind(_this6),
               currentText: _this6.state.currentText,
-              setText: _this6.setText.bind(_this6)
+              setText: _this6.setText.bind(_this6),
+              descObj: _this6.state.descObj,
+              modifyDescObj: _this6.modifyDescObj.bind(_this6)
             });
           })
         )
@@ -37839,28 +37861,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Info = function Info(props) {
   return _react2.default.createElement(
-    "div",
+    'h2',
     null,
-    _react2.default.createElement(
-      "a",
-      { href: "#close", title: "Close", "class": "close" },
-      "X"
-    ),
-    _react2.default.createElement(
-      "h2",
-      null,
-      "Modal Box"
-    ),
-    _react2.default.createElement(
-      "p",
-      null,
-      "This is a sample modal box that can be created using the powers of CSS3."
-    ),
-    _react2.default.createElement(
-      "p",
-      null,
-      "You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users."
-    )
+    props.foundText
   );
 };
 
@@ -37946,7 +37949,9 @@ var List = function List(props) {
               show: props.show,
               showDiv: props.showDiv,
               setText: props.setText,
-              currentText: props.currentText
+              currentText: props.currentText,
+              descObj: props.descObj,
+              modifyDescObj: props.modifyDescObj
             })
           );
         })
@@ -59415,28 +59420,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Info = function Info(props) {
   return _react2.default.createElement(
-    "div",
+    'h2',
     null,
-    _react2.default.createElement(
-      "a",
-      { href: "#close", title: "Close", "class": "close" },
-      "X"
-    ),
-    _react2.default.createElement(
-      "h2",
-      null,
-      "Modal Box"
-    ),
-    _react2.default.createElement(
-      "p",
-      null,
-      "This is a sample modal box that can be created using the powers of CSS3."
-    ),
-    _react2.default.createElement(
-      "p",
-      null,
-      "You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users."
-    )
+    props.foundText
   );
 };
 

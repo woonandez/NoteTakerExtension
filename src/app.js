@@ -15,6 +15,7 @@ class App extends React.Component {
     this.fetchConcepts = this.fetchConcepts.bind(this);
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
+    this.modifyDescObj = this.modifyDescObj.bind(this);
 
     this.auth = new AuthService(
       '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
@@ -27,7 +28,7 @@ class App extends React.Component {
       loggedIn: this.auth.loggedIn(),
       show: false,
       currentText: '',
-      descArray: []
+      descObj: {}
     };
   }
 
@@ -52,7 +53,7 @@ class App extends React.Component {
       });
   }
 
-  fetchConcepts(textBlock) {
+  fetchConcepts(textBlock, callback) {
     axios({
       method: 'get',
       url: '/watson/concepts',
@@ -61,8 +62,9 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
-      this.setText(res.data);
+      this.setText(res.data)
+      console.log(this.state.currentText, 'currentText state')
+      callback(res.data);
     })
     .catch((error) => {
       console.error(error);
@@ -154,6 +156,11 @@ class App extends React.Component {
     })
   }
 
+  modifyDescObj(originalText, foundText) {
+    var copyOfState = Object.assign(this.state.descObj);
+
+  }
+
   componentDidMount() {
     if (this.state.loggedIn) {
       this.fetch();
@@ -183,6 +190,8 @@ class App extends React.Component {
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
               setText={this.setText.bind(this)}
+              descObj={this.state.descObj}
+              modifyDescObj={this.modifyDescObj.bind(this)}
             />
           ))}
         </div>

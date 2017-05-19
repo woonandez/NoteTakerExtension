@@ -3,12 +3,20 @@ import Info from './info.js';
 
 var Pin = (props) => {
   let currentText = null;
+  let foundText = '';
+  let passedDownText = setCurrentText;
 
-  function setCurrentText() {
+  function setCurrentText(e) {
     console.log('ran', currentText.innerHTML);
-//     props.fetchConcepts(props.pin);
-// ref={(input) => { textInput = input; }}
+    console.log(e.target);
+    props.fetchConcepts(currentText.innerHTML, (res) => {
+      props.modifyDescObj();
+      let firstFound = res[0]
+      foundText = `${firstFound[0]} ${firstFound[1]}`;
+      console.log(foundText);
+    });
   }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
@@ -32,6 +40,11 @@ var Pin = (props) => {
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>
+      <Info
+        foundText={foundText}
+        currentText={props.currentText}
+        descObj={props.descObj}
+      />
     </div>
   )
 }
