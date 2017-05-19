@@ -7,13 +7,12 @@ var Pin = (props) => {
   let passedDownText = setCurrentText;
 
   function setCurrentText(e) {
-    console.log('ran', currentText.innerHTML);
     console.log(e.target);
+    var inner = currentText.innerHTML;
     props.fetchConcepts(currentText.innerHTML, (res) => {
-      props.modifyDescObj();
       let firstFound = res[0]
       foundText = `${firstFound[0]} ${firstFound[1]}`;
-      console.log(foundText);
+      props.modifyDescObj(inner, foundText);
     });
   }
 

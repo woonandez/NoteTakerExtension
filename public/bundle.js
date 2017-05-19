@@ -22557,13 +22557,12 @@ var Pin = function Pin(props) {
   var passedDownText = setCurrentText;
 
   function setCurrentText(e) {
-    console.log('ran', currentText.innerHTML);
     console.log(e.target);
+    var inner = currentText.innerHTML;
     props.fetchConcepts(currentText.innerHTML, function (res) {
-      props.modifyDescObj();
       var firstFound = res[0];
       foundText = firstFound[0] + ' ' + firstFound[1];
-      console.log(foundText);
+      props.modifyDescObj(inner, foundText);
     });
   }
 
@@ -29427,6 +29426,8 @@ var App = function (_React$Component) {
     key: 'modifyDescObj',
     value: function modifyDescObj(originalText, foundText) {
       var copyOfState = Object.assign(this.state.descObj);
+      copyOfState[originalText] = foundText;
+      console.log('COPY HERE', copyOfState);
     }
   }, {
     key: 'componentDidMount',
