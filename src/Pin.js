@@ -1,14 +1,26 @@
 import React from 'react';
-
 var Pin = (props) =>
-  <li className="list-group-item">
-    <div className="pin">
-      {props.pin}
+  <div className="poppaDiv">
+    <div className="listContainer">
+      <div className="notesText">
+        {props.pin}
+      </div>
     </div>
-    <button className="btn btn-warning " onClick={() => props.deleteNote(props.username, props.listname, props.pin)} >
-      <span className="glyphicon glyphicon-trash"></span>
-    </button>
-    <p className="pin-url"></p>
-  </li>
-export default Pin;
+    <div className="buttonContainer">
+      <button className="lstBtn" onClick={() =>
+        props.deleteNote(props.username, props.listname, props.pin)} >
+        <span className="glyphicon glyphicon-trash"></span>
+      </button>
+      <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)}>
+        <span className="glyphicon glyphicon-text-background"></span>
+      </button>
+      <button className="lstBtn" type="button">
+        <span className="glyphicon glyphicon-resize-horizontal"></span>
+      </button>
+      <button className="lstBtn" type="button">
+        <span className="glyphicon glyphicon-volume-up"></span>
+      </button>
+    </div>
+  </div>
 
+export default Pin;

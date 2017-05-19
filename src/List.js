@@ -1,5 +1,5 @@
-import React from "react";
-import Pin from "./Pin.js";
+import React from 'react';
+import Pin from './Pin.js';
 
 var List = (props) =>
   <div className="panel panel-primary">
@@ -32,6 +32,7 @@ var List = (props) =>
             username={props.name}
             listname={props.data.name}
             deleteNote={props.deleteNote}
+            fetchConcepts={props.fetchConcepts}
           />
         ))}
       </ul>
