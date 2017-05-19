@@ -29277,7 +29277,7 @@ var App = function (_React$Component) {
     key: 'fetchConcepts',
     value: function fetchConcepts(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
+        method: 'GET',
         url: '/api/watson/concepts',
         params: {
           text: textBlock
@@ -29292,7 +29292,7 @@ var App = function (_React$Component) {
     key: 'fetchTranslation',
     value: function fetchTranslation(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
+        method: 'GET',
         url: '/api/watson/read',
         params: {
           text: textBlock
@@ -29307,7 +29307,7 @@ var App = function (_React$Component) {
     key: 'fetchTranslation',
     value: function fetchTranslation(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
+        method: 'GET',
         url: '/api/watson/read',
         params: {
           text: textBlock
@@ -29327,7 +29327,7 @@ var App = function (_React$Component) {
       var _this3 = this;
 
       (0, _axios2.default)({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       }).then(function (res) {
@@ -29345,7 +29345,7 @@ var App = function (_React$Component) {
       var _this4 = this;
 
       (0, _axios2.default)({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/urls',
         data: { name: name, uri: uri }
       }).then(function (res) {

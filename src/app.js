@@ -49,7 +49,7 @@ class App extends React.Component {
 
   fetchConcepts(textBlock) {
     axios({
-      method: 'get',
+      method: 'GET',
       url: '/api/watson/concepts',
       params: {
         text: textBlock
@@ -65,7 +65,7 @@ class App extends React.Component {
 
   fetchTranslation(textBlock) {
     axios({
-      method: 'get',
+      method: 'GET',
       url: '/api/watson/read',
       params: {
         text: textBlock
@@ -81,7 +81,7 @@ class App extends React.Component {
 
   fetchTranslation(textBlock) {
     axios({
-      method: 'get',
+      method: 'GET',
       url: '/api/watson/read',
       params: {
         text: textBlock
@@ -98,7 +98,7 @@ class App extends React.Component {
 //Remove note from database
   deleteNote(name, uri, note) {
     axios({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       })
@@ -113,7 +113,7 @@ class App extends React.Component {
 //Remove entire url from database
   deleteList(name, uri) {
     axios({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/urls',
         data: { name: name, uri: uri }
       })
