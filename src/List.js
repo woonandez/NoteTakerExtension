@@ -34,6 +34,7 @@ var List = (props) =>
             deleteNote={props.deleteNote}
             fetchConcepts={props.fetchConcepts}
             fetchLanguageTranslator={props.fetchLanguageTranslator}
+            showDiv={props.showDiv}
           />
         ))}
       </ul>
