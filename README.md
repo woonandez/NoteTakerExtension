@@ -1,6 +1,6 @@
-# Travel Nibbler
+# Study Buddy
 
-Plan your next trips with this all-in-one itinerary app! Once you create an itinerary, add locations you would like to visit during your trip and watch an integrated Google map generate your locations in real-time.
+Allows you to take notes across the internet using an extension
 
 ## Team
 
