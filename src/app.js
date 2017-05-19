@@ -15,8 +15,8 @@ class App extends React.Component {
     this.fetchConcepts = this.fetchConcepts.bind(this);
 
     this.auth = new AuthService(
-      '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
-      'dhsiao89.auth0.com',
+      'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
+      'xosk.auth0.com',
       this.handleAuthenticate
     );
 
