@@ -41,6 +41,7 @@ var Pin = (props) => {
         </button>
       </div>
       <Info
+        className="listContainer"
         foundText={foundText}
         currentText={props.currentText}
         pinText={props.pin}

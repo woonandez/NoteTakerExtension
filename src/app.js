@@ -208,7 +208,6 @@ class App extends React.Component {
               setText={this.setText.bind(this)}
               descObj={this.state.descObj}
               modifyDescObj={this.modifyDescObj.bind(this)}
-
             />
           ))}
         </div>
