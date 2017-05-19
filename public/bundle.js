@@ -22545,47 +22545,51 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactAddonsCssTransitionGroup = __webpack_require__(320);
+
+var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Pin = function Pin(props) {
   return _react2.default.createElement(
-    "div",
-    { className: "poppaDiv" },
+    'div',
+    { className: 'poppaDiv' },
     _react2.default.createElement(
-      "div",
-      { className: "listContainer" },
+      'div',
+      { className: 'listContainer' },
       _react2.default.createElement(
-        "div",
-        { className: "notesText" },
+        'div',
+        { className: 'notesText' },
         props.pin
       )
     ),
     _react2.default.createElement(
-      "div",
-      { className: "buttonContainer" },
+      'div',
+      { className: 'buttonContainer' },
       _react2.default.createElement(
-        "button",
-        { className: "lstBtn", onClick: function onClick() {
+        'button',
+        { className: 'lstBtn', onClick: function onClick() {
             return props.deleteNote(props.username, props.listname, props.pin);
           } },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-trash" })
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-trash' })
       ),
       _react2.default.createElement(
-        "button",
-        { className: "lstBtn", type: "button", onClick: function onClick() {
+        'button',
+        { className: 'lstBtn', type: 'button', onClick: function onClick() {
             return props.fetchConcepts(props.pin);
           } },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-text-background" })
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-text-background' })
       ),
       _react2.default.createElement(
-        "button",
-        { className: "lstBtn", type: "button" },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-resize-horizontal" })
+        'button',
+        { className: 'lstBtn', type: 'button' },
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-resize-horizontal' })
       ),
       _react2.default.createElement(
-        "button",
-        { className: "lstBtn", type: "button" },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-volume-up" })
+        'button',
+        { className: 'lstBtn', type: 'button' },
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-volume-up' })
       )
     )
   );
@@ -29237,12 +29241,14 @@ var App = function (_React$Component) {
     _this.fetch = _this.fetch.bind(_this);
     _this.handleSignout = _this.handleSignout.bind(_this);
     _this.fetchConcepts = _this.fetchConcepts.bind(_this);
+    _this.showdiv = _this.showDiv.bind(_this);
 
     _this.auth = new _AuthService2.default('7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T', 'dhsiao89.auth0.com', _this.handleAuthenticate);
 
     _this.state = {
       data: { urls: [] },
-      loggedIn: _this.auth.loggedIn()
+      loggedIn: _this.auth.loggedIn(),
+      show: false
     };
     return _this;
   }
@@ -29273,11 +29279,14 @@ var App = function (_React$Component) {
         console.error(error);
       });
     }
+
+    // fetch concepts for the user
+
   }, {
     key: 'fetchConcepts',
     value: function fetchConcepts(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
+        method: 'GET',
         url: '/api/watson/concepts',
         params: {
           text: textBlock
@@ -29288,12 +29297,15 @@ var App = function (_React$Component) {
         console.error(error);
       });
     }
+
+    // fetch a translation for a user
+
   }, {
     key: 'fetchTranslation',
     value: function fetchTranslation(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
-        url: '/api/watson/read',
+        method: 'GET',
+        url: '/api/watson/translate',
         params: {
           text: textBlock
         }
@@ -29303,11 +29315,14 @@ var App = function (_React$Component) {
         console.error(err);
       });
     }
+
+    // fetch speech dictation
+
   }, {
-    key: 'fetchTranslation',
-    value: function fetchTranslation(textBlock) {
+    key: 'fetchDictation',
+    value: function fetchDictation(textBlock) {
       (0, _axios2.default)({
-        method: 'get',
+        method: 'GET',
         url: '/api/watson/read',
         params: {
           text: textBlock
@@ -29327,7 +29342,7 @@ var App = function (_React$Component) {
       var _this3 = this;
 
       (0, _axios2.default)({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       }).then(function (res) {
@@ -29345,13 +29360,23 @@ var App = function (_React$Component) {
       var _this4 = this;
 
       (0, _axios2.default)({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/urls',
         data: { name: name, uri: uri }
       }).then(function (res) {
         _this4.fetch();
       }).catch(function (error) {
         console.error(error);
+      });
+    }
+
+    // show and hide the child div
+
+  }, {
+    key: 'showDiv',
+    value: function showDiv() {
+      this.setState({
+        show: !show
       });
     }
 
@@ -29398,7 +29423,8 @@ var App = function (_React$Component) {
               key: index,
               deleteList: _this5.deleteList.bind(_this5),
               deleteNote: _this5.deleteNote.bind(_this5),
-              fetchConcepts: _this5.fetchConcepts.bind(_this5)
+              fetchConcepts: _this5.fetchConcepts.bind(_this5),
+              showDiv: _this5.showDiv.bind(_this5)
             });
           })
         )
@@ -37842,7 +37868,8 @@ var List = function List(props) {
             username: props.name,
             listname: props.data.name,
             deleteNote: props.deleteNote,
-            fetchConcepts: props.fetchConcepts
+            fetchConcepts: props.fetchConcepts,
+            showDiv: props.showDiv
           });
         })
       )
