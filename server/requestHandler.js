@@ -159,6 +159,17 @@ var requestCallbacks = function(urls, res, i = 0, paragraphs = []) {
   }
 };
 
+var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function uniqueId(length) {
+  var text = '';
+  for (var i = 0; i < length; i++) {
+    text += possible.charAt( Math.floor(Math.random() * possible.length) );
+  }
+  return text;
+};
+// ----------------------------------------------------------
+
+
 
 exports.watsonConcepts = (req, res) => {
   // query = {
@@ -185,12 +196,13 @@ exports.watsonTextToSpeech = (req, res) => {
   // query = {
   //   text: 'Hello World'
   // }
+  var id = uniqueId(30);
   textToSpeech.synthesize({
     text: req.query.text,
     voice: 'en-US_AllisonVoice',
     accept: 'audio/wav'
-  }).pipe(fs.createWriteStream(`public/temp/${KSN343NDJ}.wav`));
-  res.end('KSN343NDJ');
+  }).pipe(fs.createWriteStream(`public/temp/${id}.wav`));
+  res.end(id);
 };
 
 
