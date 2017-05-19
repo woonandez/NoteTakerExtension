@@ -29237,12 +29237,14 @@ var App = function (_React$Component) {
     _this.fetch = _this.fetch.bind(_this);
     _this.handleSignout = _this.handleSignout.bind(_this);
     _this.fetchConcepts = _this.fetchConcepts.bind(_this);
+    _this.showdiv = _this.showDiv.bind(_this);
 
     _this.auth = new _AuthService2.default('7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T', 'dhsiao89.auth0.com', _this.handleAuthenticate);
 
     _this.state = {
       data: { urls: [] },
-      loggedIn: _this.auth.loggedIn()
+      loggedIn: _this.auth.loggedIn(),
+      show: false
     };
     return _this;
   }
@@ -29366,6 +29368,13 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'showDiv',
+    value: function showDiv() {
+      this.setState({
+        show: !show
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.state.loggedIn) {
@@ -29398,7 +29407,9 @@ var App = function (_React$Component) {
               key: index,
               deleteList: _this5.deleteList.bind(_this5),
               deleteNote: _this5.deleteNote.bind(_this5),
-              fetchConcepts: _this5.fetchConcepts.bind(_this5)
+              fetchConcepts: _this5.fetchConcepts.bind(_this5),
+              show: _this5.state.show,
+              showDiv: _this5.showDiv.bind(_this5)
             });
           })
         )
