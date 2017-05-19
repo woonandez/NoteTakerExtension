@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from './translator.js'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 var Pin = (props) =>
   <div className="poppaDiv">
@@ -6,7 +7,7 @@ var Pin = (props) =>
       <div className="notesText">
         {props.pin}
       </div>
-
+      <Translator />
     </div>
     <div className="buttonContainer">
       <button className="lstBtn" onClick={() =>
@@ -26,3 +27,4 @@ var Pin = (props) =>
   </div>
 
 export default Pin;
+//() => props.fetchLanguageTranslator(props.pin, 'Arabic')
