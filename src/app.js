@@ -50,7 +50,7 @@ class App extends React.Component {
   fetchConcepts(textBlock) {
     axios({
       method: 'get',
-      url: '/api/watson/concepts'
+      url: '/api/watson/concepts',
       params: {
         text: textBlock
       }
@@ -61,6 +61,38 @@ class App extends React.Component {
     .catch((error) => {
       console.error(error);
     });
+  }
+
+  fetchTranslation(textBlock) {
+    axios({
+      method: 'get',
+      url: '/api/watson/read',
+      params: {
+        text: textBlock
+      }
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  fetchTranslation(textBlock) {
+    axios({
+      method: 'get',
+      url: '/api/watson/read',
+      params: {
+        text: textBlock
+      }
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   }
 
 //Remove note from database
