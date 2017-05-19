@@ -26,7 +26,8 @@ class App extends React.Component {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
       show: false,
-      currentText: ''
+      currentText: '',
+      descArray: []
     };
   }
 
@@ -54,13 +55,14 @@ class App extends React.Component {
   fetchConcepts(textBlock) {
     axios({
       method: 'get',
-      url: '/api/watson/concepts',
+      url: '/watson/concepts',
       params: {
         text: textBlock
       }
     })
     .then((res) => {
       console.log(res);
+      this.setText(res.data);
     })
     .catch((error) => {
       console.error(error);
@@ -70,7 +72,7 @@ class App extends React.Component {
   fetchTranslation(textBlock) {
     axios({
       method: 'get',
-      url: '/api/watson/read',
+      url: '/watson/read',
       params: {
         text: textBlock
       }
@@ -86,7 +88,7 @@ class App extends React.Component {
   fetchTranslation(textBlock) {
     axios({
       method: 'get',
-      url: '/api/watson/read',
+      url: '/watson/read',
       params: {
         text: textBlock
       }
@@ -144,9 +146,12 @@ class App extends React.Component {
   }
 
   setText(val) {
+    var definition = val[0][0];
+    var explanation = val[0][1];
+
     this.setState({
-      currentText: val
-    });
+      currentText: `${definition}, ${explanation}`
+    })
   }
 
   componentDidMount() {

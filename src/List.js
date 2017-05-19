@@ -37,8 +37,9 @@ var List = (props) =>
                 fetchConcepts={props.fetchConcepts}
                 show={props.show}
                 showDiv={props.showDiv}
+                setText={props.setText}
+                currentText={props.currentText}
               />
-              <Info/>
           </div>
         ))}
       </ul>

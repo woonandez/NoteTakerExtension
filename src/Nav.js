@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 class Nav extends React.Component {
   constructor(props) {
