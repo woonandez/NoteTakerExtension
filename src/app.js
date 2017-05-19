@@ -51,6 +51,9 @@ class App extends React.Component {
     axios({
       method: 'get',
       url: '/api/watson/concepts'
+      params: {
+        text: textBlock
+      }
     })
     .then((res) => {
       console.log(res);
