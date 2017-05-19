@@ -13,18 +13,24 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
-    this.showdiv = this.showDiv.bind(this);
+    
+    this.showDiv = this.showDiv.bind(this);
+    this.setText = this.setText.bind(this);
+    this.modifyDescObj = this.modifyDescObj.bind(this);
+
 
     this.auth = new AuthService(
-      '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
-      'dhsiao89.auth0.com',
+      'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
+      'xosk.auth0.com',
       this.handleAuthenticate
     );
 
     this.state = {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
-      show: false
+      show: false,
+      currentText: '',
+      descObj: {}
     };
   }
 
@@ -49,6 +55,7 @@ class App extends React.Component {
       });
   }
 
+
 // fetch concepts for the user
   fetchConcepts(textBlock) {
     axios({
@@ -59,7 +66,9 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
+      this.setText(res.data)
+      console.log(this.state.currentText, 'currentText state')
+      callback(res.data);
     })
     .catch((error) => {
       console.error(error);
@@ -145,6 +154,30 @@ class App extends React.Component {
     });
   }
 
+  showDiv() {
+    var bool = this.state.show
+    this.setState({
+      show: !bool
+    });
+  }
+
+  setText(val) {
+    var definition = val[0][0];
+    var explanation = val[0][1];
+
+    this.setState({
+      currentText: `${definition}, ${explanation}`
+    })
+  }
+
+  modifyDescObj(originalText, foundText) {
+    var copyOfState = Object.assign(this.state.descObj);
+    copyOfState[originalText] = foundText;
+    this.setState({
+      descObj: copyOfState
+    })
+  }
+
   componentDidMount() {
     if (this.state.loggedIn) {
       this.fetch();
@@ -170,7 +203,13 @@ class App extends React.Component {
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
+              show={this.state.show}
               showDiv={this.showDiv.bind(this)}
+              currentText={this.state.currentText}
+              setText={this.setText.bind(this)}
+              descObj={this.state.descObj}
+              modifyDescObj={this.modifyDescObj.bind(this)}
+
             />
           ))}
         </div>
