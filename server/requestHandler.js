@@ -2,6 +2,8 @@ var User = require('../database/models/user.js');
 var naturalLangLib = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var textToSpeechLib = require('watson-developer-cloud/text-to-speech/v1');
 var languageTranslatorLib = require('watson-developer-cloud/language-translator/v2');
+var request = require('request');
+var cheerio = require('cheerio');
 var fs = require('fs');
 require('../auth.js');
 
@@ -146,6 +148,19 @@ var languageTranslator = new languageTranslatorLib({
 });
 
 
+var requestCallbacks = function(urls, res, i = 0, paragraphs = []) {
+  if (i === urls.length) {
+    res.end( JSON.stringify(paragraphs) );
+  } else {
+    request(urls[i].dbpedia_resource, function (error, response, body) {
+      var $ = cheerio.load(body);
+      paragraphs.push( [urls[i].text, $('.lead').text()] );
+      requestCallbacks(urls, res, i+1, paragraphs);
+    });
+  }
+};
+
+
 exports.watsonConcepts = (req, res) => {
   // query = {
   //   text: 'In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.'
@@ -161,7 +176,7 @@ exports.watsonConcepts = (req, res) => {
       res.end('ERROR');
     } else {
       console.log(response.concepts);
-      res.end( JSON.stringify(response.concepts) );
+      requestCallbacks(response.concepts, res);
     }
   });
 };
