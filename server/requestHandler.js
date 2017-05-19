@@ -127,9 +127,6 @@ exports.userAddNotes = (req, res) => {
 
 
 
-
-
-
 var textToSpeech = new textToSpeechLib({
   username: process.env.TEXT_TO_SPEECH_USERNAME,
   password: process.env.TEXT_TO_SPEECH_PASSWORD
@@ -148,6 +145,8 @@ var languageTranslator = new languageTranslatorLib({
 });
 
 
+
+// helper function for requests
 var requestCallbacks = function(urls, res, i = 0, paragraphs = []) {
   if (i === urls.length) {
     res.end( JSON.stringify(paragraphs) );
