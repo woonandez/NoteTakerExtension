@@ -12,6 +12,7 @@ var Pin = (props) => {
     props.fetchConcepts(currentText.innerHTML, (res) => {
       let firstFound = res[0]
       foundText = `${firstFound[0]} ${firstFound[1]}`;
+      props.showDiv()
       props.modifyDescObj(inner, foundText);
     });
   }
@@ -42,7 +43,9 @@ var Pin = (props) => {
       <Info
         foundText={foundText}
         currentText={props.currentText}
+        pinText={props.pin}
         descObj={props.descObj}
+        show={props.show}
       />
     </div>
   )

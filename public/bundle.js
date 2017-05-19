@@ -22562,6 +22562,7 @@ var Pin = function Pin(props) {
     props.fetchConcepts(currentText.innerHTML, function (res) {
       var firstFound = res[0];
       foundText = firstFound[0] + ' ' + firstFound[1];
+      props.showDiv();
       props.modifyDescObj(inner, foundText);
     });
   }
@@ -22610,7 +22611,9 @@ var Pin = function Pin(props) {
     _react2.default.createElement(_info2.default, {
       foundText: foundText,
       currentText: props.currentText,
-      descObj: props.descObj
+      pinText: props.pin,
+      descObj: props.descObj,
+      show: props.show
     })
   );
 };
@@ -29329,8 +29332,8 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: 'fetchTranslation',
-    value: function fetchTranslation(textBlock) {
+    key: 'fetchTextToSpeech',
+    value: function fetchTextToSpeech(textBlock) {
       (0, _axios2.default)({
         method: 'get',
         url: '/watson/read',
@@ -29348,7 +29351,7 @@ var App = function (_React$Component) {
     value: function fetchTranslation(textBlock) {
       (0, _axios2.default)({
         method: 'get',
-        url: '/watson/read',
+        url: '/watson/translate',
         params: {
           text: textBlock
         }
@@ -29408,8 +29411,9 @@ var App = function (_React$Component) {
   }, {
     key: 'showDiv',
     value: function showDiv() {
+      var bool = this.state.show;
       this.setState({
-        show: !show
+        show: !bool
       });
     }
   }, {
@@ -29427,7 +29431,9 @@ var App = function (_React$Component) {
     value: function modifyDescObj(originalText, foundText) {
       var copyOfState = Object.assign(this.state.descObj);
       copyOfState[originalText] = foundText;
-      console.log('COPY HERE', copyOfState);
+      this.setState({
+        descObj: copyOfState
+      });
     }
   }, {
     key: 'componentDidMount',
@@ -37861,11 +37867,19 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Info = function Info(props) {
-  return _react2.default.createElement(
-    'h2',
-    null,
-    props.foundText
-  );
+  if (props.descObj[props.pinText] && props.show) {
+    return _react2.default.createElement(
+      'h2',
+      null,
+      props.descObj[props.pinText]
+    );
+  } else {
+    return _react2.default.createElement(
+      'h2',
+      null,
+      ''
+    );
+  }
 };
 
 exports.default = Info;
@@ -59420,11 +59434,19 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Info = function Info(props) {
-  return _react2.default.createElement(
-    'h2',
-    null,
-    props.foundText
-  );
+  if (props.descObj[props.pinText] && props.show) {
+    return _react2.default.createElement(
+      'h2',
+      null,
+      props.descObj[props.pinText]
+    );
+  } else {
+    return _react2.default.createElement(
+      'h2',
+      null,
+      ''
+    );
+  }
 };
 
 exports.default = Info;

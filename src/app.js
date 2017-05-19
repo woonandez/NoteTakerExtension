@@ -71,7 +71,7 @@ class App extends React.Component {
     });
   }
 
-  fetchTranslation(textBlock) {
+  fetchTextToSpeech(textBlock) {
     axios({
       method: 'get',
       url: '/watson/read',
@@ -90,7 +90,7 @@ class App extends React.Component {
   fetchTranslation(textBlock) {
     axios({
       method: 'get',
-      url: '/watson/read',
+      url: '/watson/translate',
       params: {
         text: textBlock
       }
@@ -142,8 +142,9 @@ class App extends React.Component {
   }
 
   showDiv() {
+    var bool = this.state.show
     this.setState({
-      show: !show
+      show: !bool
     });
   }
 
@@ -159,8 +160,9 @@ class App extends React.Component {
   modifyDescObj(originalText, foundText) {
     var copyOfState = Object.assign(this.state.descObj);
     copyOfState[originalText] = foundText;
-    console.log('COPY HERE', copyOfState);
-
+    this.setState({
+      descObj: copyOfState
+    })
   }
 
   componentDidMount() {
