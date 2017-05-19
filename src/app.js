@@ -13,13 +13,15 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
+    
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
 
+
     this.auth = new AuthService(
-      '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
-      'dhsiao89.auth0.com',
+      'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
+      'xosk.auth0.com',
       this.handleAuthenticate
     );
 
@@ -53,10 +55,12 @@ class App extends React.Component {
       });
   }
 
-  fetchConcepts(textBlock, callback) {
+
+// fetch concepts for the user
+  fetchConcepts(textBlock) {
     axios({
-      method: 'get',
-      url: '/watson/concepts',
+      method: 'GET',
+      url: '/api/watson/concepts',
       params: {
         text: textBlock
       }
@@ -71,10 +75,11 @@ class App extends React.Component {
     });
   }
 
-  fetchTextToSpeech(textBlock) {
+// fetch a translation for a user
+  fetchTranslation(textBlock) {
     axios({
-      method: 'get',
-      url: '/watson/read',
+      method: 'GET',
+      url: '/api/watson/translate',
       params: {
         text: textBlock
       }
@@ -87,10 +92,11 @@ class App extends React.Component {
     })
   }
 
-  fetchTranslation(textBlock) {
+// fetch speech dictation
+  fetchDictation(textBlock) {
     axios({
-      method: 'get',
-      url: '/watson/translate',
+      method: 'GET',
+      url: '/api/watson/read',
       params: {
         text: textBlock
       }
@@ -106,7 +112,7 @@ class App extends React.Component {
 //Remove note from database
   deleteNote(name, uri, note) {
     axios({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/notes',
         data: { name: name, uri: uri, note: note }
       })
@@ -121,7 +127,7 @@ class App extends React.Component {
 //Remove entire url from database
   deleteList(name, uri) {
     axios({
-        method: 'delete',
+        method: 'DELETE',
         url: '/api/users/urls',
         data: { name: name, uri: uri }
       })
@@ -131,6 +137,13 @@ class App extends React.Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+// show and hide the child div
+  showDiv() {
+    this.setState({
+      show: !show
+    })
   }
 
 //Set sign out state
@@ -196,6 +209,7 @@ class App extends React.Component {
               setText={this.setText.bind(this)}
               descObj={this.state.descObj}
               modifyDescObj={this.modifyDescObj.bind(this)}
+
             />
           ))}
         </div>
