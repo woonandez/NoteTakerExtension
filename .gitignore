@@ -1,6 +1,5 @@
 /node_modules
 mongod.exe
-/public/bundle.js
 auth.js
 /public/temp
 .DS_Store
