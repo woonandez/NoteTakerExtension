@@ -8,7 +8,7 @@ export default class AuthService {
     this.authenticateCallback = authenticateCallback;
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: "https://aqueous-falls-23719.herokuapp.com/",
+        // redirectUrl: "https://aqueous-falls-23719.herokuapp.com/",
         responseType: "token"
       }
     });
