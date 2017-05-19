@@ -13,6 +13,7 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
+    this.showdiv = this.showDiv.bind(this);
 
     this.auth = new AuthService(
       '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
@@ -22,7 +23,8 @@ class App extends React.Component {
 
     this.state = {
       data: { urls: [] },
-      loggedIn: this.auth.loggedIn()
+      loggedIn: this.auth.loggedIn(),
+      show: false
     };
   }
 
@@ -47,6 +49,7 @@ class App extends React.Component {
       });
   }
 
+// fetch concepts for the user
   fetchConcepts(textBlock) {
     axios({
       method: 'GET',
@@ -63,10 +66,11 @@ class App extends React.Component {
     });
   }
 
+// fetch a translation for a user
   fetchTranslation(textBlock) {
     axios({
       method: 'GET',
-      url: '/api/watson/read',
+      url: '/api/watson/translate',
       params: {
         text: textBlock
       }
@@ -79,7 +83,8 @@ class App extends React.Component {
     })
   }
 
-  fetchTranslation(textBlock) {
+// fetch speech dictation
+  fetchDictation(textBlock) {
     axios({
       method: 'GET',
       url: '/api/watson/read',
@@ -125,6 +130,13 @@ class App extends React.Component {
       });
   }
 
+// show and hide the child div
+  showDiv() {
+    this.setState({
+      show: !show
+    })
+  }
+
 //Set sign out state
   handleSignout() {
     this.setState({
@@ -158,6 +170,7 @@ class App extends React.Component {
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
+              showDiv={this.showDiv.bind(this)}
             />
           ))}
         </div>
