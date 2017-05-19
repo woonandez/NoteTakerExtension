@@ -33,6 +33,8 @@ var List = (props) =>
             listname={props.data.name}
             deleteNote={props.deleteNote}
             fetchConcepts={props.fetchConcepts}
+            show={props.show}
+            showDiv={props.showDiv}
           />
         ))}
       </ul>
