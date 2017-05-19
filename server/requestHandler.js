@@ -124,7 +124,7 @@ exports.userAddNotes = (req, res) => {
 
 
 
-
+// IBM Watson endpoints -------------------------------------------------------
 
 
 var textToSpeech = new textToSpeechLib({
