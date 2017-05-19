@@ -1,3 +1,11 @@
+* {
+  margin: 0;
+}
+
+body {
+  background-color: #cea760;
+}
+
 .panel-title {
   font-weight: bold;
   color: white;
@@ -38,6 +46,17 @@ a:hover {
   margin-right: 10px;
 }
 
+.panel,
+.panel-primary {
+  border-radius: 10px;
+  box-shadow: 5px 7px 5px #888888;
+}
+
+.panel-heading {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px
+}
+
 .list-group-item {
   display: flex;
   justify-content: space-between;
@@ -55,3 +74,48 @@ a:hover {
   height: 30px;
   margin-bottom: 10px;
   line-height: 33px;
+}
+
+.listContainer {
+  height: 150px;
+  display: flex;
+  padding: 10px;
+  margin: 15px;
+  width: 75%;
+  overflow: scroll;
+  border: 1px solid #cea760;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 13%;
+  align-items: center;
+  justify-content: center;
+}
+
+.lstBtn {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.notesText {
+  width: 100%;
+  font-size: 20px;
+}
+
+.poppaDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-danger {
+  width: 40px;
+  border-radius: 5px;
+}

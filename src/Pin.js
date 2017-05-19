@@ -1,25 +1,26 @@
 import React from 'react';
-
-class Pin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-        <li className="list-group-item">
-          <div className="pin">
-            {this.props.pin}
-          </div>
-          <button className="btn btn-warning " onClick={() => this.props.deleteNote(this.props.username, this.props.listname, this.props.pin)} >
-            <span className="glyphicon glyphicon-trash"></span>
-          </button>
-        <p className="pin-url"></p>
-      </li>
-    )
-  }
-}
+var Pin = (props) =>
+  <div className="poppaDiv">
+    <div className="listContainer">
+      <div className="notesText">
+        {props.pin}
+      </div>
+    </div>
+    <div className="buttonContainer">
+      <button className="lstBtn" onClick={() =>
+        props.deleteNote(props.username, props.listname, props.pin)} >
+        <span className="glyphicon glyphicon-trash"></span>
+      </button>
+      <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)}>
+        <span className="glyphicon glyphicon-text-background"></span>
+      </button>
+      <button className="lstBtn" type="button">
+        <span className="glyphicon glyphicon-resize-horizontal"></span>
+      </button>
+      <button className="lstBtn" type="button">
+        <span className="glyphicon glyphicon-volume-up"></span>
+      </button>
+    </div>
+  </div>
 
 export default Pin;
-
