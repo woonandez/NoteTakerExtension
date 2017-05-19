@@ -66,7 +66,6 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      this.setText(res.data)
       callback(res.data);
     })
     .catch((error) => {
@@ -161,20 +160,18 @@ class App extends React.Component {
   }
 
   setText(val) {
-    var definition = val[0][0];
-    var explanation = val[0][1];
-
     this.setState({
-      currentText: `${definition}, ${explanation}`
-    })
+      currentText: val
+    });
   }
 
   modifyDescObj(originalText, foundText) {
-    var copyOfState = Object.assign(this.state.descObj);
+    let copyOfState = Object.assign(this.state.descObj);
     copyOfState[originalText] = foundText;
     this.setState({
       descObj: copyOfState
-    })
+    });
+    console.log(this.state.descObj,' the obj ');
   }
 
   componentDidMount() {
