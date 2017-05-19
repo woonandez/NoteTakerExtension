@@ -1,5 +1,6 @@
 import React from 'react';
 import Pin from './Pin.js';
+import Info from './Info.js';
 
 var List = (props) =>
   <div className="panel panel-primary">
@@ -26,16 +27,25 @@ var List = (props) =>
     <div className="panel-body">
       <ul className="list-group">
         {props.data.pins.map((pin, index) => (
-          <Pin
-            pin={pin}
-            key={index}
-            username={props.name}
-            listname={props.data.name}
-            deleteNote={props.deleteNote}
-            fetchConcepts={props.fetchConcepts}
-            fetchLanguageTranslator={props.fetchLanguageTranslator}
-            showDiv={props.showDiv}
-          />
+
+            <div>
+              <Pin
+                pin={pin}
+                key={index}
+                username={props.name}
+                listname={props.data.name}
+                deleteNote={props.deleteNote}
+                fetchConcepts={props.fetchConcepts}
+                fetchLanguageTranslator={props.fetchLanguageTranslator}
+                show={props.show}
+                showDiv={props.showDiv}
+                setText={props.setText}
+                currentText={props.currentText}
+                descObj={props.descObj}
+                modifyDescObj={props.modifyDescObj}
+              />
+          </div>
+
         ))}
       </ul>
     </div>
