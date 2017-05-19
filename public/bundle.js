@@ -22545,7 +22545,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactAddonsCssTransitionGroup = __webpack_require__(320);
+var _reactAddonsCssTransitionGroup = __webpack_require__(154);
 
 var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
