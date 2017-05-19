@@ -1,4 +1,5 @@
 import React from 'react';
+
 var Pin = (props) =>
   <div className="poppaDiv">
     <div className="listContainer">
@@ -11,7 +12,7 @@ var Pin = (props) =>
         props.deleteNote(props.username, props.listname, props.pin)} >
         <span className="glyphicon glyphicon-trash"></span>
       </button>
-      <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)}>
+      <button className="lstBtn" type="button" onClick={() => props.fetchConcepts(props.pin)} onClick={() => props.showDiv()}>
         <span className="glyphicon glyphicon-text-background"></span>
       </button>
       <button className="lstBtn" type="button">
@@ -20,6 +21,9 @@ var Pin = (props) =>
       <button className="lstBtn" type="button">
         <span className="glyphicon glyphicon-volume-up"></span>
       </button>
+    </div>
+    <div>
+      <p>WOO</p>
     </div>
   </div>
 

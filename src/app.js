@@ -13,7 +13,8 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
-    this.showdiv = this.showDiv.bind(this);
+    this.showDiv = this.showDiv.bind(this);
+    this.setText = this.setText.bind(this);
 
     this.auth = new AuthService(
       '7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T',
@@ -24,7 +25,8 @@ class App extends React.Component {
     this.state = {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
-      show: false
+      show: false,
+      currentText: ''
     };
   }
 
@@ -141,6 +143,12 @@ class App extends React.Component {
     });
   }
 
+  setText(val) {
+    this.setState({
+      currentText: val
+    });
+  }
+
   componentDidMount() {
     if (this.state.loggedIn) {
       this.fetch();
@@ -168,6 +176,8 @@ class App extends React.Component {
               fetchConcepts={this.fetchConcepts.bind(this)}
               show={this.state.show}
               showDiv={this.showDiv.bind(this)}
+              currentText={this.state.currentText}
+              setText={this.setText.bind(this)}
             />
           ))}
         </div>

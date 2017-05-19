@@ -22547,6 +22547,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Pin = function Pin(props) {
   return _react2.default.createElement(
     "div",
@@ -22572,9 +22574,11 @@ var Pin = function Pin(props) {
       ),
       _react2.default.createElement(
         "button",
-        { className: "lstBtn", type: "button", onClick: function onClick() {
+        _defineProperty({ className: "lstBtn", type: "button", onClick: function onClick() {
             return props.fetchConcepts(props.pin);
-          } },
+          } }, "onClick", function onClick() {
+          return props.showDiv();
+        }),
         _react2.default.createElement("span", { className: "glyphicon glyphicon-text-background" })
       ),
       _react2.default.createElement(
@@ -22586,6 +22590,15 @@ var Pin = function Pin(props) {
         "button",
         { className: "lstBtn", type: "button" },
         _react2.default.createElement("span", { className: "glyphicon glyphicon-volume-up" })
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      _react2.default.createElement(
+        "p",
+        null,
+        "WOO"
       )
     )
   );
@@ -29237,14 +29250,16 @@ var App = function (_React$Component) {
     _this.fetch = _this.fetch.bind(_this);
     _this.handleSignout = _this.handleSignout.bind(_this);
     _this.fetchConcepts = _this.fetchConcepts.bind(_this);
-    _this.showdiv = _this.showDiv.bind(_this);
+    _this.showDiv = _this.showDiv.bind(_this);
+    _this.setText = _this.setText.bind(_this);
 
     _this.auth = new _AuthService2.default('7ahU6Olf4SuRFf3B3lDGVuY6DGP0hj5T', 'dhsiao89.auth0.com', _this.handleAuthenticate);
 
     _this.state = {
       data: { urls: [] },
       loggedIn: _this.auth.loggedIn(),
-      show: false
+      show: false,
+      currentText: ''
     };
     return _this;
   }
@@ -29375,6 +29390,13 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'setText',
+    value: function setText(val) {
+      this.setState({
+        currentText: val
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.state.loggedIn) {
@@ -29409,7 +29431,9 @@ var App = function (_React$Component) {
               deleteNote: _this5.deleteNote.bind(_this5),
               fetchConcepts: _this5.fetchConcepts.bind(_this5),
               show: _this5.state.show,
-              showDiv: _this5.showDiv.bind(_this5)
+              showDiv: _this5.showDiv.bind(_this5),
+              currentText: _this5.state.currentText,
+              setText: _this5.setText.bind(_this5)
             });
           })
         )
@@ -37803,6 +37827,10 @@ var _Pin = __webpack_require__(144);
 
 var _Pin2 = _interopRequireDefault(_Pin);
 
+var _Info = __webpack_require__(438);
+
+var _Info2 = _interopRequireDefault(_Info);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var List = function List(props) {
@@ -37847,16 +37875,21 @@ var List = function List(props) {
         'ul',
         { className: 'list-group' },
         props.data.pins.map(function (pin, index) {
-          return _react2.default.createElement(_Pin2.default, {
-            pin: pin,
-            key: index,
-            username: props.name,
-            listname: props.data.name,
-            deleteNote: props.deleteNote,
-            fetchConcepts: props.fetchConcepts,
-            show: props.show,
-            showDiv: props.showDiv
-          });
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_Pin2.default, {
+              pin: pin,
+              key: index,
+              username: props.name,
+              listname: props.data.name,
+              deleteNote: props.deleteNote,
+              fetchConcepts: props.fetchConcepts,
+              show: props.show,
+              showDiv: props.showDiv
+            }),
+            _react2.default.createElement(_Info2.default, null)
+          );
         })
       )
     )
@@ -59315,6 +59348,33 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 438 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Info = function Info(props) {
+  return _react2.default.createElement(
+    'h2',
+    null,
+    'Hello'
+  );
+};
+
+exports.default = Info;
 
 /***/ })
 /******/ ]);
