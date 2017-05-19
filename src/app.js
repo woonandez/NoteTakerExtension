@@ -13,7 +13,7 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
-    
+
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
@@ -57,7 +57,7 @@ class App extends React.Component {
 
 
 // fetch concepts for the user
-  fetchConcepts(textBlock) {
+  fetchConcepts(textBlock, callback) {
     axios({
       method: 'GET',
       url: '/api/watson/concepts',
@@ -67,7 +67,6 @@ class App extends React.Component {
     })
     .then((res) => {
       this.setText(res.data)
-      console.log(this.state.currentText, 'currentText state')
       callback(res.data);
     })
     .catch((error) => {

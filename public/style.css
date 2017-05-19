@@ -120,14 +120,6 @@ a:hover {
   border-radius: 5px;
 }
 
-
-.panel {
-  width: 200px;
-  height: 100px;
-  background: green;
-  margin-top: 10px;
-}
-
 .example-enter {
   height: 0px;
 }
