@@ -13,7 +13,7 @@ class App extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
     this.fetchConcepts = this.fetchConcepts.bind(this);
-
+    this.fetchLanguageTranslator = this.fetchLanguageTranslator.bind(this);
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
@@ -30,6 +30,8 @@ class App extends React.Component {
       loggedIn: this.auth.loggedIn(),
       show: false,
       currentText: '',
+      translatedText: '',
+      showTranslated: false,
       descObj: {}
     };
   }
@@ -107,6 +109,31 @@ class App extends React.Component {
       console.error(err)
     })
   }
+
+//added fetchLanguageTranslator to fetch data from api
+  fetchLanguageTranslator(text, translateTo) {
+    axios({
+      method: 'get',
+      url: '/api/watson/translate',
+      params: {
+        text: text,
+        translateTo: translateTo
+      }
+    })
+    .then((res) => {
+      console.log('******', res);
+
+      this.setState({
+        translatedText: res.data,
+        showTranslated: !this.showTranslated
+
+      })
+    })
+    .catch((err) => {
+      console.error('*********', err)
+    })
+  }
+
 
 //Remove note from database
   deleteNote(name, uri, note) {
@@ -202,6 +229,8 @@ class App extends React.Component {
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
+              fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
+              translatedText={this.state.translatedText}
               show={this.state.show}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}

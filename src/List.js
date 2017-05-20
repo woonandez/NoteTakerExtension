@@ -27,6 +27,7 @@ var List = (props) =>
     <div className="panel-body">
       <ul className="list-group">
         {props.data.pins.map((pin, index) => (
+
             <div>
               <Pin
                 pin={pin}
@@ -35,6 +36,8 @@ var List = (props) =>
                 listname={props.data.name}
                 deleteNote={props.deleteNote}
                 fetchConcepts={props.fetchConcepts}
+                fetchLanguageTranslator={props.fetchLanguageTranslator}
+                translatedText={props.translatedText}
                 show={props.show}
                 showDiv={props.showDiv}
                 setText={props.setText}
@@ -43,6 +46,7 @@ var List = (props) =>
                 modifyDescObj={props.modifyDescObj}
               />
           </div>
+
         ))}
       </ul>
     </div>
