@@ -3,7 +3,6 @@ import Sources from './Sources.js';
 
 var Info = (props) => {
   var resultsContainer = props.recentQuery;
-  console.log(resultsContainer, 'HALLO');
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">
@@ -13,11 +12,11 @@ var Info = (props) => {
   }
   if (props.pinText === props.currentText && props.show) {
     return (
-      <div>
+      <div className="infoBody">
         {
-          resultsContainer.map((string, key) => {
-             return <Sources title={string[0]} sentence={string[1]}     />
-          })
+          resultsContainer.map((string, key) => (
+             <Sources title={string[0]} sentence={string[1]} key={key} />
+          ))
         }
       </div>
     )

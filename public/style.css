@@ -148,6 +148,7 @@ a:hover {
   margin: 10px;
   font-style: italic;
   overflow: scroll;
+  height: 400px;
 }
 
 .example-enter.example-enter-active {
