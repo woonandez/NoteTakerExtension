@@ -40,6 +40,7 @@ var List = (props) =>
                 fetchLanguageTranslator={props.fetchLanguageTranslator}
                 fetchDictation={props.fetchDictation.bind(this)}
                 translatedText={props.translatedText}
+                showTranslated={props.showTranslated}
                 show={props.show}
                 showDiv={props.showDiv}
                 setText={props.setText}
