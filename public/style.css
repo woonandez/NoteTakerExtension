@@ -140,6 +140,7 @@ a:hover {
   font-size: 1.7em;
   font-style: italic;
   text-decoration: underline;
+  padding-top: 11px;
 }
 
 .infoBody {
@@ -149,6 +150,10 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
+}
+
+.infoItem {
+  border: none;
 }
 
 .example-enter.example-enter-active {
