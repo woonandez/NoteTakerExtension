@@ -25,8 +25,8 @@ var Pin = (props) => {
   }
 
   function displayTranslation(e) {
-    console.log('hey');
-    props.fetchLanguageTranslator(props.pin, 'Arabic');
+    console.log(props.pinid, props.listid)
+    props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, 'Arabic');
   }
 
   return (
@@ -35,7 +35,7 @@ var Pin = (props) => {
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator translated={props.translatedText} />
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex} translated={props.translatedText}/>
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -46,9 +46,13 @@ var Pin = (props) => {
           onClick={setCurrentText}>
           <span className="glyphicon glyphicon-text-background"></span>
         </button>
-        <button className="lstBtn" type="button" onClick={displayTranslation}>
-          <span className="glyphicon glyphicon-resize-horizontal"></span>
-        </button>
+
+          <button className="lstBtn" type="button" onClick={displayTranslation}>
+            <span className="glyphicon glyphicon-resize-horizontal"></span>
+          </button>
+
+
+
         <button className="lstBtn" type="button">
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
