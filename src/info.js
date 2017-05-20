@@ -1,11 +1,18 @@
 import React from 'react';
 
 var Info = (props) => {
-  if (props.descObj[props.pinText] && props.show) {
+  if (props.pinText === props.currentText && props.show) {
     return (
-      <h2>
-        {props.descObj[props.pinText]}
-      </h2>
+      <div className="notesText">
+        <div className="infoContainer">
+          <div className="infoTitle">
+            {props.title}
+          </div>
+          <div className="infoBody">
+            {props.descObj[props.currentText]}
+          </div>
+        </div>
+      </div>
     )
   } else {
     return (

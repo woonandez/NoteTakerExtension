@@ -117,6 +117,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn-danger {
@@ -126,6 +127,27 @@ a:hover {
 
 .example-enter {
   height: 0px;
+}
+
+.infoContainer {
+  display: flex;
+  flex: wrap;
+  flex-direction: column;
+}
+
+.infoTitle {
+  align-self: center;
+  font-size: 1.7em;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.infoBody {
+  border: 1px solid #cea760;
+  padding: 20px;
+  margin: 10px;
+  font-style: italic;
+  overflow: scroll;
 }
 
 .example-enter.example-enter-active {

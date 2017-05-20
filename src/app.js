@@ -17,7 +17,7 @@ class App extends React.Component {
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
-
+    this.setTitleForDropDown = this.setTitleForDropDown.bind(this);
 
     this.auth = new AuthService(
       'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
@@ -33,6 +33,8 @@ class App extends React.Component {
       translatedText: '',
       activePinIndex: -1,
       activeListIndex: -1,
+      showTranslated: false,
+      title: '',
       descObj: {}
     };
   }
@@ -69,7 +71,6 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      this.setText(res.data)
       callback(res.data);
     })
     .catch((error) => {
@@ -168,13 +169,6 @@ class App extends React.Component {
       });
   }
 
-// show and hide the child div
-  showDiv() {
-    this.setState({
-      show: !show
-    })
-  }
-
 //Set sign out state
   handleSignout() {
     this.setState({
@@ -191,20 +185,23 @@ class App extends React.Component {
   }
 
   setText(val) {
-    var definition = val[0][0];
-    var explanation = val[0][1];
-
     this.setState({
-      currentText: `${definition}, ${explanation}`
-    })
+      currentText: val
+    });
+  }
+
+  setTitleForDropDown(input) {
+    this.setState({
+      title: input
+    });
   }
 
   modifyDescObj(originalText, foundText) {
-    var copyOfState = Object.assign(this.state.descObj);
+    let copyOfState = Object.assign(this.state.descObj);
     copyOfState[originalText] = foundText;
     this.setState({
       descObj: copyOfState
-    })
+    });
   }
 
   componentDidMount() {
@@ -236,6 +233,7 @@ class App extends React.Component {
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
               translatedText={this.state.translatedText}
               show={this.state.show}
+              title={this.state.title}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
               setText={this.setText.bind(this)}
@@ -243,6 +241,7 @@ class App extends React.Component {
               modifyDescObj={this.modifyDescObj.bind(this)}
               activePinIndex={this.state.activePinIndex}
               activeListIndex={this.state.activeListIndex}
+              setTitleForDropDown={this.setTitleForDropDown.bind(this)}
             />
           ))}
         </div>

@@ -47,6 +47,8 @@ var List = (props) =>
                 modifyDescObj={props.modifyDescObj}
                 activePinIndex={props.activePinIndex}
                 activeListIndex={props.activeListIndex}
+                setTitleForDropDown={props.setTitleForDropDown}
+                title={props.title}
               />
         ))}
       </ul>
