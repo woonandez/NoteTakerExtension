@@ -38,7 +38,8 @@ class App extends React.Component {
       showTranslated: false,
       title: '',
       descObj: {},
-      audioFile: ''
+      audioFile: '',
+      recentQuery: []
     };
   }
 
@@ -74,6 +75,9 @@ class App extends React.Component {
       }
     })
     .then((res) => {
+      this.setState({
+        recentQuery: res.data
+      });
       callback(res.data);
     })
     .catch((error) => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import Info from './info.js';
 import Translator from './translator.js';
-import Loader from 'react-loaders';
 
 var Pin = (props) => {
   let foundText = '';
