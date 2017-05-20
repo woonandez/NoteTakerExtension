@@ -197,13 +197,20 @@ exports.watsonTextToSpeech = (req, res) => {
   //   text: 'Hello World'
   // }
   var id = uniqueId(30);
+  var stream = fs.createWriteStream(`public/temp/${id}.webm`);
+
   textToSpeech.synthesize({
     text: req.query.text,
     voice: 'en-US_AllisonVoice',
-    accept: 'audio/wav'
-  }).pipe(fs.createWriteStream(`public/temp/${id}.wav`));
-  setTimeout(fs.unlink, 120000, `public/temp/${id}.wav`);
-  res.end(id);
+    accept: 'audio/webm'
+  }).pipe(stream);
+
+  stream.on('finish', function() {
+    console.log('done');
+    res.end(id);
+  });
+
+  setTimeout(fs.unlink, 120000, `public/temp/${id}.webm`);
 };
 
 

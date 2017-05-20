@@ -38,7 +38,7 @@ class App extends React.Component {
       showTranslated: false,
       title: '',
       descObj: {},
-      audioFile: ''
+      audioFile: '/temp/CWByI6K56N5T4kMafWsn9Up85J5mDD.webm'
     };
   }
 
@@ -109,7 +109,13 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log(res);
-      callback(res.data);
+      this.setState({
+        audioFile: `/temp/${res.data}.webm`
+      }, function() {
+        var audio = document.getElementById('audio');
+        audio.load();
+        audio.play();
+      });
     })
     .catch((err) => {
       console.error(err)
@@ -261,7 +267,7 @@ class App extends React.Component {
           ))}
         </div>
         <audio id="audio">
-          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
+          <source src={this.state.audioFile} type="audio/webm"></source>
         </audio>
       </div>
     );
