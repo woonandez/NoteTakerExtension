@@ -47,7 +47,7 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          {props.loading ? 'Loading' : <span className="glyphicon glyphicon-text-background"></span> }
+          {<span className="glyphicon glyphicon-text-background"></span> }
         </button>
         <button className="lstBtn" type="button" onClick={displayTranslation}>
           <span className="glyphicon glyphicon-resize-horizontal"></span>
@@ -64,6 +64,7 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
+        loading={props.loading}
       />
     </div>
   )

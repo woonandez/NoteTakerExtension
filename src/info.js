@@ -1,6 +1,11 @@
 import React from 'react';
 
 var Info = (props) => {
+  if (props.pinText === props.currentText && props.loading) {
+    return (
+      <h2>Hello world</h2>
+    )
+  }
   if (props.pinText === props.currentText && props.show) {
     return (
       <div className="notesText">
