@@ -8,7 +8,7 @@ var Pin = (props) => {
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
-    console.log(inner);
+    console.log(inner, 'here');
     if (!props.show) {
       props.isLoaded();
       props.setText(foundText.innerHTML);
