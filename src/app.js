@@ -33,7 +33,8 @@ class App extends React.Component {
       translatedText: '',
       showTranslated: false,
       title: '',
-      descObj: {}
+      descObj: {},
+      audioFile: ''
     };
   }
 
@@ -238,6 +239,9 @@ class App extends React.Component {
             />
           ))}
         </div>
+        <audio id="audio">
+          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav">
+        </audio>
       </div>
     );
   }
