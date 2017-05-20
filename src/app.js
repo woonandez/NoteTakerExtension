@@ -35,7 +35,8 @@ class App extends React.Component {
       activeListIndex: -1,
       showTranslated: false,
       title: '',
-      descObj: {}
+      descObj: {},
+      audioFile: ''
     };
   }
 
@@ -230,6 +231,7 @@ class App extends React.Component {
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
+              fetchDictation={this.fetchDictation.bind(this)}
               translatedText={this.state.translatedText}
               showTranslated={this.state.showTranslated}
               show={this.state.show}
@@ -242,9 +244,13 @@ class App extends React.Component {
               activePinIndex={this.state.activePinIndex}
               activeListIndex={this.state.activeListIndex}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
+              audioFile={this.state.audioFile}
             />
           ))}
         </div>
+        <audio id="audio">
+          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
+        </audio>
       </div>
     );
   }
