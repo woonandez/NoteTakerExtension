@@ -38,6 +38,7 @@ var List = (props) =>
                 deleteNote={props.deleteNote}
                 fetchConcepts={props.fetchConcepts}
                 fetchLanguageTranslator={props.fetchLanguageTranslator}
+                fetchDictation={props.fetchDictation.bind(this)}
                 translatedText={props.translatedText}
                 show={props.show}
                 showDiv={props.showDiv}
@@ -49,6 +50,7 @@ var List = (props) =>
                 activeListIndex={props.activeListIndex}
                 setTitleForDropDown={props.setTitleForDropDown}
                 title={props.title}
+                audioFile={props.audioFile}
               />
         ))}
       </ul>

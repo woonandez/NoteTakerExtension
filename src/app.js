@@ -232,6 +232,7 @@ class App extends React.Component {
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
+              fetchDictation={this.fetchDictation.bind(this)}
               translatedText={this.state.translatedText}
               show={this.state.show}
               title={this.state.title}
@@ -243,11 +244,12 @@ class App extends React.Component {
               activePinIndex={this.state.activePinIndex}
               activeListIndex={this.state.activeListIndex}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
+              audioFile={this.state.audioFile}
             />
           ))}
         </div>
         <audio id="audio">
-          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav">
+          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
         </audio>
       </div>
     );
