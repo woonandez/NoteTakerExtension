@@ -1,6 +1,7 @@
 import React from 'react';
 import Info from './info.js';
-import Translator from './translator.js'
+import Translator from './translator.js';
+import Loader from 'react-loaders';
 
 var Pin = (props) => {
   let foundText = '';
@@ -9,8 +10,10 @@ var Pin = (props) => {
     var inner = foundText.innerHTML;
     console.log(inner);
     if (!props.show) {
+      props.isLoaded();
       props.setText(foundText.innerHTML);
       props.fetchConcepts(inner, (res) => {
+        props.isLoaded();
         let firstFound = res[0]
         foundText = `${firstFound[0]} ${firstFound[1]}`;
         props.setTitleForDropDown(firstFound[0]);
@@ -25,8 +28,8 @@ var Pin = (props) => {
   }
 
   function displayTranslation(e) {
-    console.log('hey');
-    props.fetchLanguageTranslator(props.pin, 'Arabic');
+    console.log(props.pinid, props.listid)
+    props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, 'Arabic');
   }
 
   function playAudio(e) {
@@ -43,7 +46,7 @@ var Pin = (props) => {
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator translated={props.translatedText} />
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex} translated={props.translatedText}/>
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -52,7 +55,7 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          <span className="glyphicon glyphicon-text-background"></span>
+          {<span className="glyphicon glyphicon-text-background"></span> }
         </button>
         <button className="lstBtn" type="button" onClick={displayTranslation}>
           <span className="glyphicon glyphicon-resize-horizontal"></span>
@@ -69,6 +72,7 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
+        loading={props.loading}
       />
     </div>
   )

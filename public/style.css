@@ -104,6 +104,10 @@ a:hover {
   background-color: white;
 }
 
+.icn {
+  margin: 0 auto;
+}
+
 .notesText {
   width: 100%;
   font-size: 20px;
@@ -154,5 +158,27 @@ a:hover {
 .example-leave.example-leave-active {
   height: 0px;
   -webkit-transition: height .3s ease;
+}
+
+.icantwait {
+  display: flex;
+  font-size: 1.7rem;
+  font-style: italic;
+  -webkit-animation: icantwait 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0.5;
+  /*background: 'here'*/
+}
+
+@-webkit-keyframes icantwait {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
