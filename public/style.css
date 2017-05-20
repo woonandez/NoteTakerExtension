@@ -125,6 +125,14 @@ a:hover {
   height: 0px;
 }
 
+.infoTitle {
+  border: 2px solid red;
+}
+
+.infoBody {
+  border: 2px solid blue;
+}
+
 .example-enter.example-enter-active {
   height: 100px;
   -webkit-transition: height .3s ease;

@@ -13,6 +13,7 @@ var Pin = (props) => {
       props.fetchConcepts(inner, (res) => {
         let firstFound = res[0]
         foundText = `${firstFound[0]} ${firstFound[1]}`;
+        props.setTitleForDropDown(firstFound[0]);
         props.showDiv();
         props.modifyDescObj(inner, foundText);
       });
@@ -59,6 +60,7 @@ var Pin = (props) => {
         pinText={props.pin}
         descObj={props.descObj}
         show={props.show}
+        title={props.title}
       />
     </div>
   )

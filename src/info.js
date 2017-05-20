@@ -7,7 +7,12 @@ var Info = (props) => {
   if (props.pinText === props.currentText && props.show) {
     return (
       <div className="notesText">
-        {props.descObj[props.currentText]}
+        <div className="infoTitle">
+          {props.title}
+        </div>
+        <div className="infoBody">
+          {props.descObj[props.currentText]}
+        </div>
       </div>
     )
   } else {
