@@ -27,9 +27,9 @@ var Pin = (props) => {
     }
   }
 
+  //Displays translated text
   function displayTranslation(e) {
-    console.log('hey');
-    props.fetchLanguageTranslator(props.pin, 'Arabic');
+    props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, 'Arabic');
   }
 
   function playAudio(e) {
@@ -42,7 +42,7 @@ var Pin = (props) => {
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator translated={props.translatedText} />
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText}/>
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
