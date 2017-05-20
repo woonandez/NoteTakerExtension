@@ -1,9 +1,14 @@
 import React from 'react';
 
 var Info = (props) => {
+  var style = {
+    width: '60%'
+  }
   if (props.pinText === props.currentText && props.loading) {
     return (
-      <h2>Hello world</h2>
+      <div className="icantwait">
+        <h3>Loading...</h3>
+      </div>
     )
   }
   if (props.pinText === props.currentText && props.show) {
