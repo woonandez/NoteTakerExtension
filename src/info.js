@@ -1,7 +1,10 @@
 import React from 'react';
 
 var Info = (props) => {
-  if (props.descObj[props.pinText] && props.show) {
+  // var keys = Object.keys(props.descObj).filter(key => key === props.currentText)
+  // console.log(keys, 'woo');
+// props.descObj[props.currentText] &&
+  if (props.pinText === props.currentText && props.show) {
     return (
       <div className="notesText">
         {props.descObj[props.currentText]}

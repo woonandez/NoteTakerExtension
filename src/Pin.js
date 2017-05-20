@@ -3,9 +3,7 @@ import Info from './info.js';
 import Translator from './translator.js'
 
 var Pin = (props) => {
-  let currentText = null;
   let foundText = '';
-  let passedDownText = setCurrentText;
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
@@ -33,7 +31,7 @@ var Pin = (props) => {
   return (
     <div className="poppaDiv">
       <div className="listContainer">
-        <div className="notesText" ref={(input) => {currentText = input} }>
+        <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
         <Translator translated={props.translatedText} />

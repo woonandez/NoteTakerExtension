@@ -68,7 +68,6 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      this.setText(res.data)
       callback(res.data);
     })
     .catch((error) => {
