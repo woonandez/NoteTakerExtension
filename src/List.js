@@ -37,6 +37,7 @@ var List = (props) =>
                 deleteNote={props.deleteNote}
                 fetchConcepts={props.fetchConcepts}
                 fetchLanguageTranslator={props.fetchLanguageTranslator}
+                fetchDictation={props.fetchDictation.bind(this)}
                 translatedText={props.translatedText}
                 show={props.show}
                 showDiv={props.showDiv}
@@ -46,6 +47,7 @@ var List = (props) =>
                 modifyDescObj={props.modifyDescObj}
                 setTitleForDropDown={props.setTitleForDropDown}
                 title={props.title}
+                audioFile={props.audioFile}
               />
           </div>
 

@@ -29,6 +29,10 @@ var Pin = (props) => {
     props.fetchLanguageTranslator(props.pin, 'Arabic');
   }
 
+  function playAudio(e) {
+    props.fetchDictation(props.pin);
+  }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
@@ -49,7 +53,7 @@ var Pin = (props) => {
         <button className="lstBtn" type="button" onClick={displayTranslation}>
           <span className="glyphicon glyphicon-resize-horizontal"></span>
         </button>
-        <button className="lstBtn" type="button">
+        <button className="lstBtn" type="button" onClick={playAudio}>
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>
