@@ -104,6 +104,10 @@ a:hover {
   background-color: white;
 }
 
+.icn {
+  margin: 0 auto;
+}
+
 .notesText {
   width: 100%;
   font-size: 20px;
