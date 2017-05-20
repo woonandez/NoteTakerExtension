@@ -39,6 +39,7 @@ var List = (props) =>
                 fetchConcepts={props.fetchConcepts}
                 fetchLanguageTranslator={props.fetchLanguageTranslator}
                 translatedText={props.translatedText}
+                showTranslated={props.showTranslated}
                 show={props.show}
                 showDiv={props.showDiv}
                 setText={props.setText}

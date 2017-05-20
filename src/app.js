@@ -112,7 +112,7 @@ class App extends React.Component {
     })
   }
 
-//added fetchLanguageTranslator to fetch data from api
+// fetch translated text from api
   fetchLanguageTranslator(listIndex, pinIndex, text, translateTo) {
     axios({
       method: 'get',
@@ -124,14 +124,13 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log('******', res);
-
+      var bool = this.state.showTranslated
       this.setState({
         translatedText: res.data,
-        showTranslated: !this.showTranslated,
+        showTranslated: !bool,
         activePinIndex: pinIndex,
         activeListIndex: listIndex
       })
-
     })
     .catch((err) => {
       console.error('*********', err)
@@ -232,6 +231,7 @@ class App extends React.Component {
               fetchConcepts={this.fetchConcepts.bind(this)}
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
               translatedText={this.state.translatedText}
+              showTranslated={this.state.showTranslated}
               show={this.state.show}
               title={this.state.title}
               showDiv={this.showDiv.bind(this)}
