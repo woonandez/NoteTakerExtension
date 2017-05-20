@@ -37,6 +37,7 @@ var List = (props) =>
                 deleteNote={props.deleteNote}
                 fetchConcepts={props.fetchConcepts}
                 fetchLanguageTranslator={props.fetchLanguageTranslator}
+                translatedText={props.translatedText}
                 show={props.show}
                 showDiv={props.showDiv}
                 setText={props.setText}

@@ -18,12 +18,18 @@ var Pin = (props) => {
     });
   }
 
+  function displayTranslation(e) {
+    console.log('hey');
+    props.fetchLanguageTranslator(props.pin, 'Arabic');
+  }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
         <div className="notesText" ref={(input) => {currentText = input} }>
           {props.pin}
         </div>
+        <Translator translated={props.translatedText} />
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -34,8 +40,8 @@ var Pin = (props) => {
           onClick={setCurrentText}>
           <span className="glyphicon glyphicon-text-background"></span>
         </button>
-        <button className="lstBtn" type="button" >
-          <span className="glyphicon glyphicon-resize-horizontal" onClick={() => props.fetchLanguageTranslator(props.pin, 'Arabic')}></span>
+        <button className="lstBtn" type="button" onClick={displayTranslation}>
+          <span className="glyphicon glyphicon-resize-horizontal"></span>
         </button>
         <button className="lstBtn" type="button">
           <span className="glyphicon glyphicon-volume-up"></span>

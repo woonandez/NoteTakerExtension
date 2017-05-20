@@ -2,7 +2,9 @@ import React from 'react';
 
 var Translator = (props) =>
 <div>
-  Hey how you doing?
+
+  {props.translated}
 </div>
 
 export default Translator;
+
