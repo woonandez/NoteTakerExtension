@@ -3,6 +3,7 @@ import Pin from './Pin.js';
 import Info from './Info.js';
 
 var List = (props) =>
+
   <div className="panel panel-primary">
     <div className="panel-heading">
       <a
@@ -27,11 +28,11 @@ var List = (props) =>
     <div className="panel-body">
       <ul className="list-group">
         {props.data.pins.map((pin, index) => (
-
-            <div>
               <Pin
                 pin={pin}
                 key={index}
+                pinid={index}
+                listid={props.listid}
                 username={props.name}
                 listname={props.data.name}
                 deleteNote={props.deleteNote}
@@ -44,9 +45,9 @@ var List = (props) =>
                 currentText={props.currentText}
                 descObj={props.descObj}
                 modifyDescObj={props.modifyDescObj}
+                activePinIndex={props.activePinIndex}
+                activeListIndex={props.activeListIndex}
               />
-          </div>
-
         ))}
       </ul>
     </div>
