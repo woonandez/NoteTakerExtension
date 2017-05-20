@@ -6,6 +6,7 @@ var Pin = (props) => {
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
+    console.log(inner);
     if (!props.show) {
       props.setText(foundText.innerHTML);
       props.fetchConcepts(inner, (res) => {
