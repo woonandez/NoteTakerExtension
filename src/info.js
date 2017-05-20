@@ -13,11 +13,13 @@ var Info = (props) => {
   }
   if (props.pinText === props.currentText && props.show) {
     return (
-      <Sources
-        title={props.title}
-        descObj={props.descObj}
-        currentText={props.currentText}
-      />
+      <div>
+        {
+          resultsContainer.map((string, key) => {
+             return <Sources title={string[0]} sentence={string[1]}     />
+          })
+        }
+      </div>
     )
   } else {
     return (
