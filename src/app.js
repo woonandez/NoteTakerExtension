@@ -260,6 +260,7 @@ class App extends React.Component {
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
               isLoaded={this.isLoaded.bind(this)}
               audioFile={this.state.audioFile}
+              recentQuery={this.state.recentQuery}
             />
           ))}
         </div>

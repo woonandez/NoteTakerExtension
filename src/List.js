@@ -54,6 +54,7 @@ var List = (props) =>
             loading={props.loading}
             title={props.title}
             audioFile={props.audioFile}
+            recentQuery={props.recentQuery}
           />
         ))}
       </ul>

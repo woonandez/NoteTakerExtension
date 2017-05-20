@@ -68,6 +68,7 @@ var Pin = (props) => {
         show={props.show}
         title={props.title}
         loading={props.loading}
+        recentQuery={props.recentQuery}
       />
     </div>
   )
