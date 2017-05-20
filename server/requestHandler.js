@@ -212,6 +212,7 @@ exports.watsonTranslate = (req, res) => {
   //   text: 'So we beat on, boats against the current, borne back ceaselessly into the past.',
   //   translateTo: 'es'
   // }
+  console.log('request received')
   languageTranslator.translate({
     text: req.query.text,
     source: 'en',
