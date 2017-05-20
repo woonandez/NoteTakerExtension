@@ -15,6 +15,7 @@ class App extends React.Component {
     this.fetchConcepts = this.fetchConcepts.bind(this);
     this.fetchLanguageTranslator = this.fetchLanguageTranslator.bind(this);
     this.showDiv = this.showDiv.bind(this);
+    this.isLoaded = this.isLoaded.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
     this.setTitleForDropDown = this.setTitleForDropDown.bind(this);
@@ -29,7 +30,7 @@ class App extends React.Component {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
       show: false,
-      loaded: false,
+      loading: false,
       currentText: '',
       translatedText: '',
       showTranslated: false,
@@ -182,9 +183,9 @@ class App extends React.Component {
   }
 
   isLoaded() {
-    var bool = this.state.loaded;
+    var bool = this.state.loading;
     this.setState({
-      loaded: !bool
+      loading: !bool
     });
   }
 
@@ -236,6 +237,7 @@ class App extends React.Component {
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
               translatedText={this.state.translatedText}
               show={this.state.show}
+              loading={this.state.loading}
               title={this.state.title}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
@@ -243,6 +245,7 @@ class App extends React.Component {
               descObj={this.state.descObj}
               modifyDescObj={this.modifyDescObj.bind(this)}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
+              isLoaded={this.isLoaded.bind(this)}
             />
           ))}
         </div>

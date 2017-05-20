@@ -45,6 +45,8 @@ var List = (props) =>
                 descObj={props.descObj}
                 modifyDescObj={props.modifyDescObj}
                 setTitleForDropDown={props.setTitleForDropDown}
+                isLoaded={props.isLoaded}
+                loading={props.loading}
                 title={props.title}
               />
           </div>
