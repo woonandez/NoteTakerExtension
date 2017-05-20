@@ -29,6 +29,7 @@ class App extends React.Component {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
       show: false,
+      loaded: false,
       currentText: '',
       translatedText: '',
       showTranslated: false,
@@ -174,9 +175,16 @@ class App extends React.Component {
   }
 
   showDiv() {
-    var bool = this.state.show
+    var bool = this.state.show;
     this.setState({
       show: !bool
+    });
+  }
+
+  isLoaded() {
+    var bool = this.state.loaded;
+    this.setState({
+      loaded: !bool
     });
   }
 
