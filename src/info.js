@@ -1,9 +1,8 @@
 import React from 'react';
 
 var Info = (props) => {
-  var style = {
-    width: '60%'
-  }
+  var resultsContainer = props.recentQuery;
+  console.log(resultsContainer, 'HALLO');
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">
