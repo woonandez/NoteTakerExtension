@@ -44,6 +44,8 @@ var List = (props) =>
                 currentText={props.currentText}
                 descObj={props.descObj}
                 modifyDescObj={props.modifyDescObj}
+                setTitleForDropDown={props.setTitleForDropDown}
+                title={props.title}
               />
           </div>
 

@@ -17,7 +17,7 @@ class App extends React.Component {
     this.showDiv = this.showDiv.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
-
+    this.setTitleForDropDown = this.setTitleForDropDown.bind(this);
 
     this.auth = new AuthService(
       'gLvvvwQlgFMIhedyBZDIjsGrb1Oa47oZ',
@@ -32,6 +32,7 @@ class App extends React.Component {
       currentText: '',
       translatedText: '',
       showTranslated: false,
+      title: '',
       descObj: {}
     };
   }
@@ -164,13 +165,6 @@ class App extends React.Component {
       });
   }
 
-// show and hide the child div
-  showDiv() {
-    this.setState({
-      show: !show
-    })
-  }
-
 //Set sign out state
   handleSignout() {
     this.setState({
@@ -192,13 +186,18 @@ class App extends React.Component {
     });
   }
 
+  setTitleForDropDown(input) {
+    this.setState({
+      title: input
+    });
+  }
+
   modifyDescObj(originalText, foundText) {
     let copyOfState = Object.assign(this.state.descObj);
     copyOfState[originalText] = foundText;
     this.setState({
       descObj: copyOfState
     });
-    console.log(this.state.descObj,' the obj ');
   }
 
   componentDidMount() {
@@ -229,11 +228,13 @@ class App extends React.Component {
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
               translatedText={this.state.translatedText}
               show={this.state.show}
+              title={this.state.title}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
               setText={this.setText.bind(this)}
               descObj={this.state.descObj}
               modifyDescObj={this.modifyDescObj.bind(this)}
+              setTitleForDropDown={this.setTitleForDropDown.bind(this)}
             />
           ))}
         </div>
