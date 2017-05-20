@@ -28,28 +28,28 @@ var List = (props) =>
     <div className="panel-body">
       <ul className="list-group">
         {props.data.pins.map((pin, index) => (
-              <Pin
-                pin={pin}
-                key={index}
-                pinid={index}
-                listid={props.listid}
-                username={props.name}
-                listname={props.data.name}
-                deleteNote={props.deleteNote}
-                fetchConcepts={props.fetchConcepts}
-                fetchLanguageTranslator={props.fetchLanguageTranslator}
-                translatedText={props.translatedText}
-                show={props.show}
-                showDiv={props.showDiv}
-                setText={props.setText}
-                currentText={props.currentText}
-                descObj={props.descObj}
-                modifyDescObj={props.modifyDescObj}
-                activePinIndex={props.activePinIndex}
-                activeListIndex={props.activeListIndex}
-                setTitleForDropDown={props.setTitleForDropDown}
-                title={props.title}
-              />
+          <Pin
+            pin={pin}
+            key={index}
+            pinid={index}
+            listid={props.listid}
+            username={props.name}
+            listname={props.data.name}
+            deleteNote={props.deleteNote}
+            fetchConcepts={props.fetchConcepts}
+            fetchLanguageTranslator={props.fetchLanguageTranslator}
+            translatedText={props.translatedText}
+            show={props.show}
+            showDiv={props.showDiv}
+            setText={props.setText}
+            currentText={props.currentText}
+            descObj={props.descObj}
+            modifyDescObj={props.modifyDescObj}
+            activePinIndex={props.activePinIndex}
+            activeListIndex={props.activeListIndex}
+            setTitleForDropDown={props.setTitleForDropDown}
+            title={props.title}
+          />
         ))}
       </ul>
     </div>
