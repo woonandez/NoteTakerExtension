@@ -31,6 +31,8 @@ class App extends React.Component {
       show: false,
       currentText: '',
       translatedText: '',
+      activePinIndex: -1,
+      activeListIndex: -1,
       showTranslated: false,
       title: '',
       descObj: {},
@@ -112,7 +114,7 @@ class App extends React.Component {
   }
 
 //added fetchLanguageTranslator to fetch data from api
-  fetchLanguageTranslator(text, translateTo) {
+  fetchLanguageTranslator(listIndex, pinIndex, text, translateTo) {
     axios({
       method: 'get',
       url: '/api/watson/translate',
@@ -126,9 +128,11 @@ class App extends React.Component {
 
       this.setState({
         translatedText: res.data,
-        showTranslated: !this.showTranslated
-
+        showTranslated: !this.showTranslated,
+        activePinIndex: pinIndex,
+        activeListIndex: listIndex
       })
+
     })
     .catch((err) => {
       console.error('*********', err)
@@ -223,6 +227,7 @@ class App extends React.Component {
               name={this.state.data.name}
               data={list}
               key={index}
+              listid={index}
               deleteList={this.deleteList.bind(this)}
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
@@ -236,6 +241,8 @@ class App extends React.Component {
               setText={this.setText.bind(this)}
               descObj={this.state.descObj}
               modifyDescObj={this.modifyDescObj.bind(this)}
+              activePinIndex={this.state.activePinIndex}
+              activeListIndex={this.state.activeListIndex}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
               audioFile={this.state.audioFile}
             />
