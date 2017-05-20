@@ -8,14 +8,21 @@ var Pin = (props) => {
   let passedDownText = setCurrentText;
 
   function setCurrentText(e) {
-    console.log(e.target);
-    var inner = currentText.innerHTML;
-    props.fetchConcepts(currentText.innerHTML, (res) => {
-      let firstFound = res[0]
-      foundText = `${firstFound[0]} ${firstFound[1]}`;
-      props.showDiv()
-      props.modifyDescObj(inner, foundText);
-    });
+    var inner = foundText.innerHTML;
+    console.log(inner);
+    if (!props.show) {
+      props.setText(foundText.innerHTML);
+      props.fetchConcepts(inner, (res) => {
+        let firstFound = res[0]
+        foundText = `${firstFound[0]} ${firstFound[1]}`;
+        props.showDiv();
+        props.modifyDescObj(inner, foundText);
+      });
+    } else {
+      props.setText('');
+      props.modifyDescObj(inner, null);
+      props.showDiv();
+    }
   }
 
   function displayTranslation(e) {
