@@ -1,4 +1,5 @@
 import React from 'react';
+import Sources from './Sources.js';
 
 var Info = (props) => {
   var resultsContainer = props.recentQuery;
