@@ -1,7 +1,6 @@
 import React from 'react';
 import Info from './info.js';
 import Translator from './translator.js';
-import Loader from 'react-loaders';
 
 var Pin = (props) => {
   let foundText = '';
@@ -69,6 +68,7 @@ var Pin = (props) => {
         show={props.show}
         title={props.title}
         loading={props.loading}
+        recentQuery={props.recentQuery}
       />
     </div>
   )

@@ -32,9 +32,6 @@ class Nav extends React.Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand penguin">
-              <img className="penguin" src="./yummypanguin.png"></img>
-            </a>
             <button
               type="button"
               className="navbar-toggle collapsed"
@@ -46,7 +43,9 @@ class Nav extends React.Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <a className="navbar-brand" href="#">Noted</a>
+            <a className="navbar-brand" href="#">
+              Studdy <span className="glyphicon glyphicon-globe"></span> Buddy
+            </a>
           </div>
           <div
             className="collapse navbar-collapse"
