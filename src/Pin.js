@@ -30,7 +30,11 @@ var Pin = (props) => {
   }
 
   function playAudio(e) {
-    props.fetchDictation(props.pin);
+    props.fetchDictation(props.pin, function(filePath) {
+      props.audioFile = filePath;
+      var audio = document.getElementById("audio");
+      audio.play();
+    });
   }
 
   return (
