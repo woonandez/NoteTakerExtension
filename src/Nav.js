@@ -32,9 +32,6 @@ class Nav extends React.Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand penguin">
-              <img className="penguin" src="./yummypanguin.png"></img>
-            </a>
             <button
               type="button"
               className="navbar-toggle collapsed"
