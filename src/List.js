@@ -49,6 +49,8 @@ var List = (props) =>
                 activePinIndex={props.activePinIndex}
                 activeListIndex={props.activeListIndex}
                 setTitleForDropDown={props.setTitleForDropDown}
+                isLoaded={props.isLoaded}
+                loading={props.loading}
                 title={props.title}
                 audioFile={props.audioFile}
               />
