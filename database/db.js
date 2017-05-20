@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 var options = {server: {socketOptions: {keepAlive: 300000, connectTimeoutMS: 30000 }},
                 replset: {socketOptions: {keepAlive: 300000, connectTimeoutMS : 30000 }}};
 
-// var MONGODB_URI = 'mongodb://localhost:27017/NoteExtension';
-mongoose.connect(process.env.MONGODB_URI, options);
+var MONGODB_URI = 'mongodb://localhost:27017/NoteExtension';
+mongoose.connect(MONGODB_URI, options);
 
 mongoose.Promise = global.Promise;
 
