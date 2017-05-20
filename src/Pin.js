@@ -8,7 +8,6 @@ var Pin = (props) => {
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
-    props.isLoaded();
     console.log(inner);
     if (!props.show) {
       props.isLoaded();
@@ -20,13 +19,11 @@ var Pin = (props) => {
         props.setTitleForDropDown(firstFound[0]);
         props.showDiv();
         props.modifyDescObj(inner, foundText);
-        props.isLoaded();
       });
     } else {
       props.setText('');
       props.modifyDescObj(inner, null);
       props.showDiv();
-      props.isLoaded();
     }
   }
 
