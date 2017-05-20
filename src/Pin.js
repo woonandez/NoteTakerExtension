@@ -1,29 +1,29 @@
 import React from 'react';
 import Info from './info.js';
-import Translator from './translator.js'
+import Translator from './translator.js';
+import Loader from 'react-loaders';
 
 var Pin = (props) => {
   let foundText = '';
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
-    props.isLoaded();
     console.log(inner);
     if (!props.show) {
+      props.isLoaded();
       props.setText(foundText.innerHTML);
       props.fetchConcepts(inner, (res) => {
+        props.isLoaded();
         let firstFound = res[0]
         foundText = `${firstFound[0]} ${firstFound[1]}`;
         props.setTitleForDropDown(firstFound[0]);
         props.showDiv();
         props.modifyDescObj(inner, foundText);
-        props.isLoaded();
       });
     } else {
       props.setText('');
       props.modifyDescObj(inner, null);
       props.showDiv();
-      props.isLoaded();
     }
   }
 
@@ -47,7 +47,7 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          <span className="glyphicon glyphicon-text-background"></span>
+          {props.loading ? 'Loading' : <span className="glyphicon glyphicon-text-background"></span> }
         </button>
         <button className="lstBtn" type="button" onClick={displayTranslation}>
           <span className="glyphicon glyphicon-resize-horizontal"></span>

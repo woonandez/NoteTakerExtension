@@ -156,3 +156,9 @@ a:hover {
   -webkit-transition: height .3s ease;
 }
 
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
