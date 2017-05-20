@@ -1,6 +1,7 @@
 import React from 'react';
 import Info from './info.js';
-import Translator from './translator.js'
+import Translator from './translator.js';
+import Loader from 'react-loaders';
 
 var Pin = (props) => {
   let foundText = '';
@@ -10,8 +11,10 @@ var Pin = (props) => {
     props.isLoaded();
     console.log(inner);
     if (!props.show) {
+      props.isLoaded();
       props.setText(foundText.innerHTML);
       props.fetchConcepts(inner, (res) => {
+        props.isLoaded();
         let firstFound = res[0]
         foundText = `${firstFound[0]} ${firstFound[1]}`;
         props.setTitleForDropDown(firstFound[0]);
@@ -32,6 +35,10 @@ var Pin = (props) => {
     props.fetchLanguageTranslator(props.pin, 'Arabic');
   }
 
+  function playAudio(e) {
+    props.fetchDictation(props.pin);
+  }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
@@ -47,12 +54,12 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          <span className="glyphicon glyphicon-text-background"></span>
+          {<span className="glyphicon glyphicon-text-background"></span> }
         </button>
         <button className="lstBtn" type="button" onClick={displayTranslation}>
           <span className="glyphicon glyphicon-resize-horizontal"></span>
         </button>
-        <button className="lstBtn" type="button">
+        <button className="lstBtn" type="button" onClick={playAudio}>
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>
@@ -64,6 +71,7 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
+        loading={props.loading}
       />
     </div>
   )

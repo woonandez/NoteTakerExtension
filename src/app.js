@@ -15,6 +15,7 @@ class App extends React.Component {
     this.fetchConcepts = this.fetchConcepts.bind(this);
     this.fetchLanguageTranslator = this.fetchLanguageTranslator.bind(this);
     this.showDiv = this.showDiv.bind(this);
+    this.isLoaded = this.isLoaded.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
     this.setTitleForDropDown = this.setTitleForDropDown.bind(this);
@@ -29,13 +30,15 @@ class App extends React.Component {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
       show: false,
+      loading: false,
       currentText: '',
       translatedText: '',
       activePinIndex: -1,
       activeListIndex: -1,
       showTranslated: false,
       title: '',
-      descObj: {}
+      descObj: {},
+      audioFile: ''
     };
   }
 
@@ -178,9 +181,16 @@ class App extends React.Component {
   }
 
   showDiv() {
-    var bool = this.state.show
+    var bool = this.state.show;
     this.setState({
       show: !bool
+    });
+  }
+
+  isLoaded() {
+    var bool = this.state.loading;
+    this.setState({
+      loading: !bool
     });
   }
 
@@ -231,8 +241,10 @@ class App extends React.Component {
               deleteNote={this.deleteNote.bind(this)}
               fetchConcepts={this.fetchConcepts.bind(this)}
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
+              fetchDictation={this.fetchDictation.bind(this)}
               translatedText={this.state.translatedText}
               show={this.state.show}
+              loading={this.state.loading}
               title={this.state.title}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
@@ -242,9 +254,14 @@ class App extends React.Component {
               activePinIndex={this.state.activePinIndex}
               activeListIndex={this.state.activeListIndex}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
+              isLoaded={this.isLoaded.bind(this)}
+              audioFile={this.state.audioFile}
             />
           ))}
         </div>
+        <audio id="audio">
+          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
+        </audio>
       </div>
     );
   }
