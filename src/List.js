@@ -28,6 +28,7 @@ var List = (props) =>
     <div className="panel-body">
       <ul className="list-group">
         {props.data.pins.map((pin, index) => (
+
               <Pin
                 pin={pin}
                 key={index}
@@ -50,11 +51,16 @@ var List = (props) =>
                 activePinIndex={props.activePinIndex}
                 activeListIndex={props.activeListIndex}
                 setTitleForDropDown={props.setTitleForDropDown}
+                isLoaded={props.isLoaded}
+                loading={props.loading}
                 title={props.title}
                 audioFile={props.audioFile}
+                audioFile={props.audioFile}
+                recentQuery={props.recentQuery}
                 language={props.language}
                 getLanguage={props.getLanguage}
               />
+
         ))}
       </ul>
     </div>

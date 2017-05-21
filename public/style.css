@@ -140,6 +140,7 @@ a:hover {
   font-size: 1.7em;
   font-style: italic;
   text-decoration: underline;
+  padding-top: 11px;
 }
 
 .infoBody {
@@ -148,6 +149,11 @@ a:hover {
   margin: 10px;
   font-style: italic;
   overflow: scroll;
+  height: 400px;
+}
+
+.infoItem {
+  border: none;
 }
 
 .example-enter.example-enter-active {
@@ -160,41 +166,28 @@ a:hover {
   -webkit-transition: height .3s ease;
 }
 
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.icantwait {
+  display: flex;
+  font-size: 1.7rem;
+  font-style: italic;
+  -webkit-animation: icantwait 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0.5;
+  /*background: 'here'*/
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
+@-webkit-keyframes icantwait {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;

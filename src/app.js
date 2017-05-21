@@ -15,6 +15,7 @@ class App extends React.Component {
     this.fetchConcepts = this.fetchConcepts.bind(this);
     this.fetchLanguageTranslator = this.fetchLanguageTranslator.bind(this);
     this.showDiv = this.showDiv.bind(this);
+    this.isLoaded = this.isLoaded.bind(this);
     this.setText = this.setText.bind(this);
     this.modifyDescObj = this.modifyDescObj.bind(this);
     this.setTitleForDropDown = this.setTitleForDropDown.bind(this);
@@ -29,6 +30,7 @@ class App extends React.Component {
       data: { urls: [] },
       loggedIn: this.auth.loggedIn(),
       show: false,
+      loading: false,
       currentText: '',
       translatedText: '',
       activePinIndex: -1,
@@ -37,7 +39,9 @@ class App extends React.Component {
       title: '',
       descObj: {},
       audioFile: '',
-      language: 'Arabic'
+      language: 'Arabic',
+      recentQuery: []
+
     };
   }
 
@@ -73,6 +77,9 @@ class App extends React.Component {
       }
     })
     .then((res) => {
+      this.setState({
+        recentQuery: res.data
+      });
       callback(res.data);
     })
     .catch((error) => {
@@ -107,7 +114,7 @@ class App extends React.Component {
   }
 
 // fetch speech dictation
-  fetchDictation(textBlock) {
+  fetchDictation(textBlock, callback) {
     axios({
       method: 'GET',
       url: '/api/watson/read',
@@ -117,6 +124,13 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log(res);
+      this.setState({
+        audioFile: `/temp/${res.data}.webm`
+      }, function() {
+        var audio = document.getElementById('audio');
+        audio.load();
+        audio.play();
+      });
     })
     .catch((err) => {
       console.error(err)
@@ -188,9 +202,16 @@ class App extends React.Component {
   }
 
   showDiv() {
-    var bool = this.state.show
+    var bool = this.state.show;
     this.setState({
       show: !bool
+    });
+  }
+
+  isLoaded() {
+    var bool = this.state.loading;
+    this.setState({
+      loading: !bool
     });
   }
 
@@ -245,6 +266,7 @@ class App extends React.Component {
               translatedText={this.state.translatedText}
               showTranslated={this.state.showTranslated}
               show={this.state.show}
+              loading={this.state.loading}
               title={this.state.title}
               showDiv={this.showDiv.bind(this)}
               currentText={this.state.currentText}
@@ -254,14 +276,16 @@ class App extends React.Component {
               activePinIndex={this.state.activePinIndex}
               activeListIndex={this.state.activeListIndex}
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
+              isLoaded={this.isLoaded.bind(this)}
               audioFile={this.state.audioFile}
               language={this.state.language}
               getLanguage={this.getLanguage.bind(this)}
+              recentQuery={this.state.recentQuery}
             />
           ))}
         </div>
         <audio id="audio">
-          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
+          <source src={this.state.audioFile} type="audio/webm"></source>
         </audio>
       </div>
     );
