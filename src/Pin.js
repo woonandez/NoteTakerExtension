@@ -25,12 +25,9 @@ var Pin = (props) => {
   }
 
   //Displays translated text
-  function displayTranslation(e) {
-    props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, 'Arabic');
-  }
-
-  function playAudio(e) {
-    props.fetchDictation(props.pin);
+  function displayTranslation(event) {
+    console.log('event.target', event.target.value)
+    props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, props.language);
   }
 
   return (
@@ -39,7 +36,7 @@ var Pin = (props) => {
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText}/>
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText} getLanguage={props.getLanguage} language={props.language}/>
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -50,10 +47,15 @@ var Pin = (props) => {
           onClick={setCurrentText}>
           <span className="glyphicon glyphicon-text-background"></span>
         </button>
-        <button className="lstBtn" type="button" onClick={displayTranslation}>
-          <span className="glyphicon glyphicon-resize-horizontal"></span>
-        </button>
-        <button className="lstBtn" type="button" onClick={playAudio}>
+
+          <button className="lstBtn" type="button" onClick={displayTranslation}>
+
+            <span className="glyphicon glyphicon-resize-horizontal"></span>
+          </button>
+
+
+
+        <button className="lstBtn" type="button">
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>

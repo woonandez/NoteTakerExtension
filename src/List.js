@@ -52,6 +52,8 @@ var List = (props) =>
                 setTitleForDropDown={props.setTitleForDropDown}
                 title={props.title}
                 audioFile={props.audioFile}
+                language={props.language}
+                getLanguage={props.getLanguage}
               />
         ))}
       </ul>
