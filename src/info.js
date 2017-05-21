@@ -3,6 +3,7 @@ import Sources from './Sources.js';
 
 var Info = (props) => {
   var resultsContainer = props.recentQuery;
+  console.log('here', resultsContainer);
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">

@@ -67,6 +67,7 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
+        recentQuery={props.recentQuery}
       />
     </div>
   )

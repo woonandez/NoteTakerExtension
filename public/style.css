@@ -150,6 +150,7 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
+  width: 75%;
 }
 
 .infoItem {
@@ -173,7 +174,6 @@ a:hover {
   -webkit-animation: icantwait 3s ease-out;
   -webkit-animation-iteration-count: infinite;
   opacity: 0.5;
-  /*background: 'here'*/
 }
 
 @-webkit-keyframes icantwait {
