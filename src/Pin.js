@@ -10,7 +10,9 @@ var Pin = (props) => {
     console.log(inner);
     if (!props.show) {
       props.setText(foundText.innerHTML);
+      props.isLoaded();
       props.fetchConcepts(inner, (res) => {
+        props.isLoaded();
         let firstFound = res[0]
         foundText = `${firstFound[0]} ${firstFound[1]}`;
         props.setTitleForDropDown(firstFound[0]);
@@ -68,6 +70,7 @@ var Pin = (props) => {
         show={props.show}
         title={props.title}
         recentQuery={props.recentQuery}
+        loading={props.loading}
       />
     </div>
   )
