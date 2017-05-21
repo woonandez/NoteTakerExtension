@@ -153,7 +153,7 @@ var requestCallbacks = function(urls, res, i = 0, paragraphs = []) {
   } else {
     request(urls[i].dbpedia_resource, function (error, response, body) {
       var $ = cheerio.load(body);
-      paragraphs.push( [urls[i].text, $('.lead').text()] );
+      paragraphs.push( [urls[i].text, $('.lead').text(), urls[i].dbpedia_resource] );
       requestCallbacks(urls, res, i+1, paragraphs);
     });
   }
