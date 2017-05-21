@@ -1,5 +1,6 @@
 import React from 'react';
 import Sources from './Sources.js';
+import Topics from './Topics.js';
 
 var Info = (props) => {
   var resultsContainer = props.recentQuery;
@@ -14,8 +15,8 @@ var Info = (props) => {
   if (props.pinText === props.currentText && props.show) {
     return (
       <div className="infoBody">
-        <div className="bodyTopics">
-          Woo
+        <div className="bodyTopicsContainer">
+          <Topics />
         </div>
         {
           resultsContainer.map((string, key) => (
