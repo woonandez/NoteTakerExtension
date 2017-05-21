@@ -28,7 +28,12 @@ a:visited {
 }
 
 a:hover {
-  color: #ffd164;
+  color: white;
+}
+
+/*a:visited,*/
+.uniqueLink:visited {
+  color: #008cba;
 }
 
 .panel-heading {
@@ -156,6 +161,8 @@ a:hover {
 .infoItem {
   border: none;
 }
+
+
 
 .example-enter.example-enter-active {
   height: 100px;
