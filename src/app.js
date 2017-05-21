@@ -103,7 +103,7 @@ class App extends React.Component {
   }
 
 // fetch speech dictation
-  fetchDictation(textBlock) {
+  fetchDictation(textBlock, callback) {
     axios({
       method: 'GET',
       url: '/api/watson/read',
@@ -113,6 +113,13 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log(res);
+      this.setState({
+        audioFile: `/temp/${res.data}.webm`
+      }, function() {
+        var audio = document.getElementById('audio');
+        audio.load();
+        audio.play();
+      });
     })
     .catch((err) => {
       console.error(err)
@@ -265,7 +272,7 @@ class App extends React.Component {
           ))}
         </div>
         <audio id="audio">
-          <source src={`/temp/${this.state.audioFile}.wav`} type="audio/wav"></source>
+          <source src={this.state.audioFile} type="audio/webm"></source>
         </audio>
       </div>
     );
