@@ -171,6 +171,27 @@ function uniqueId(length) {
 
 
 
+exports.watsonCategories = (req, res) => {
+  // query = {
+  //   text: 'In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.'
+  // }
+  naturalLang.analyze({
+    html: req.query.text,
+    features: {
+      categories: {}
+    }
+  }, function(err, response) {
+    if (err) {
+      console.log('error:', err);
+      res.end('ERROR');
+    } else {
+      console.log(response.categories);
+      res.end( JSON.stringify(response.categories) );
+    }
+  });
+};
+
+
 exports.watsonConcepts = (req, res) => {
   // query = {
   //   text: 'In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.'
