@@ -130,6 +130,7 @@ a:hover {
   border-radius: 5px;
   background-color: black;
   font: red;
+  border-color: #008cba;
 }
 
 .example-enter {

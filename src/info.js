@@ -14,6 +14,9 @@ var Info = (props) => {
   if (props.pinText === props.currentText && props.show) {
     return (
       <div className="infoBody">
+        <div className="bodyTopics">
+          Woo
+        </div>
         {
           resultsContainer.map((string, key) => (
             <Sources
