@@ -39,7 +39,9 @@ class App extends React.Component {
       title: '',
       descObj: {},
       audioFile: '',
+      language: 'Arabic',
       recentQuery: []
+
     };
   }
 
@@ -99,6 +101,15 @@ class App extends React.Component {
     })
     .catch((err) => {
       console.error(err);
+    })
+  }
+
+// get the language in which the text is to be translated in
+  getLanguage(e) {
+    console.log("e.target.value", e.target.value);
+    var selected = e.target.value;
+    this.setState({
+      language: selected
     })
   }
 
@@ -267,6 +278,8 @@ class App extends React.Component {
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
               isLoaded={this.isLoaded.bind(this)}
               audioFile={this.state.audioFile}
+              language={this.state.language}
+              getLanguage={this.getLanguage.bind(this)}
               recentQuery={this.state.recentQuery}
             />
           ))}

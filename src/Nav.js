@@ -17,6 +17,10 @@ class Nav extends React.Component {
     this.props.onSignout();
   }
 
+  getLanguage(e) {
+    console.log("e.target.value", e.target.value);
+  }
+
   render() {
     var loggedIn = this.props.auth.loggedIn();
     var authButton;
@@ -54,6 +58,7 @@ class Nav extends React.Component {
             <ul className="nav navbar-nav">
               <li>{authButton}</li>
             </ul>
+
           </div>
         </div>
       </nav>
