@@ -1,9 +1,8 @@
 import React from 'react';
+import Sources from './Sources.js';
 
 var Info = (props) => {
-  var style = {
-    width: '60%'
-  }
+  var resultsContainer = props.recentQuery;
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">
@@ -13,15 +12,12 @@ var Info = (props) => {
   }
   if (props.pinText === props.currentText && props.show) {
     return (
-      <div className="notesText">
-        <div className="infoContainer">
-          <div className="infoTitle">
-            {props.title}
-          </div>
-          <div className="infoBody">
-            {props.descObj[props.currentText]}
-          </div>
-        </div>
+      <div className="infoBody">
+        {
+          resultsContainer.map((string, key) => (
+             <Sources title={string[0]} sentence={string[1]} key={key} />
+          ))
+        }
       </div>
     )
   } else {

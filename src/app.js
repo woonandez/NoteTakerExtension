@@ -38,7 +38,8 @@ class App extends React.Component {
       showTranslated: false,
       title: '',
       descObj: {},
-      audioFile: '/temp/CWByI6K56N5T4kMafWsn9Up85J5mDD.webm'
+      audioFile: '',
+      recentQuery: []
     };
   }
 
@@ -74,6 +75,9 @@ class App extends React.Component {
       }
     })
     .then((res) => {
+      this.setState({
+        recentQuery: res.data
+      });
       callback(res.data);
     })
     .catch((error) => {
@@ -122,7 +126,7 @@ class App extends React.Component {
     })
   }
 
-//added fetchLanguageTranslator to fetch data from api
+// fetch translated text from api
   fetchLanguageTranslator(listIndex, pinIndex, text, translateTo) {
     axios({
       method: 'get',
@@ -134,14 +138,13 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log('******', res);
-
+      var bool = this.state.showTranslated
       this.setState({
         translatedText: res.data,
-        showTranslated: !this.showTranslated,
+        showTranslated: !bool,
         activePinIndex: pinIndex,
         activeListIndex: listIndex
       })
-
     })
     .catch((err) => {
       console.error('*********', err)
@@ -250,6 +253,7 @@ class App extends React.Component {
               fetchLanguageTranslator={this.fetchLanguageTranslator.bind(this)}
               fetchDictation={this.fetchDictation.bind(this)}
               translatedText={this.state.translatedText}
+              showTranslated={this.state.showTranslated}
               show={this.state.show}
               loading={this.state.loading}
               title={this.state.title}
@@ -263,6 +267,7 @@ class App extends React.Component {
               setTitleForDropDown={this.setTitleForDropDown.bind(this)}
               isLoaded={this.isLoaded.bind(this)}
               audioFile={this.state.audioFile}
+              recentQuery={this.state.recentQuery}
             />
           ))}
         </div>
