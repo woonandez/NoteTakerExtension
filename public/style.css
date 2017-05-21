@@ -150,6 +150,7 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
+  width: 75%;
 }
 
 .infoItem {
