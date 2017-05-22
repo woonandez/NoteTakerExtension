@@ -113,11 +113,55 @@ exports.userAddNotes = (req, res) => {
       var pages = user.urls.map(site => site.name);
 
       if(pages.includes(req.body.uri)) {
-        user.urls[pages.indexOf(req.body.uri)].pins.push({content: req.body.note});
+        user.urls[pages.indexOf(req.body.uri)].pins.push({
+          content: req.body.note,
+          annotations: []
+        });
       } else {
         user.urls.push({
           name: req.body.uri,
-          pins: [{content: req.body.note}]
+          pins: [{
+            content: req.body.note,
+            annotations: []
+          }]
+        });
+      }
+      user.markModified('urls');
+      user.save();
+      res.status(201).send('Post Success');
+    });
+  }
+};
+
+exports.userAddAnnotations = (req, res) => {
+  //send name/uri/note in body
+  if(req.body.note === null || req.body.note === "") {
+    res.status(404).send('Please hightlight something.');
+  } else {
+    User.findOne({name: req.body.name}, (err, user) => {
+      if(err) {
+        res.status(404).send('Could not find user.');
+      }
+      var pages = user.urls.map(site => site.name);
+
+      if(pages.includes(req.body.uri)) {
+        var pins = user.urls[pages.indexOf(req.body.uri)].pins;
+        var noteIndex = -1;
+        for (var pin of pins) {
+          if (pin.content === req.body.note) {
+            noteIndex = pin.content;
+          }
+        }
+        if (noteIndex) {
+          pins[noteIndex].annotations.push(req.body.annotation);
+        }
+      } else {
+        user.urls.push({
+          name: req.body.uri,
+          pins: [{
+            content: req.body.note,
+            annotations: [req.body.annotation]
+          }]
         });
       }
       user.markModified('urls');
