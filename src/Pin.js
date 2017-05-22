@@ -28,6 +28,7 @@ var Pin = (props) => {
   //Displays translated text
   function displayTranslation(event) {
     console.log('event.target', event.target.value)
+    props.hideTranslated();
     props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, props.language);
   }
 
@@ -46,7 +47,8 @@ var Pin = (props) => {
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText}/>
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText} getLanguage={props.getLanguage} language={props.language} pinid={props.pinid} listid={props.listid} pin={props.pin} fetchLanguageTranslator={props.fetchLanguageTranslator}
+        />
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -72,8 +74,8 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
-        loading={props.loading}
         recentQuery={props.recentQuery}
+        loading={props.loading}
       />
     </div>
   )

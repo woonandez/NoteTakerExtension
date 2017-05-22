@@ -31,6 +31,7 @@ a:hover {
   color: white;
 }
 
+
 .uniqueLink:visited {
   color: #008cba;
 }
@@ -212,8 +213,8 @@ a:hover {
 }
 
 .transLanguage {
+  text-indent: 5px;
   float: right;
-  text-align: center;
   margin-top: -7px;
   margin-right: -9px;
   -webkit-appearance: none;

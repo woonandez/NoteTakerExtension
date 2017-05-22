@@ -105,12 +105,13 @@ class App extends React.Component {
   }
 
 // get the language in which the text is to be translated in
-  getLanguage(e) {
+  getLanguage(e, listIndex, pinIndex, text, translateTo) {
     console.log("e.target.value", e.target.value);
     var selected = e.target.value;
     this.setState({
       language: selected
     })
+    this.fetchLanguageTranslator(listIndex, pinIndex, text, e.target.value);
   }
 
 // fetch speech dictation
@@ -152,7 +153,6 @@ class App extends React.Component {
       var bool = this.state.showTranslated
       this.setState({
         translatedText: res.data,
-        showTranslated: !bool,
         activePinIndex: pinIndex,
         activeListIndex: listIndex
       })
@@ -162,6 +162,15 @@ class App extends React.Component {
     })
   }
 
+// hide translated text
+
+  hideTranslated() {
+    console.log('hide');
+    var bool = this.state.showTranslated
+    this.setState({
+      showTranslated: !bool
+    })
+  }
 
 //Remove note from database
   deleteNote(name, uri, note) {
@@ -281,6 +290,7 @@ class App extends React.Component {
               language={this.state.language}
               getLanguage={this.getLanguage.bind(this)}
               recentQuery={this.state.recentQuery}
+              hideTranslated={this.hideTranslated.bind(this)}
             />
           ))}
         </div>

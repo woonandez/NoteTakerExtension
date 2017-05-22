@@ -2,7 +2,6 @@ import React from 'react';
 
 var Topics = (props) => {
   var topic = document.getElementById(`${props.topic}`);
-
   function scrollTo() {
     topic.scrollIntoView({behavior: 'smooth'});
   }

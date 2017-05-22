@@ -59,6 +59,7 @@ var List = (props) =>
                 recentQuery={props.recentQuery}
                 language={props.language}
                 getLanguage={props.getLanguage}
+                hideTranslated={props.hideTranslated}
               />
 
         ))}
