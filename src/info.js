@@ -5,6 +5,7 @@ import Topics from './Topics.js';
 var Info = (props) => {
   var resultsContainer = props.recentQuery;
   var topics = resultsContainer.map(result => result[0]);
+
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">
