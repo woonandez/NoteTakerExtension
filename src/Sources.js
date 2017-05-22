@@ -12,6 +12,4 @@ var Sources = (props) =>
     </div>
   </div>
 
-export default Sources
-
-// <a href="#name_of_target">Link Text</a>
+export default Sources;
