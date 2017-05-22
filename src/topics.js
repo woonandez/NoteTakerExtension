@@ -3,7 +3,7 @@ import React from 'react';
 var Topics = (props) => {
   var topic = document.getElementById(`${props.topic}`);
   function scrollTo() {
-    console.log(topic, 'topic');
+    topic.scrollIntoView({behavior: 'smooth'});
   }
   return (
     <div className="topicItem">
