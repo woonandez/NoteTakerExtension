@@ -35,7 +35,7 @@ var Pin = (props) => {
   function playAudio(e) {
     var audio = document.getElementById('audio');
     if (!audio.paused) {
-      audio.stop();
+      audio.pause();
     } else {
       props.fetchDictation(props.pin);
     }
