@@ -5,10 +5,10 @@ var Translator = (props) =>{
     return (
       <div>
       <div>
-      <select className='transLanguage' onClick={props.getLanguage}>
+      <select className='transLanguage' onChange={props.getLanguage}>
         <option value="Japanese">Japanese</option>
         <option value="German">German</option>
-        <option selected value="props.language">Arabic</option>
+        <option selected value={props.language}>{props.language}</option>
         <option value="Spanish">Spanish</option>
       </select>
       </div>
