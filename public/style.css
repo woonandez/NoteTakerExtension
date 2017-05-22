@@ -210,8 +210,8 @@ a:hover {
 }
 
 .transLanguage {
+  text-indent: 5px;
   float: right;
-  text-align: center;
   margin-top: -7px;
   margin-right: -9px;
   -webkit-appearance: none;
@@ -235,5 +235,9 @@ a:hover {
   flex: 1 1;
   padding: 10px;
   font: 1.3em;
+  text-align: center;
+}
+
+.option {
   text-align: center;
 }
