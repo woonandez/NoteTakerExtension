@@ -31,10 +31,6 @@ a:hover {
   color: white;
 }
 
-.uniqueLink {
-  color: black;
-}
-
 .uniqueLink:visited {
   color: #008cba;
 }
@@ -186,7 +182,6 @@ a:hover {
 
 .icantwait {
   display: flex;
-  font-size: 1.7rem;
   font-style: italic;
   -webkit-animation: icantwait 3s ease-out;
   -webkit-animation-iteration-count: infinite;
