@@ -103,7 +103,7 @@ a:hover {
 .lstBtn {
   margin: 0px;
   padding: 0px;
-  width: 100%;
+  width: 75%;
   height: 50px;
   border-radius: 5px;
   background-color: white;
@@ -158,7 +158,7 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
-  width: 80%;
+  width: 88%;
 }
 
 .infoItem {
