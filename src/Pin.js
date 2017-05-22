@@ -1,13 +1,12 @@
 import React from 'react';
 import Info from './info.js';
-import Translator from './translator.js'
+import Translator from './translator.js';
 
 var Pin = (props) => {
   let foundText = '';
 
   function setCurrentText(e) {
     var inner = foundText.innerHTML;
-    console.log(inner);
     if (!props.show) {
       props.setText(foundText.innerHTML);
       props.isLoaded();
@@ -33,6 +32,15 @@ var Pin = (props) => {
     props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, props.language);
   }
 
+  function playAudio(e) {
+    var audio = document.getElementById('audio');
+    if (!audio.paused) {
+      audio.pause();
+    } else {
+      props.fetchDictation(props.pin);
+    }
+  }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
@@ -49,17 +57,12 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          <span className="glyphicon glyphicon-text-background"></span>
+          {<span className="glyphicon glyphicon-text-background"></span> }
         </button>
-
-          <button className="lstBtn" type="button" onClick={displayTranslation}>
-
-            <span className="glyphicon glyphicon-resize-horizontal"></span>
-          </button>
-
-
-
-        <button className="lstBtn" type="button">
+        <button className="lstBtn" type="button" onClick={displayTranslation}>
+          <span className="glyphicon glyphicon-resize-horizontal"></span>
+        </button>
+        <button className="lstBtn" type="button" onClick={playAudio}>
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>

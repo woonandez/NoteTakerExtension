@@ -31,9 +31,13 @@ a:hover {
   color: white;
 }
 
-/*a:visited,*/
+
 .uniqueLink:visited {
   color: #008cba;
+}
+
+.uniqueLink:hover {
+  color: black;
 }
 
 .panel-heading {
@@ -103,7 +107,7 @@ a:hover {
 .lstBtn {
   margin: 0px;
   padding: 0px;
-  width: 100%;
+  width: 75%;
   height: 50px;
   border-radius: 5px;
   background-color: white;
@@ -158,7 +162,7 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
-  width: 80%;
+  width: 88.5%;
 }
 
 .infoItem {
@@ -179,7 +183,6 @@ a:hover {
 
 .icantwait {
   display: flex;
-  font-size: 1.7rem;
   font-style: italic;
   -webkit-animation: icantwait 3s ease-out;
   -webkit-animation-iteration-count: infinite;
@@ -238,3 +241,6 @@ a:hover {
   text-align: center;
 }
 
+.topicItem:hover {
+  color: #008cba;
+}

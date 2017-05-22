@@ -8,7 +8,10 @@ var userSchema = mongoose.Schema({
   user_id: String,
   urls: [{
     name: String,
-    pins: [String]
+    pins: [{
+      content: String,
+      annotations: [String]
+    }]
   }]
 });
 

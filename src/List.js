@@ -30,7 +30,7 @@ var List = (props) =>
         {props.data.pins.map((pin, index) => (
 
               <Pin
-                pin={pin}
+                pin={pin.content}
                 key={index}
                 pinid={index}
                 listid={props.listid}
