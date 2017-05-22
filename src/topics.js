@@ -2,7 +2,7 @@ import React from 'react';
 
 var Topics = (props) =>
   <div className="topicItem">
-    woo
+    {props.topic}
   </div>
 
 export default Topics;

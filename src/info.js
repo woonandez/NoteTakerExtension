@@ -16,7 +16,15 @@ var Info = (props) => {
     return (
       <div className="infoBody">
         <div className="bodyTopicsContainer">
-          <Topics topics={topics}/>
+          {
+            topics.map((topic, key) => (
+              <Topics
+                key={key}
+                index={key}
+                topic={topic}
+              />
+            ))
+          }
         </div>
         {
           resultsContainer.map((string, key) => (
