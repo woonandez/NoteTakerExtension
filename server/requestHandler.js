@@ -146,15 +146,16 @@ exports.userAddAnnotations = (req, res) => {
 
       if(pages.includes(req.body.uri)) {
         var pins = user.urls[pages.indexOf(req.body.uri)].pins;
-        var noteIndex = -1;
+        // var noteIndex = -1;
         for (var pin of pins) {
           if (pin.content === req.body.note) {
-            noteIndex = pin.content;
+            // noteIndex = pin.content;
+            pin.annotations.push(req.body.annotation);
           }
         }
-        if (noteIndex) {
-          pins[noteIndex].annotations.push(req.body.annotation);
-        }
+        // if (noteIndex) {
+        //   pins[noteIndex].annotations.push(req.body.annotation);
+        // }
       } else {
         user.urls.push({
           name: req.body.uri,
