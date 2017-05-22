@@ -82,7 +82,12 @@ exports.noteRemove = (req, res) => {
       var index = pages.indexOf(req.body.uri);
 
       if(index !== -1) {
-        var noteIndex = user.urls[index].pins.indexOf(req.body.note);
+        var noteIndex = -1;
+        for (var pin of user.urls[index].pins) {
+          if (pin.content === req.body.note) {
+            noteIndex = pin.content;
+          }
+        }
         if(noteIndex !== -1) {
           user.urls[index].pins.splice(noteIndex, 1);
         }
@@ -108,11 +113,11 @@ exports.userAddNotes = (req, res) => {
       var pages = user.urls.map(site => site.name);
 
       if(pages.includes(req.body.uri)) {
-        user.urls[pages.indexOf(req.body.uri)].pins.push(req.body.note);
+        user.urls[pages.indexOf(req.body.uri)].pins.push({content: req.body.note});
       } else {
         user.urls.push({
           name: req.body.uri,
-          pins: [req.body.note]
+          pins: [{content: req.body.note}]
         });
       }
       user.markModified('urls');

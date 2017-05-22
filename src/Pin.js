@@ -1,6 +1,6 @@
 import React from 'react';
 import Info from './info.js';
-import Translator from './translator.js'
+import Translator from './translator.js';
 
 var Pin = (props) => {
   let foundText = '';
@@ -32,13 +32,22 @@ var Pin = (props) => {
     props.fetchLanguageTranslator(props.listid, props.pinid, props.pin, props.language);
   }
 
+  function playAudio(e) {
+    var audio = document.getElementById('audio');
+    if (!audio.paused) {
+      audio.stop();
+    } else {
+      props.fetchDictation(props.pin);
+    }
+  }
+
   return (
     <div className="poppaDiv">
       <div className="listContainer">
         <div className="notesText" ref={(input) => {foundText = input} }>
           {props.pin}
         </div>
-        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText} getLanguage={props.getLanguage} language={props.language}/>
+        <Translator id={props.id} active={props.pinid===props.activePinIndex && props.listid===props.activeListIndex && props.showTranslated === true} translated={props.translatedText}/>
       </div>
       <div className="buttonContainer">
         <button className="lstBtn" onClick={() =>
@@ -47,17 +56,12 @@ var Pin = (props) => {
         </button>
         <button className="lstBtn" type="button"
           onClick={setCurrentText}>
-          <span className="glyphicon glyphicon-text-background"></span>
+          {<span className="glyphicon glyphicon-text-background"></span> }
         </button>
-
-          <button className="lstBtn" type="button" onClick={displayTranslation}>
-
-            <span className="glyphicon glyphicon-resize-horizontal"></span>
-          </button>
-
-
-
-        <button className="lstBtn" type="button">
+        <button className="lstBtn" type="button" onClick={displayTranslation}>
+          <span className="glyphicon glyphicon-resize-horizontal"></span>
+        </button>
+        <button className="lstBtn" type="button" onClick={playAudio}>
           <span className="glyphicon glyphicon-volume-up"></span>
         </button>
       </div>
@@ -69,8 +73,8 @@ var Pin = (props) => {
         descObj={props.descObj}
         show={props.show}
         title={props.title}
-        recentQuery={props.recentQuery}
         loading={props.loading}
+        recentQuery={props.recentQuery}
       />
     </div>
   )
