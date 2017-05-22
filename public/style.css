@@ -31,8 +31,15 @@ a:hover {
   color: white;
 }
 
-/*a:visited,*/
+.uniqueLink {
+  color: black;
+}
+
 .uniqueLink:visited {
+  color: #008cba;
+}
+
+.uniqueLink:hover {
   color: #008cba;
 }
 
@@ -236,4 +243,8 @@ a:hover {
   padding: 10px;
   font: 1.3em;
   text-align: center;
+}
+
+.topicItem:hover {
+  color: #008cba;
 }
