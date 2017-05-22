@@ -29,6 +29,7 @@ app.get("/", function(req, res) {
 });
 
 app.get('/api/watson/concepts', handle.watsonConcepts);
+app.get('/api/watson/categories', handle.watsonCategories);
 app.get('/api/watson/read', handle.watsonTextToSpeech);
 app.get('/api/watson/translate', handle.watsonTranslate);
 

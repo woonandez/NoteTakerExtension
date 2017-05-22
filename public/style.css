@@ -28,7 +28,12 @@ a:visited {
 }
 
 a:hover {
-  color: #ffd164;
+  color: white;
+}
+
+/*a:visited,*/
+.uniqueLink:visited {
+  color: #008cba;
 }
 
 .panel-heading {
@@ -123,6 +128,9 @@ a:hover {
 .btn-danger {
   width: 40px;
   border-radius: 5px;
+  background-color: black;
+  font: red;
+  border-color: #008cba;
 }
 
 .example-enter {
@@ -150,11 +158,14 @@ a:hover {
   font-style: italic;
   overflow: scroll;
   height: 400px;
+  width: 80%;
 }
 
 .infoItem {
   border: none;
 }
+
+
 
 .example-enter.example-enter-active {
   height: 100px;
@@ -173,7 +184,6 @@ a:hover {
   -webkit-animation: icantwait 3s ease-out;
   -webkit-animation-iteration-count: infinite;
   opacity: 0.5;
-  /*background: 'here'*/
 }
 
 @-webkit-keyframes icantwait {
@@ -211,4 +221,19 @@ a:hover {
 .select {
   margin-top: 12px;
   float: right;
+}
+
+.bodyTopicsContainer {
+  display: flex;
+  flex-wrap: space-between;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #008cba;
+}
+
+.topicItem {
+  flex: 1 1;
+  padding: 10px;
+  font: 1.3em;
+  text-align: center;
 }

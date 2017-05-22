@@ -5,7 +5,7 @@ var Sources = (props) =>
     <div className="infoContainer">
       <div className="infoItem">
         <div className="infoTitle">
-          {props.title}
+          <a id={props.title} className="uniqueLink" href={props.link} target="_blank">{props.title}</a>
         </div>
         {props.sentence}
       </div>
@@ -13,3 +13,5 @@ var Sources = (props) =>
   </div>
 
 export default Sources
+
+// <a href="#name_of_target">Link Text</a>
