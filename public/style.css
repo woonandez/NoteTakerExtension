@@ -224,7 +224,16 @@ a:hover {
 }
 
 .bodyTopicsContainer {
-  border: 2px solid red;
   display: flex;
   flex-wrap: space-between;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #008cba;
+}
+
+.topicItem {
+  flex: 1 1;
+  padding: 10px;
+  font: 1.3em;
+  text-align: center;
 }
