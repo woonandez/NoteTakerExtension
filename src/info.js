@@ -9,36 +9,44 @@ var Info = (props) => {
   if (props.pinText === props.currentText && props.loading) {
     return (
       <div className="icantwait">
-        <h3>Loading...</h3>
+        <h1>Loading...</h1>
       </div>
     )
   }
   if (props.pinText === props.currentText && props.show) {
-    return (
-      <div className="infoBody">
-        <div className="bodyTopicsContainer">
-          {
-            topics.map((topic, key) => (
-              <Topics
-                key={key}
-                index={key}
-                topic={topic}
-              />
-            ))
-          }
+    if (resultsContainer.length === 0) {
+      return (
+        <div className="icantwait">
+          <h2>No results found... thanks for playing.</h2>
         </div>
-        {
-          resultsContainer.map((string, key) => (
-            <Sources
-              title={string[0]}
-              sentence={string[1]}
-              key={key}
-              link={string[2]}
-            />
-          ))
-        }
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className="infoBody">
+          <div className="bodyTopicsContainer">
+            {
+              topics.map((topic, key) => (
+                <Topics
+                  key={key}
+                  index={key}
+                  topic={topic}
+                />
+              ))
+            }
+          </div>
+            {
+              resultsContainer.map((string, key) => (
+                <Sources
+                  title={string[0]}
+                  sentence={string[1]}
+                  key={key}
+                  link={string[2]}
+                />
+              ))
+            }
+        </div>
+      )
+    }
   } else {
     return (
       <h2>{''}</h2>
